@@ -21,17 +21,13 @@ public class Model {
 		nOptionCount = eventOptions.length;
 
 		options = eventOptions.clone();
-
 	}
 	
 	public void addNewEdge(int optionIndex, int x, int y) {
 		nLastXClick = x;
 		nLastYClick = y;
-
-
 		
 		if (nextIndex < 100) {
-			
 			optionIndices[nextIndex] = optionIndex;
 			optionHeights[nextIndex] = y;
 			nextIndex++;

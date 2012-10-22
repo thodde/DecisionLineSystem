@@ -10,9 +10,6 @@ import SimpleEdge.model.Model;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-
-
-
 // Draw edge form, options, and all submitted edges
 public class EdgeDisplayPanel extends JPanel {
 
@@ -46,8 +43,6 @@ public class EdgeDisplayPanel extends JPanel {
 				addEdgeController.ProcessEdgeAddition();
 			}
 		});
-		
-
 	}
 
 	public int GetOptionXCoord(Graphics g, int optionIndex) {

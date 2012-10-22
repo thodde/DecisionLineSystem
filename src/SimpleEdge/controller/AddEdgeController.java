@@ -11,7 +11,6 @@ public class AddEdgeController {
 	public AddEdgeController(Model m, EdgeDisplayPanel p) {
 		model = m;
 		panel = p;
-	
 	}
 
 	public void ProcessEdgeAddition() {
