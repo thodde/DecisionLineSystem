@@ -26,7 +26,6 @@ public class SimpleEdge extends JPanel {
 	private JPanel contentPane;
 	private JTextField textField;
 
-
 	/**
 	 * Create the frame.
 	 */
@@ -37,12 +36,9 @@ public class SimpleEdge extends JPanel {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
-		
-		
 		EdgeDisplayPanel edgePanel = new EdgeDisplayPanel(m);
 		edgePanel.setPreferredSize(new Dimension(100,0));
 		edgePanel.setBorder(BorderFactory.createLineBorder(Color.red,3));
-		
 		
 		textField = new JTextField();
 		textField.setColumns(10);

@@ -1,7 +1,7 @@
 package DLS.model;
 
-import DLS.Controller.uiStateController;
-import DLS.Controller.uiStateController.AppState;
+import DLS.Controller.UIStateController;
+import DLS.Controller.UIStateController.AppState;
 
 //====================================================================
 //THIS CLASS IS A SINGLETON!!!!!!
@@ -85,7 +85,7 @@ public class Model {
 		state = AppState.START;
 
 		// get ui state from UI state machine controller singleton.
-		uiStateController uiSC =  uiStateController.getUIStateController();
+		UIStateController uiSC =  UIStateController.getUIStateController();
 	}
 
     //===============================================================

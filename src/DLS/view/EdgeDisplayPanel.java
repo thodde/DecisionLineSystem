@@ -4,11 +4,14 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import DLS.Controller.AddEdgeController;
 import DLS.model.Model;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JButton;
@@ -57,7 +60,14 @@ public class EdgeDisplayPanel extends JPanel {
 		btnExitButton.setBounds(270, y2, 89, 23);
 		btnExitButton.setVisible(true);
 		add(btnExitButton);
-
+		
+		btnExitButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				closeFrame();
+			} 
+		});
+		
 		edgeController = new AddEdgeController(model, this);
 		
 		addMouseListener(new MouseAdapter() {
@@ -66,9 +76,16 @@ public class EdgeDisplayPanel extends JPanel {
 				nLastXClick = arg0.getX();
 				nLastYClick = arg0.getY();
 				edgeController.processEdgeAddition();
-
 			}
 		});
+	}
+	
+	/**
+	 * Make sure the user can exit the form if they choose to do so
+	 */
+	public void closeFrame() {
+		JFrame frame = (JFrame) this.getTopLevelAncestor();
+		frame.dispose();
 	}
 
 	//====================================================================
@@ -166,12 +183,10 @@ public class EdgeDisplayPanel extends JPanel {
 						int optionIndex = model.optionIndices[index];
 						int y = model.optionHeights[index];
 						if (optionIndex < model.nOptionCount) {
-							g.drawLine(xCoords[optionIndex], y,
-									xCoords[optionIndex + 1],y);
+							g.drawLine(xCoords[optionIndex], y, xCoords[optionIndex + 1],y);
 						}
 					}
 				}
-
 			}
 		}
 	}

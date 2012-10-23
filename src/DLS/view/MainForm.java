@@ -13,7 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.AbstractDocument.Content;
 
-import DLS.Controller.uiStateController;
+import DLS.Controller.UIStateController;
 import DLS.model.Model;
 
 //================================================================================================
@@ -69,11 +69,8 @@ public class MainForm extends JFrame {
 	//  Rev 1  -M. Peltola   20-Oct-2012 Method created 
     //===============================================================
 	private MainForm() {
-
-		// TODO Auto-generated constructor stub
 		setTitle("Decision Line Entry4");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//setBounds(100, 100, 682, 575);
 		setBounds(25, 25, 700, 675);
 	}
 	
@@ -90,23 +87,19 @@ public class MainForm extends JFrame {
     // setup initial form elements and regions
 	//  Rev 1  -M. Peltola   20-Oct-2012 Method created 
     //===============================================================
-	public void SetInitial()
-	{
-
+	public void SetInitial() {
 		MainForm.getMainForm().setLayout(null);
-		
 		addStatusRegion();
 		addCredentialsRegion();
 		
-		uiStateController.getUIStateController().updateUIToNextState(DLS.Controller.uiStateController.AppState.WELCOME);
+		UIStateController.getUIStateController().updateUIToNextState(DLS.Controller.UIStateController.AppState.WELCOME);
 	}
 	
 	//===============================================================
     // Add status region to bottom of main container
 	//  Rev 1  -M. Peltola   20-Oct-2012 Method created 
     //===============================================================
-	private void addStatusRegion(){
-		
+	private void addStatusRegion() {
 		statPanel = new StatusPanel();
 		
 		//statPanel.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1));
@@ -115,9 +108,7 @@ public class MainForm extends JFrame {
 		int xb = 25;
 		int yb = 25;
 		
-		
 		statPanel.setBounds(xb, r.height-100, r.width-xb, 46);
-
  	    statPanel.setLayout(null);
 		
 		MainForm.getMainForm().add(statPanel);

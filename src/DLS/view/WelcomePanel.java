@@ -4,11 +4,12 @@ import java.awt.Color;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import DLS.Controller.uiStateController;
+import DLS.Controller.UIStateController;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
@@ -58,8 +59,8 @@ public class WelcomePanel extends JPanel{
 		button.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
-				uiStateController usc = uiStateController.getUIStateController();
-				usc.updateUIToNextState(uiStateController.AppState.CREATE_EVENT);	
+				UIStateController usc = UIStateController.getUIStateController();
+				usc.updateUIToNextState(UIStateController.AppState.CREATE_EVENT);	
 			}
 		});
 		button.setBounds(20, 11, 142, 23);
@@ -69,8 +70,8 @@ public class WelcomePanel extends JPanel{
 		button_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
-				uiStateController usc = uiStateController.getUIStateController();
-				usc.updateUIToNextState(uiStateController.AppState.ADD_RR_EDGE);
+				UIStateController usc = UIStateController.getUIStateController();
+				usc.updateUIToNextState(UIStateController.AppState.ADD_RR_EDGE);
 			}
 		});
 		button_1.addActionListener(new ActionListener() {
@@ -90,8 +91,8 @@ public class WelcomePanel extends JPanel{
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
 				
-				uiStateController usc = uiStateController.getUIStateController();
-				usc.updateUIToNextState(uiStateController.AppState.ADMIN);
+				UIStateController usc = UIStateController.getUIStateController();
+				usc.updateUIToNextState(UIStateController.AppState.ADMIN);
 
 			}
 		});
@@ -126,7 +127,18 @@ public class WelcomePanel extends JPanel{
 		JButton btnExit = new JButton("Exit");
 		btnExit.setBounds(229, 184, 89, 23);
 		add(btnExit);
-
+		
+		btnExit.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				closeForm();
+			}
+		});
+	}
+	
+	public void closeForm() {
+		JFrame frame = (JFrame) this.getTopLevelAncestor();
+		frame.dispose();
 	}
 }
 

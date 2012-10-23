@@ -18,7 +18,7 @@ import DLS.view.WelcomePanel;
 // If the state change is valid, the UI is updated to the new state
 //Rev 1  -M. Peltola   20-Oct-2012 Class created 
 //====================================================================
-public class uiStateController {
+public class UIStateController {
 
 	public enum AppState
 	{
@@ -44,7 +44,7 @@ public class uiStateController {
     // The following 3 steps turn this class into a singleton
     //===============================================================
     //  1. private & static instance reference to this class
-	static private uiStateController uiSCInstance = null;
+	static private UIStateController uiSCInstance = null;
 
     //===============================================================
     //  2. static factory method
@@ -54,11 +54,11 @@ public class uiStateController {
 	//  Any further calls to this method, returns that reference
 	//  Rev 1  -M. Peltola   20-Oct-2012 Method created 
     //===============================================================
-	static public uiStateController getUIStateController()
+	static public UIStateController getUIStateController()
 	{
 		if (uiSCInstance == null)
 		{
-			uiSCInstance = new uiStateController ();
+			uiSCInstance = new UIStateController ();
 		}
 
 		return uiSCInstance;
@@ -68,7 +68,7 @@ public class uiStateController {
     //  3. private constructor
 	//  Rev 1  -M. Peltola   20-Oct-2012 Method created 
     //===============================================================
-	private uiStateController ()
+	private UIStateController ()
 	{
 
 	}
@@ -81,7 +81,6 @@ public class uiStateController {
     {
     	uiSCInstance = null;
     }
-
 	
 	//====================================================================
 	// Method validates UI state change and refreshes UI elements
@@ -91,7 +90,7 @@ public class uiStateController {
 	{
 		Model m = Model.getModel();
 		
-		MainForm mf =MainForm.getMainForm();
+		MainForm mf = MainForm.getMainForm();
 
 		// set the pending state to PENDING_CHANGE, if all is valid,
 		// this will be set to the nextState value
@@ -137,7 +136,6 @@ public class uiStateController {
 						mf.showCredentialsPanel(true);
 					}
 					break;					
-				
 			}
 
 			// if we have a valid new state (not PENDING_CHANGE)
@@ -191,7 +189,6 @@ public class uiStateController {
 		}
 		else if (m.state == AppState.CREATE_EVENT)
 		{
-
 			CreateEvent ce = new CreateEvent();
 			ce.setVisible(true);
 			mf.add(ce);
