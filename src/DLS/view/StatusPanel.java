@@ -62,7 +62,8 @@ public class StatusPanel extends JPanel{
 	public void paintComponent(Graphics g) {
 
 		Rectangle bounds = getBounds();
-
+        g.clearRect(bounds.x, bounds.y, bounds.width, bounds.height);
+        
 		if(normal)
 		{
 			g.setColor(Color.LIGHT_GRAY);

@@ -1,7 +1,7 @@
 package DLS.model;
 
-import DLS.Controller.UIStateController;
-import DLS.Controller.UIStateController.AppState;
+//import DLS.Controller.View.UIStateController;
+//import DLS.Controller.View.UIStateController.AppState;
 
 //====================================================================
 //THIS CLASS IS A SINGLETON!!!!!!
@@ -31,7 +31,7 @@ public class Model {
     public int nextIndex; 
 
     // Basically the UI states displayed by the app
-    public AppState state;
+    //public AppState state;
     
     //===============================================================
     // The following 3 steps turn this class into a singleton
@@ -82,10 +82,10 @@ public class Model {
 		
 		options = null;
 		
-		state = AppState.START;
+		//state = AppState.START;
 
 		// get ui state from UI state machine controller singleton.
-		UIStateController uiSC =  UIStateController.getUIStateController();
+		//UIStateController uiSC =  UIStateController.getUIStateController();
 	}
 
     //===============================================================
@@ -112,6 +112,24 @@ public class Model {
 			return status;	
 		}
 
+				//===============================================================
+		//  Rev 1  -M. Peltola   28-Oct-2012 Method determines if
+		//                                   event is closed
+		//                                   NOTE: TEMP rpalce with server operation
+		//===============================================================
+		public boolean isClosedEventType(String eventID)
+		{
+			boolean f = false;
+			
+			// replace with server stuff
+			if (eventID.contains("ABC1"))
+			{
+				f = true;
+			}
+			return f;
+		}
+		
+		
 		//===============================================================
 		//  Rev 1  -M. Peltola   20-Oct-2012 Method extracted from older
 		//                                   code in constructor and

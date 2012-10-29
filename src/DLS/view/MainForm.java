@@ -13,7 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.AbstractDocument.Content;
 
-import DLS.Controller.UIStateController;
+//import DLS.Controller.View.UIStateController;
 import DLS.model.Model;
 
 //================================================================================================
@@ -69,7 +69,7 @@ public class MainForm extends JFrame {
 	//  Rev 1  -M. Peltola   20-Oct-2012 Method created 
     //===============================================================
 	private MainForm() {
-		setTitle("Decision Line Entry4");
+		setTitle("Decision Line Entry55");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(25, 25, 700, 675);
 	}
@@ -92,7 +92,15 @@ public class MainForm extends JFrame {
 		addStatusRegion();
 		addCredentialsRegion();
 		
-		UIStateController.getUIStateController().updateUIToNextState(DLS.Controller.UIStateController.AppState.WELCOME);
+		WelcomePanel wp = WelcomePanel.GetWelcomePanel();
+		wp.setBounds(94,137,500,254);
+		wp.setVisible(true);
+		add(wp);
+
+		setTitle("Decision Lines");
+		updateStatus(true, "Welcome");		
+		repaint();
+		//UIStateController.getUIStateController().updateUIToNextState(DLS.Controller.UIStateController.AppState.WELCOME);
 	}
 	
 	//===============================================================
@@ -154,5 +162,8 @@ public class MainForm extends JFrame {
 	public void updateStatus(boolean status, String statusMsg)
 	{
 		statPanel.updateStatus(status, statusMsg);
+		
+		// Need this for some reason to flush previous message out of status message area
+		repaint();
 	}
 }

@@ -7,7 +7,7 @@ import java.awt.Rectangle;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import DLS.Controller.AddEdgeController;
+import DLS.Controller.View.AddEdgeController;
 import DLS.model.Model;
 
 import java.awt.event.ActionEvent;
@@ -44,7 +44,7 @@ public class EdgeDisplayPanel extends JPanel {
 	//                                 Made edgeController persist for 
 	//                                 life of this panel
 	//====================================================================
-	public EdgeDisplayPanel(Model m) {
+	public EdgeDisplayPanel(Model m, boolean moderator) {
 		model = m;
 
 		setLayout(null);

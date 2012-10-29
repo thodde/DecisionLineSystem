@@ -36,7 +36,7 @@ public class SimpleEdge extends JPanel {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
-		EdgeDisplayPanel edgePanel = new EdgeDisplayPanel(m);
+		EdgeDisplayPanel edgePanel = new EdgeDisplayPanel(m, false);
 		edgePanel.setPreferredSize(new Dimension(100,0));
 		edgePanel.setBorder(BorderFactory.createLineBorder(Color.red,3));
 		

@@ -9,7 +9,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import DLS.Controller.UIStateController;
+import DLS.Controller.View.CreateNewEventController;
+import DLS.Controller.View.ExistingEventController;
+import DLS.Controller.View.UserAddOpenChoiceController;
+//import DLS.Controller.View.UIStateController;
+import DLS.Controller.View.ValidateEventIDController;
+import DLS.Controller.View.WelcomeAdministratorController;
+import DLS.Controller.View.UserAddEdgeController;
+import DLS.model.Model;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
@@ -28,15 +35,35 @@ import java.awt.event.MouseEvent;
 //====================================================================
 public class WelcomePanel extends JPanel{
 
-	JTextField textField;
-	JButton button_1;
+	JTextField textEventIDField;
+	JButton button_User;
+
+	private static  WelcomePanel wpInstance;
+
+	public static WelcomePanel GetWelcomePanel()
+	{
+		if (wpInstance == null)
+		{
+			wpInstance = new WelcomePanel();
+		}
+		return wpInstance;
+	}
+
+	WelcomeAdministratorController welcomeAdminController;
+	UserAddEdgeController userAddEdgeController;
+	UserAddOpenChoiceController userAddOpenChoiceController;
+	CreateNewEventController createNewEventController;
+	ExistingEventController existingEventController;	
+	ValidateEventIDController validateEventIDController;
 	
 	//====================================================================
 	//The constructor does the work of setting up the UI elements
 	//when they start a session with DLS 
 	//Rev 1  -M. Peltola   18-Oct-2012 Class created 
 	//====================================================================
-	public WelcomePanel() {
+	private WelcomePanel() {
+
+		createControllers();
 
 		setBorder(BorderFactory.createLineBorder(Color.RED, 1));
 		setBorder(BorderFactory.createTitledBorder("Welcome to DecisionLines - Please choose your role"));
@@ -44,90 +71,24 @@ public class WelcomePanel extends JPanel{
 		setBounds(1,11,507,234);
 		setLayout(null);
 
-		JPanel innerWelcomePanel = new JPanel();
-
-		innerWelcomePanel.setLayout(null);
-
-		innerWelcomePanel.setBounds(10, 23, 329,101);
-		innerWelcomePanel.setBorder(BorderFactory.createLineBorder(Color.RED, 1));
-		add(innerWelcomePanel);
-
-		innerWelcomePanel.setLayout(null);
-
-
-		JButton button = new JButton("Moderator");
-		button.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent arg0) {
-				UIStateController usc = UIStateController.getUIStateController();
-				usc.updateUIToNextState(UIStateController.AppState.CREATE_EVENT);	
-			}
-		});
-		button.setBounds(20, 11, 142, 23);
-		innerWelcomePanel.add(button);
-
-		button_1 = new JButton("User");
-		button_1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent arg0) {
-				UIStateController usc = UIStateController.getUIStateController();
-				usc.updateUIToNextState(UIStateController.AppState.ADD_RR_EDGE);
-			}
-		});
-		button_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		
-		button_1.setBounds(172, 11, 136, 23);
-		innerWelcomePanel.add(button_1);
+		JPanel innerWelcomePanel = createInnerPanel();
+		createModeratorButton(innerWelcomePanel);
+		button_User = createUserButton(innerWelcomePanel);
 
 		JLabel lblNewLabel = new JLabel("EventID?");
 		lblNewLabel.setBounds(60, 74, 74, 14);
 		innerWelcomePanel.add(lblNewLabel);
 
-		JButton btnNewButton = new JButton("Administrator");
-		btnNewButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent arg0) {
-				
-				UIStateController usc = UIStateController.getUIStateController();
-				usc.updateUIToNextState(UIStateController.AppState.ADMIN);
+		// START ADMINISTRATOR BUTTON CODE
+		createAdminButton();
 
-			}
-		});
-		btnNewButton.setBounds(357, 96, 136, 28);
-		add(btnNewButton);
-
-
-		textField = new JTextField();
-		textField.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyTyped(KeyEvent arg0) {
-				if(textField.getText().length()>0)
-				{
-					button_1.setEnabled(true);
-				}
-				else
-				{
-					button_1.setEnabled(false);
-				}
-			}
-		});
-		textField.addPropertyChangeListener(new PropertyChangeListener() {
-			public void propertyChange(PropertyChangeEvent arg0) {
-				int y = 22;
-			}
-
-		});
-		textField.setBounds(144, 71, 130, 20);
-		innerWelcomePanel.add(textField);
-		textField.setColumns(10);
+		// sets up class reference, so nothing returned
+		createEventIDCluster(innerWelcomePanel);
 
 		JButton btnExit = new JButton("Exit");
 		btnExit.setBounds(229, 184, 89, 23);
 		add(btnExit);
-		
+
 		btnExit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -135,10 +96,191 @@ public class WelcomePanel extends JPanel{
 			}
 		});
 	}
-	
+
 	public void closeForm() {
 		JFrame frame = (JFrame) this.getTopLevelAncestor();
 		frame.dispose();
+	}
+
+	//====================================================================
+	//The method creates the welcome panel's inner panel
+	//Rev 1  -M. Peltola   18-Oct-2012 Class created 
+	//====================================================================	
+	private JPanel createInnerPanel()
+	{
+		JPanel innerWelcomePanel = new JPanel();
+		innerWelcomePanel.setLayout(null);
+		innerWelcomePanel.setBounds(10, 23, 329,101);
+		innerWelcomePanel.setBorder(BorderFactory.createLineBorder(Color.RED, 1));
+		add(innerWelcomePanel);
+		innerWelcomePanel.setLayout(null);
+		return innerWelcomePanel;
+	}		
+
+	//====================================================================
+	//The method creates the moderator button
+	//Rev 1  -M. Peltola   18-Oct-2012 Class created 
+	//====================================================================	
+	JButton createModeratorButton(JPanel innerPanel)
+	{
+		// START MODERATOR BUTTON CODE
+		JButton button = new JButton("Moderator");
+		button.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+
+				String eventID = textEventIDField.getText();
+
+				if (eventID.length()== 0)
+				{
+					createNewEventController.setupAddNewEventGUI();
+					removeWelcomePanel();
+				}
+				else
+				{
+					if (validateEventIDController.isValidEventID(eventID))
+					{
+						existingEventController.setupExistingEventGUI(eventID);
+						removeWelcomePanel();
+					}
+				}
+			}
+		});
+
+		button.setBounds(20, 11, 142, 23);
+		innerPanel.add(button);
+
+		return button;
+	}
+
+	//====================================================================
+	//The method creates the user button
+	//Rev 1  -M. Peltola   18-Oct-2012 Class created 
+	//====================================================================	
+	JButton createUserButton(JPanel innerPanel)
+	{
+		// START USER BUTTON CODE
+		JButton button = new JButton("User");
+		button.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				//UIStateController usc = UIStateController.getUIStateController();
+				//usc.updateUIToNextState(UIStateController.AppState.ADD_RR_EDGE);
+
+				String eventID = textEventIDField.getText();
+
+				if (validateEventIDController.isValidEventID(eventID))
+				{
+					Model m = Model.getModel();
+
+					if(m.isClosedEventType(eventID))
+					{
+
+						userAddEdgeController.setupAddEdgeGUI(eventID, false);
+						removeWelcomePanel();
+					}
+					else
+					{
+						userAddOpenChoiceController.setupAddChoiceGUI(eventID, false);
+						removeWelcomePanel();
+					}
+				}
+			}
+		});
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+
+		button.setBounds(172, 11, 136, 23);
+		innerPanel.add(button);
+		return button;
+	}
+
+	//====================================================================
+	//The method creates the admin button
+	//Rev 1  -M. Peltola   18-Oct-2012 Class created 
+	//====================================================================	
+	JButton createAdminButton()
+	{
+		JButton btnAdministrator = new JButton("Administrator");
+
+		btnAdministrator.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+
+				//UIStateController usc = UIStateController.getUIStateController();
+				//usc.updateUIToNextState(UIStateController.AppState.ADMIN);
+				welcomeAdminController.setupAdminGUI();
+
+				removeWelcomePanel();
+			}
+		});
+		
+		btnAdministrator.setBounds(357, 96, 136, 28);
+		add(btnAdministrator);
+		return btnAdministrator;
+	}
+
+	//====================================================================
+	//The method creates the eventID cluster (label and txt control)
+	//Rev 1  -M. Peltola   18-Oct-2012 Class created 
+	//====================================================================	
+	private void createEventIDCluster(JPanel innerPanel)
+	{
+		// START EVENT ID CODE
+		textEventIDField = new JTextField();
+		textEventIDField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				if(textEventIDField.getText().length()>0)
+				{
+					button_User.setEnabled(true);
+				}
+				else
+				{
+					button_User.setEnabled(false);
+				}
+			}
+		});
+
+		textEventIDField.addPropertyChangeListener(new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent arg0) {
+				int y = 22;
+			}
+
+		});
+		textEventIDField.setBounds(144, 71, 130, 20);
+		innerPanel.add(textEventIDField);
+		textEventIDField.setColumns(10);
+	}
+
+
+	//====================================================================
+	//The method creates the welcome panel's UI controllers
+	//Rev 1  -M. Peltola   25-Oct-2012 Class created 
+	//====================================================================	
+	private void createControllers()
+	{
+		welcomeAdminController = new WelcomeAdministratorController() ;
+		userAddEdgeController = new UserAddEdgeController();
+		userAddOpenChoiceController = new UserAddOpenChoiceController();
+			createNewEventController = new CreateNewEventController ();
+		existingEventController = new ExistingEventController();
+		validateEventIDController = new ValidateEventIDController();
+	}
+
+	//====================================================================
+	//The method removes the welcome panel from the main form
+	//Rev 1  -M. Peltola   25-Oct-2012 Class created 
+	//====================================================================	
+	private void removeWelcomePanel()
+	{
+		WelcomePanel wp =  WelcomePanel.GetWelcomePanel();
+
+		MainForm mf = MainForm.getMainForm();
+		mf.remove(this);
+		mf.repaint();
 	}
 }
 
