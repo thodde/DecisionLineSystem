@@ -1,19 +1,12 @@
 package DLS.view;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import javax.swing.JRadioButton;
-import javax.swing.JTextField;
-import javax.swing.ButtonGroup;
 
 //====================================================================
 //This class provides the GUI elements for the admin state
@@ -21,6 +14,8 @@ import javax.swing.ButtonGroup;
 //====================================================================
 public class AdminPanel extends JPanel{
 	
+	private static final long serialVersionUID = 1L;
+
 	//====================================================================
 	//The constructor does the work of setting up the UI elements
 	//Rev 1  -M. Peltola   21-Oct-2012 Class created 
@@ -42,7 +37,6 @@ public class AdminPanel extends JPanel{
 			mep.setLayout(null);
 			
 			tabbedAdminPane.addTab("Manage Events", mep);
-			
 			
 			// much of the group code will be relocated to the GenerateReportsPanel class 
 	        GenerateReportsPanel grp = new GenerateReportsPanel();

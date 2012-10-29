@@ -1,8 +1,5 @@
 package DLS.model;
 
-//import DLS.Controller.View.UIStateController;
-//import DLS.Controller.View.UIStateController.AppState;
-
 //====================================================================
 //THIS CLASS IS A SINGLETON!!!!!!
 //This class holds the various information needed by DLS

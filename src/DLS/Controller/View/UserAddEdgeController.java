@@ -25,7 +25,7 @@ public class UserAddEdgeController {
 	// panel 
 	//Rev 1  -M. Peltola   26-Oct-2012 Class created 
 	//====================================================================
-		public void setupAddEdgeGUI(String eventID, boolean moderator)
+	public void setupAddEdgeGUI(String eventID, boolean moderator)
 	{
 		MainForm mf = MainForm.getMainForm();
 		

@@ -4,14 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.event.ListSelectionListener;
-
-import DLS.Controller.View.QuestionListener;
-import DLS.Controller.View.SubmitClosedEventController;
-import DLS.Controller.View.SubmitOpenEventController;
 
 //====================================================================
 //This class provides the GUI elements of the add choice panel
@@ -19,8 +13,8 @@ import DLS.Controller.View.SubmitOpenEventController;
 //====================================================================	
 public class AddOpenEventChoice extends JPanel{
 	
+	private static final long serialVersionUID = 1L;
 	private JTextField questionTextField;
-	private JButton btnCreateThisEvent;
 	JPanel questionPanel;
 	ChoiceListEditor listEditor; 
 
@@ -57,10 +51,5 @@ public class AddOpenEventChoice extends JPanel{
 		add(listEditor);
 		
 		repaint();
-		
-		
 	}
-
-
-
 }

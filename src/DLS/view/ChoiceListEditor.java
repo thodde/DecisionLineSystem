@@ -20,6 +20,8 @@ import DLS.Controller.View.JListTxtFriendListener;
 //====================================================================	
 public class ChoiceListEditor extends JPanel{
 
+	private static final long serialVersionUID = 1L;
+
 	public final int AllItems = -1;
 
 	private JList itemList;

@@ -13,13 +13,9 @@ import java.awt.event.MouseEvent;
 // Draw edge form, options, and all submitted edges
 public class EdgeDisplayPanel extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	public Model model;
 
-	
 	public int nLastXClick;
 	public int nLastYClick;
 	
@@ -33,9 +29,6 @@ public class EdgeDisplayPanel extends JPanel {
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				int y =1;
-				//nLastXClick = arg0.getXOnScreen();
-				//nLastYClick = arg0.getYOnScreen();
 				nLastXClick = arg0.getX();
 				nLastYClick = arg0.getY();
 				
@@ -94,11 +87,6 @@ public class EdgeDisplayPanel extends JPanel {
 
 		if (model != null) {
 
-			String clickCoord = "X= " + model.nLastXClick+ "  Y= " + model.nLastYClick;
-
-			//g.drawString(clickCoord, 65, 65);
-
-			
  			if (model.nOptionCount > 0) {
 				
 				regenerateOptionXCoords(g);

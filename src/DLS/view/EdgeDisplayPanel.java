@@ -2,7 +2,6 @@ package DLS.view;
 
 import java.awt.FontMetrics;
 import java.awt.Graphics;
-import java.awt.Rectangle;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -22,9 +21,6 @@ import javax.swing.JButton;
 //====================================================================
 public class EdgeDisplayPanel extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	public Model model;
 
@@ -50,8 +46,6 @@ public class EdgeDisplayPanel extends JPanel {
 		setLayout(null);
 		setBounds(10,65,580,500);
 				
-		Rectangle r = MainForm.getMainForm().getBounds();
-		Rectangle r1 = getBounds();
 		int h = getHeight();
 		
 		// Hard coded exit button location
@@ -153,10 +147,6 @@ public class EdgeDisplayPanel extends JPanel {
 	public void paintComponent(Graphics g) {
 
 		if (model != null) {
-
-			String clickCoord = "X= " + model.nLastXClick+ "  Y= " + model.nLastYClick;
-
-			Rectangle r1 = getBounds();
 
 			if (model.nOptionCount > 0) {
 

@@ -1,7 +1,8 @@
 package DLS.view;
 
 import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
@@ -15,6 +16,7 @@ import javax.swing.JButton;
 //====================================================================	
 public class CredentialsPanel  extends JPanel{
 
+	private static final long serialVersionUID = 1L;
 	final int left = 1;
 	final int top = 5;
 	final int width = 577;
@@ -31,7 +33,7 @@ public class CredentialsPanel  extends JPanel{
 	{
 		setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1));		
 		setBorder(BorderFactory.createTitledBorder("Credentials"));
-			setBounds(left,top,610,90);
+		setBounds(left,top,610,90);
 		setLayout(null);
 		
 		int y = 22;
@@ -57,6 +59,13 @@ public class CredentialsPanel  extends JPanel{
 		JButton btnSubmitCredentials = new JButton("Submit Credentials");
 		btnSubmitCredentials.setBounds(396, y, 145, 23);
 		add(btnSubmitCredentials);
+		
+		btnSubmitCredentials.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				//Send XML Request to server to validate user
+			}
+		});
 		
 	}
 }
