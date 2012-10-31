@@ -14,19 +14,19 @@ public class MoveToEdgeController implements ActionListener {
 		MainForm mf = MainForm.getMainForm();
 		//removeCreateEventPanel();
 
-		String eventID = submitClosedEventController.submit(questionTextField.getText(), 
-				rdbtnRoundRobin.isSelected(),
-				numberOfChoicesListener.getCurrentValue(),
-				numberOfRoundsListener.getCurrentValue(),
-				choiceListEditor.getChoices() );
+//		String eventID = submitClosedEventController.submit(questionTextField.getText(), 
+//				rdbtnRoundRobin.isSelected(),
+//				numberOfChoicesListener.getCurrentValue(),
+//				numberOfRoundsListener.getCurrentValue(),
+//				choiceListEditor.getChoices() );
 
-		if (eventID.length()>0)
-		{
-			//removeCreateEventPanel();
-			mf.updateStatus(true, "Closed event submitted");
+//		if (eventID.length()>0)
+//		{
+//			//removeCreateEventPanel();
+//			mf.updateStatus(true, "Closed event submitted");
 
-			setupAddEdgeGUI(eventID, true);
-		}
+//			setupAddEdgeGUI(eventID, true);
+//		}
 	}
 
 }

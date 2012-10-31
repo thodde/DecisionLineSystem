@@ -97,7 +97,7 @@ abstract class CreateEvent extends JPanel {
 		questionPanel.setLayout(new BorderLayout(0, 0));
 
 		questionTextField = new JTextField();
-		questionTextField.addKeyListener(new QuestionListener(this));
+//		questionTextField.addKeyListener(new QuestionListener(this));
 		questionTextField.setForeground(Color.BLACK);
 
 		questionPanel.add(questionTextField, BorderLayout.CENTER);
