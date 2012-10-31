@@ -17,12 +17,12 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
+import DLS.Controller.View.MoveToEdgeController;
 import DLS.Controller.View.NumberListener;
 import DLS.Controller.View.QuestionListener;
 import DLS.Controller.View.SubmitClosedEventController;
 import DLS.Controller.View.SubmitOpenEventController;
 import DLS.model.Model;
-import SimpleEdge.controller.MoveToEdgeController;
 
 public class CreateEventFrame extends JFrame {
 

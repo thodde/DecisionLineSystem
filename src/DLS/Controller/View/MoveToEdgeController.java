@@ -1,4 +1,4 @@
-package SimpleEdge.controller;
+package DLS.Controller.View;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

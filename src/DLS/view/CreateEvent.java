@@ -17,6 +17,7 @@ import javax.swing.JRadioButton;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 
+import DLS.Controller.View.MoveToEdgeController;
 import DLS.Controller.View.NumberListener;
 import DLS.Controller.View.QuestionListener;
 import DLS.Controller.View.SubmitClosedEventController;
@@ -26,7 +27,6 @@ import DLS.Controller.View.TextController;
 //import DLS.Controller.View.UIStateController.AppState;
 import DLS.model.Model;
 import DLS.model.Value;
-import SimpleEdge.controller.MoveToEdgeController;
 
 import java.awt.event.InputMethodListener;
 import java.awt.event.InputMethodEvent;
