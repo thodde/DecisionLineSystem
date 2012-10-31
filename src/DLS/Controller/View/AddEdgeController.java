@@ -7,15 +7,17 @@ import DLS.view.EdgeDisplayPanel;
 //This class places a new edge addition into the model
 //Rev 1  -M. Peltola   7-Oct-2012 Class created 
 //====================================================================
+
 public class AddEdgeController {
 
 	Model model;
 	EdgeDisplayPanel panel;
 
-	//====================================================================
-	//The constructor stores a reference to the model and UI
-	//Rev 1  -M. Peltola   07-Oct-2012 Class created 
-	//====================================================================
+	/**
+	 * @author jforkey, mpeltola, thodde
+	 * @param m model to be given to controller
+	 * @param p panel to display
+	 */
 	public AddEdgeController(Model m, EdgeDisplayPanel p) {
 		model = m;
 		panel = p;
