@@ -15,7 +15,7 @@ import javax.swing.text.Document;
 
 
 
-import DLS.view.CreateEvent;
+import DLS.view.CreateEventFrame;
 
 //====================================================================
 //This class provides the class to listen to the question txt box
@@ -23,14 +23,14 @@ import DLS.view.CreateEvent;
 //====================================================================	
 public class QuestionListener implements KeyListener
 {
-	private CreateEvent ce;
+	private CreateEventFrame ce;
 	
 	//====================================================================
 	//The constructor does the work of setting up the question listener
 	//Rev 1  -M. Peltola   27-Oct-2012 Class created 
 	//====================================================================
 
-	public QuestionListener(CreateEvent p)
+	public QuestionListener(CreateEventFrame p)
 	{
 		ce = p;
 	}

@@ -71,7 +71,7 @@ public class MainForm extends JFrame {
 	private MainForm() {
 		setTitle("Decision Line Entry55");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(25, 25, 700, 675);
+		setSize(700, 675);
 	}
 	
 	//===============================================================
@@ -143,7 +143,7 @@ public class MainForm extends JFrame {
 
 		credPanel.setLayout(null);
 
-		MainForm.getMainForm().add(credPanel);
+//		MainForm.gsetMainForm().add(credPanel);
 	}
 
     //===============================================================

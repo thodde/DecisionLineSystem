@@ -1,46 +1,31 @@
 package DLS.view;
 
-import javax.swing.BorderFactory;
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import javax.swing.JTextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-import javax.swing.ButtonModel;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JButton;
-import javax.swing.JList;
-import javax.swing.JRadioButton;
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
 
 import DLS.Controller.View.NumberListener;
 import DLS.Controller.View.QuestionListener;
 import DLS.Controller.View.SubmitClosedEventController;
 import DLS.Controller.View.SubmitOpenEventController;
-import DLS.Controller.View.TextController;
-//import DLS.Controller.View.UIStateController;
-//import DLS.Controller.View.UIStateController.AppState;
 import DLS.model.Model;
-import DLS.model.Value;
 import SimpleEdge.controller.MoveToEdgeController;
 
-import java.awt.event.InputMethodListener;
-import java.awt.event.InputMethodEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+public class CreateEventFrame extends JFrame {
 
-// no longer compiles delete soon real soon
-//====================================================================
-//This class provides the GUI elements of the create event panel
-//Rev 1  -M. Peltola   20-Oct-2012 Class created 
-//====================================================================	
-abstract class CreateEvent extends JPanel {
 	private JTextField textField;
 	private JTextField textField_NumberOfChoices;
 	private JTextField textField_NumberOfRounds;
@@ -76,10 +61,11 @@ abstract class CreateEvent extends JPanel {
 	//Rev 1  -M. Peltola   20-Oct-2012 Class created 
 	//====================================================================
 	@SuppressWarnings("deprecation")
-	public CreateEvent() {
+	public CreateEventFrame() {
+		super("This is new Event Frame");
 		
-//		submitClosedEventController = new SubmitClosedEventController();
-//		submitOpenEventController = new SubmitOpenEventController();
+		submitClosedEventController = new SubmitClosedEventController();
+		submitOpenEventController = new SubmitOpenEventController();
 
 		validQuestion = false;
 		validNumOfChoices = false;
@@ -181,7 +167,7 @@ abstract class CreateEvent extends JPanel {
 		btnCancel.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				closeFrame();
+				setVisible(false);
 			}
 		});
 	}
@@ -370,13 +356,6 @@ abstract class CreateEvent extends JPanel {
 		mf.repaint();
 	}
 
-	/**
-	 * Make sure the user can exit the form if they choose to do so
-	 */
-	public void closeFrame() {
-		JFrame frame = (JFrame) this.getTopLevelAncestor();
-		frame.dispose();
-	}
 
 	public void setValidQuestion(boolean b)
 	{

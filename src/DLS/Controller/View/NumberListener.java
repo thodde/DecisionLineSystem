@@ -5,7 +5,7 @@ import java.awt.event.KeyListener;
 
 import javax.swing.JTextField;
 
-import DLS.view.CreateEvent;
+import DLS.view.CreateEventFrame;
 
 //====================================================================
 //This class provides the controller operation to manage listening to 
@@ -14,7 +14,7 @@ import DLS.view.CreateEvent;
 //====================================================================	
 public class NumberListener implements KeyListener
 {
-	private CreateEvent ce;
+	private CreateEventFrame ce;
 	private int minLimit;
 	private int maxLimit;
 	private int currentValue;

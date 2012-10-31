@@ -279,8 +279,14 @@ public class WelcomePanel extends JPanel{
 		WelcomePanel wp =  WelcomePanel.GetWelcomePanel();
 
 		MainForm mf = MainForm.getMainForm();
-		mf.remove(this);
-		mf.repaint();
+		mf.remove(wp);
+		
+		
+		mf.invalidate();
+		mf.pack();
+		mf.setSize(800,800);  // need to be bigger
+		
+		mf.repaint();  // redundant
 	}
 }
 

@@ -22,7 +22,8 @@ public class SubmitClosedEventController {
 	public String submit(String question, boolean isRoundRobin, int numberOfChoices, int numberOfRounds, String[] choices)
 	{
 		String eventID = "ABC1"; // Note ValidateEventIDController will accept this string!
-		// This is where we will interact with the server and receive confirmation that event was accepted by server
+		// This is where we will interact with the server.
+		// NOTE WE CAN'T RECEIVE confirmation unless you use the specia;l ServerAccess IController interface that event was accepted by server
 		return eventID;
 	}	
 

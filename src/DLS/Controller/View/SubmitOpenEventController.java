@@ -1,6 +1,6 @@
 package DLS.Controller.View;
 
-import DLS.view.CreateEvent;
+import DLS.view.CreateEventFrame;
 
 //====================================================================
 //This class provides the open event submission controller

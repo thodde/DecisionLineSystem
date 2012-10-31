@@ -16,7 +16,7 @@ import javax.swing.text.Document;
 
 
 
-import DLS.view.CreateEvent;
+import DLS.view.CreateEventFrame;
 
 //====================================================================
 //This class provides the class to listen a txt box

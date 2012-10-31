@@ -1,6 +1,6 @@
 package DLS.Controller.View;
 
-import DLS.view.CreateEvent;
+import DLS.view.CreateEventFrame;
 import DLS.view.MainForm;
 
 //====================================================================
@@ -28,13 +28,18 @@ public class CreateNewEventController {
 	public void setupAddNewEventGUI()
 	{
 		MainForm mf = MainForm.getMainForm();		
-		CreateEvent ce = new CreateEvent();
+		CreateEventFrame ce = new CreateEventFrame();
 
 		ce.setVisible(true);
 		mf.add(ce);
 		mf.setTitle("Decision Lines - Create New Event");
 
 		mf.updateStatus(true, "Create Event");
-		mf.showCredentialsPanel(true);		
+		mf.showCredentialsPanel(true);	
+		
+		// last thing you do to clean things up....
+		mf.invalidate();
+		mf.pack();
+		mf.repaint();  // redundant
 	}
 }
