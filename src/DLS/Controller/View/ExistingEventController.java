@@ -1,7 +1,8 @@
 package DLS.Controller.View;
 
 
-import DLS.view.ExistingEventStatus;
+//import DLS.view.ExistingEventStatus;
+import DLS.view.ExistingEventStatusFrame;
 import DLS.view.MainForm;
 
 //====================================================================
@@ -27,16 +28,10 @@ public class ExistingEventController {
 	//====================================================================
 	public void setupExistingEventGUI(String eventID)
 	{
-		MainForm mf = MainForm.getMainForm();		
-		ExistingEventStatus ees = new ExistingEventStatus(eventID);
+		MainForm mf = MainForm.getMainForm();
 		
-		// these are place keepers
-		// have not implemented real GUI yet
+		ExistingEventStatusFrame ees = new ExistingEventStatusFrame(eventID);
 		ees.setVisible(true);
-		mf.add(ees);
-		mf.setTitle("Decision Lines - Modify Existing Event NEEDS WORK!!!");
-
-		mf.updateStatus(true, "Modify Existing Event NEEDS WORK!!!");
 		mf.showCredentialsPanel(true);				
 	}
 }

@@ -33,7 +33,6 @@ public class AdminPanel extends JPanel{
 			// much of the mep code will be relocated to the ManageEventsPanel class 
 			ManageEventsPanel mep = new ManageEventsPanel();
 			
-			//mep.setLayout(new BoxLayout(mep, BoxLayout.Y_AXIS));
 			mep.setLayout(null);
 			
 			tabbedAdminPane.addTab("Manage Events", mep);

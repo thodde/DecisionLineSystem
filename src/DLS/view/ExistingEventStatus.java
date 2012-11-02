@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 // placekeeper, not implemented
 //Rev 1  -M. Peltola   28-Oct-2012 Class created 
 //====================================================================	
-public class ExistingEventStatus extends JPanel{
+abstract public class ExistingEventStatus extends JPanel{
 	
 	public ExistingEventStatus(String eventID){
 

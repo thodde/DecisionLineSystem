@@ -18,7 +18,7 @@ import DLS.Controller.View.JListTxtFriendListener;
 //This class provides the GUI elements of the choice list editor panel
 //Rev 1  -M. Peltola   28-Oct-2012 Class created 
 //====================================================================	
-public class ChoiceListEditor extends JPanel{
+abstract public class ChoiceListEditor extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 
@@ -29,7 +29,7 @@ public class ChoiceListEditor extends JPanel{
 	private boolean allowListEditing;
 	private boolean addOnlyLastItem;
 	private JTextField txtEditField;
-	private JButton btnSubmit;
+	
 	private String[] localList;
 
 	//====================================================================
@@ -46,33 +46,21 @@ public class ChoiceListEditor extends JPanel{
 		addOnlyLastItem = onlyLastItemAdded;
 
 		itemList = new JList(externalList);
-		itemList.setBounds(10,20, 420,160);
+	    itemList.setBounds(50,10, 420,280);
 		itemList.setVisibleRowCount(4);
-
 		
 		itemList.addListSelectionListener(new ValueReporter());
 
-
 		add(itemList);
 
-		JLabel label1 = new JLabel("Add/Edit");
-		label1.setBounds(10, 190, 100, 35);
-		label1.setVisible(allowListEditing);
-		add(label1);
-
 		txtEditField = new JTextField();
-		txtEditField.setBounds(100, 190, 240, 35);
+		txtEditField.setBounds(20, 300, 240, 35);
 		txtEditField.setVisible(allowListEditing);
 		txtEditField.addKeyListener(new JListTxtFriendListener(itemList));
-		
-		
+		txtEditField.setColumns(10);
 		
 		add(txtEditField);
 
-		btnSubmit = new JButton("submit");
-		btnSubmit.setBounds(350, 190, 80, 35);
-		btnSubmit.setVisible(allowListEditing);
-		add(btnSubmit);
 	}
 
 	//====================================================================

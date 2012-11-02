@@ -13,8 +13,10 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import DLS.Controller.View.MoveToEdgeController;
@@ -36,7 +38,7 @@ public class CreateEventFrame extends JFrame {
 	private JRadioButton rdbtnAsynch;
 	private JRadioButton rdbtnRoundRobin;
 	private ChoiceListEditor choiceListEditor;
-	private AddOpenEventChoice addOpenEventChoice;
+	//private AddOpenEventChoice addOpenEventChoice;
 	
 	private NumberListener numberOfChoicesListener;
 	private NumberListener numberOfRoundsListener;
@@ -208,12 +210,13 @@ public class CreateEventFrame extends JFrame {
 					mf.updateStatus(true, "Finish Closed event ");
 				}
 				
-				// else he moderator has chosen to create an open event
+				// else the moderator has chosen to create an open event
 				// Submit the event 
 				// The moderator is done with the CreateEvent GUI
 				else
 				{
 					submitOpenEvent();
+					setVisible(false);
 				}
 			}
 		});
@@ -237,9 +240,20 @@ public class CreateEventFrame extends JFrame {
 		button.setEnabled(true);
 
 		button.setBounds(117, 491, 163, 23);
-		
-		button.addActionListener(new MoveToEdgeController());
+	
+		button.setBounds(117, 491, 163, 23);
+		button.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				setVisible(false);
+				Model m = Model.getModel();
+				EdgeDisplayFrame p = new EdgeDisplayFrame(m, true);
+				p.setVisible(true);
+			}
 
+		}
+		);
+		
 		add(button);
 		return button;
 	}
@@ -270,6 +284,7 @@ public class CreateEventFrame extends JFrame {
 	//====================================================================
 	private void 	addLateCreateEventConfigControls()
 	{
+		super.setTitle("This is new Event Frame-- Part 2");
 		addList();
 		btnCreateThisEvent = createSubmitClosedEventButton();
 	}
@@ -289,11 +304,30 @@ public class CreateEventFrame extends JFrame {
 				"Grape",
 				"Pomegranate"
 		};
-
-		choiceListEditor = new ChoiceListEditor("Choices", theChoiceList, true,false); 
-		choiceListEditor.setBounds(45, 250, 450, 235);
-		add(choiceListEditor);
-
+		
+		JPanel choicesPanel = new JPanel();
+		choicesPanel.setBounds(40, 240, 350, 230);
+		
+		choicesPanel.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
+		choicesPanel.setBorder(BorderFactory.createTitledBorder("Existing Choices"));
+		add(choicesPanel);
+		
+		//JList itemList = new JList(theChoiceList);
+	    //itemList.setSize(200,140);
+	    //itemList.setVisibleRowCount(4);
+	    //choicesPanel.add(itemList);
+		JTextArea ml = new JTextArea();
+		
+		ml.setSize(200,140);
+	    choicesPanel.add(ml);
+	    ml.setText("Mango\nApple\nOrange");
+    
+	    
+	    JLabel lblYourChoice= new JLabel("Your Choice?");
+	    lblYourChoice.setBounds(5, 420, 78, 35);
+	    choicesPanel.add(lblYourChoice);
+		
+		
 		repaint();
 	}
 
@@ -311,20 +345,17 @@ public class CreateEventFrame extends JFrame {
 		
 		if (eventID.length()>0)
 		{
-			removeCreateEventPanel();
+			String [] existingChoices = {"Choice1A", 
+					"Choice2A"};
+			
+			CreateAddSingleChoiceFrame cascf = new CreateAddSingleChoiceFrame(eventID, questionTextField.getText(), existingChoices);
+			
+			cascf.setVisible(true);
+					
+			//removeCreateEventPanel();
 			MainForm mf = MainForm.getMainForm();
-			mf.updateStatus(true, "Open event submitted");
-			String question = "Why?";
-			String [] existingChoices = {"Choice1", 
-					"Choice2"};
-			
-			AddOpenEventChoice addOpenEventChoice = new AddOpenEventChoice(eventID, questionTextField.getText(), existingChoices);
-			addOpenEventChoice.setBounds(1,40,450,430);
-			
-			mf.add(addOpenEventChoice);
-			mf.repaint();
-
-		}
+			mf.updateStatus(true, "Open event submitted Add choce frame");
+			}
 	}
 
 	//====================================================================

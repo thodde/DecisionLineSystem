@@ -135,13 +135,14 @@ public class WelcomePanel extends JPanel{
 				{
 					createNewEventController.setupAddNewEventGUI();
 					removeWelcomePanel();
-				}
+					setVisible(false);				}
 				else
 				{
 					if (validateEventIDController.isValidEventID(eventID))
 					{
 						existingEventController.setupExistingEventGUI(eventID);
 						removeWelcomePanel();
+						setVisible(false);						
 					}
 				}
 			}
@@ -164,9 +165,7 @@ public class WelcomePanel extends JPanel{
 		button.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
-				//UIStateController usc = UIStateController.getUIStateController();
-				//usc.updateUIToNextState(UIStateController.AppState.ADD_RR_EDGE);
-
+			
 				String eventID = textEventIDField.getText();
 
 				if (validateEventIDController.isValidEventID(eventID))
@@ -175,9 +174,9 @@ public class WelcomePanel extends JPanel{
 
 					if(m.isClosedEventType(eventID))
 					{
-
 						userAddEdgeController.setupAddEdgeGUI(eventID, false);
 						removeWelcomePanel();
+					
 					}
 					else
 					{
@@ -187,11 +186,7 @@ public class WelcomePanel extends JPanel{
 				}
 			}
 		});
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-
+		
 		button.setBounds(172, 11, 136, 23);
 		innerPanel.add(button);
 		return button;
@@ -288,5 +283,8 @@ public class WelcomePanel extends JPanel{
 		
 		mf.repaint();  // redundant
 	}
+	
+	
+	
 }
 

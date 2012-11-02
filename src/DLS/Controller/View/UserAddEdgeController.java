@@ -1,6 +1,7 @@
 package DLS.Controller.View;
 
 import DLS.model.Model;
+import DLS.view.EdgeDisplayFrame;
 import DLS.view.EdgeDisplayPanel;
 import DLS.view.MainForm;
 
@@ -32,10 +33,16 @@ public class UserAddEdgeController {
 		mf.updateStatus(true, "RR Edge");
 		mf.showCredentialsPanel(true);
 		
-		EdgeDisplayPanel p1 = new EdgeDisplayPanel(Model.getModel(), moderator);
-		p1.setVisible(true);
-		mf.add(p1);
-		mf.setTitle("Decision Lines - Add your edge");		
+		//EdgeDisplayPanel p1 = new EdgeDisplayPanel(Model.getModel(), moderator);
+		//p1.setVisible(true);
+		//mf.add(p1);
+		mf.setTitle("Decision Lines - Add your edge555");	
+		
+		//setVisible(false);
+		Model m = Model.getModel();
+		EdgeDisplayFrame p = new EdgeDisplayFrame(m, true);
+		p.setVisible(true);
+		
 	}
 
 }

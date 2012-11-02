@@ -10,6 +10,8 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 
+import DLS.Controller.View.ValidateCredentialsController;
+
 //====================================================================
 //This class provides the GUI elements of the credentials panel
 //Rev 1  -M. Peltola   20-Oct-2012 Class created 
@@ -64,6 +66,9 @@ public class CredentialsPanel  extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				//Send XML Request to server to validate user
+				
+				ValidateCredentialsController vcc = new ValidateCredentialsController();
+				vcc.credentialsAreValid(textField.getText(), textField_1.getText());
 			}
 		});
 		

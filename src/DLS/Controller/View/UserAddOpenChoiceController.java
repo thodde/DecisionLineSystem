@@ -1,7 +1,8 @@
 package DLS.Controller.View;
 
 import DLS.model.Model;
-import DLS.view.AddOpenEventChoice;
+//import DLS.view.AddOpenEventChoice;
+import DLS.view.CreateAddSingleChoiceFrame;
 import DLS.view.EdgeDisplayPanel;
 import DLS.view.MainForm;
 
@@ -29,18 +30,18 @@ public class UserAddOpenChoiceController {
 	//====================================================================
 	public void setupAddChoiceGUI(String eventID, boolean moderator)
 	{
-		MainForm mf = MainForm.getMainForm();
+		//MainForm mf = MainForm.getMainForm();
 		
-		mf.updateStatus(true, "Add open Choice");
-		mf.showCredentialsPanel(true);
+		//mf.updateStatus(true, "Add open Choice");
+		//mf.showCredentialsPanel(true);
 
-		mf.setTitle("Decision Lines - Add your choice");
+		//mf.setTitle("Decision Lines - Add your choice");
 		String question = "What was the question again?";
 		String [] existingChoices = {"Orange","Tomato"};
 		
-		AddOpenEventChoice aopEC = new AddOpenEventChoice(eventID, question , existingChoices);
+		//AddOpenEventChoice aopEC = new AddOpenEventChoice(eventID, question , existingChoices);
+		CreateAddSingleChoiceFrame cascf = new CreateAddSingleChoiceFrame(eventID, question , existingChoices);
 		
-		aopEC.setVisible(true);
-		mf.add(aopEC);
+		cascf.setVisible(true);
 	}
 }

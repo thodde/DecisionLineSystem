@@ -1,6 +1,7 @@
 package DLS.Controller.View;
 
 import DLS.model.Model;
+import DLS.view.EdgeDisplayFrame;
 import DLS.view.EdgeDisplayPanel;
 
 //====================================================================
@@ -16,11 +17,11 @@ public class AddEdgeController {
 	/**
 	 * @author jforkey, mpeltola, thodde
 	 * @param m model to be given to controller
-	 * @param p panel to display
+	 * @param edgeDisplayFrame panel to display
 	 */
-	public AddEdgeController(Model m, EdgeDisplayPanel p) {
+	public AddEdgeController(Model m, EdgeDisplayPanel edgeDisplayPanel) {
 		model = m;
-		panel = p;
+		panel = edgeDisplayPanel;
 	}
 
 	//====================================================================
