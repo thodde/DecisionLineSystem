@@ -23,8 +23,12 @@ public class TextController implements ActionListener {
 	void generateEventFromId(String eventId) {
 		if (eventId.equalsIgnoreCase("ABC")) {
 			System.out.println("Got it! " + eventId);
+			model.setEventID(eventId);
 			mf.redraw();
 		} 
+		else {
+			System.out.println("No Event ID");
+		}
 		
 		// clear text once done.
 		mf.setTextField("");

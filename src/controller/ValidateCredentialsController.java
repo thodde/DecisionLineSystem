@@ -47,6 +47,7 @@ public class ValidateCredentialsController implements ActionListener {
 		//if the credentials are valid, close the form
 		if(isValid) {
 			cf.dispose();
+			
 			EdgeDisplayForm edf = new EdgeDisplayForm(model, moderator);
 			edf.setVisible(true);
 			System.out.println("Moderator: " + moderator);

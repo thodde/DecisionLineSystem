@@ -12,6 +12,7 @@ public class Model {
 	public int[] optionIndices;
 	public int[] optionHeights;
     public int nextIndex; 
+    String eventId;
 
     static private Model modelInstance = null; 
     
@@ -64,6 +65,14 @@ public class Model {
 			f = true;
 		}
 		return f;
+	}
+	
+	public String getEventID() {
+		return eventId;
+	}
+	
+	public void setEventID(String id) {
+		eventId = id;
 	}
 		
 	public void addOptions(String[] eventOptions) {

@@ -2,6 +2,7 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 
 import model.Model;
 import view.AddOpenEventChoice;
@@ -40,20 +41,21 @@ public class CreateNewEventController implements ActionListener {
 		
 		//if the moderator has chosen an open event, set it up
 		if (eventType.equals("Open")) {
-			submitOpenEvent();
+			loadCredentialsForm();
 		}
 		else {
 			getChoices();
 		}
-		loadCredentialsForm();
 	}
 	
 	public void submitOpenEvent() {
 		String eventID = submitOpenEventController.submit(question, choiceMode, numChoices, numRounds);
 		
 		if (eventID.length() > 0) {
-			String [] existingChoices = {"Choice1", "Choice2"};
-			AddOpenEventChoice addOpenEventChoice = new AddOpenEventChoice(eventID, question, existingChoices);
+			Vector<String> existingChoices = new Vector<String>();
+			existingChoices.add("Choice1");
+			existingChoices.add("Choice2");
+			AddOpenEventChoice addOpenEventChoice = new AddOpenEventChoice(eventID, question, existingChoices, model);
 			addOpenEventChoice.setBounds(1, 40, 450, 430);
 		}
 	}
@@ -65,8 +67,10 @@ public class CreateNewEventController implements ActionListener {
 	}
 	
 	public void getChoices() {
-		String [] existingChoices = {"Choice1", "Choice2"};
-		ChoiceListEditor cle = new ChoiceListEditor("Choices", existingChoices, true, true);
+		Vector<String> existingChoices = new Vector<String>();
+		existingChoices.add("Choice1");
+		existingChoices.add("Choice2");
+		ChoiceListEditor cle = new ChoiceListEditor("Choices", existingChoices, true, model);
 		cle.setVisible(true);
 	}
 }

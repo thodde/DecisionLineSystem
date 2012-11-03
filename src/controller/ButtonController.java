@@ -3,10 +3,12 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import view.AdminForm;
 import view.CreateEventForm;
 import view.CredentialsForm;
+import view.MainForm;
 import model.Model;
 
 /**
@@ -19,6 +21,7 @@ public class ButtonController implements ActionListener {
 	final int USER_BUTTON_VALUE = 1;
 	final int ADMIN_BUTTON_VALUE = 2;
 	final int EXIT_BUTTON_VALUE = 3;
+	boolean isValid;
 	
 	/** The box being controlled. */
 	final int number;
@@ -45,6 +48,7 @@ public class ButtonController implements ActionListener {
 			break;
 		case USER_BUTTON_VALUE:
 			//do user stuff
+			isValid = checkValidId();
 			loadCredentialsForm();
 			break;
 		case ADMIN_BUTTON_VALUE:
@@ -66,6 +70,11 @@ public class ButtonController implements ActionListener {
 	public void loadCredentialsForm() {
 		CredentialsForm cf = new CredentialsForm(model, false);
 		cf.setVisible(true);
+	}
+	
+	public boolean checkValidId() {
+		//In here we will check for a valid event ID with the server
+		return true;
 	}
 	
 	/**

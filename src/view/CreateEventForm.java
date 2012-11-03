@@ -4,6 +4,8 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.util.Vector;
+
 import javax.swing.JTextField;
 
 import javax.swing.JFrame;
@@ -187,11 +189,6 @@ public class CreateEventForm extends JFrame {
 		return button;
 	}
 
-	//====================================================================
-	// add controls used in later portion oef event creation.
-	// Only used in closed event creation 
-	//Rev 1  -M. Peltola   27-Oct-2012 Class created 
-	//====================================================================
 	private void addLateCreateEventConfigControls() {
 		addList();
 		btnCreateThisEvent = createSubmitClosedEventButton();
@@ -204,31 +201,18 @@ public class CreateEventForm extends JFrame {
 	//Rev 1  -M. Peltola   27-Oct-2012 Class created 
 	//====================================================================
 	private void addList() {
-		String [] theChoiceList = {
-				"Mango",
-				"Apple",
-				"Grape",
-				"Pomegranate"
-		};
+		Vector<String> theChoiceList = new Vector<String>();
+		theChoiceList.add("Mango");
+		theChoiceList.add("Apple");
+		theChoiceList.add("Grape");
+		theChoiceList.add("Pomegranate");
 
-		choiceListEditor = new ChoiceListEditor("Choices", theChoiceList, true, false); 
+		choiceListEditor = new ChoiceListEditor("Choices", theChoiceList, false, model); 
 		choiceListEditor.setBounds(45, 250, 450, 235);
 		add(choiceListEditor);
 
 		repaint();
 	}
-
-	public void SetValidNumberOfRounds(boolean b) {
-		validNumOfRounds = b;
-	}
-
-	public void SetValidNumberOfChoices(boolean b) {
-		validNumOfChoices = b;
-	}
-
-	public void updateCreateEventButtonStatus() {
-		btnCreateThisEvent.setEnabled(validQuestion);
-	}	
 	
 	public void redraw() {
 		this.repaint();

@@ -85,10 +85,18 @@ public class MainForm extends JFrame {
 		this.repaint();
 	}
 	
+	/**
+	 * Gets a reference to the text box for event IDs
+	 * @return String eventID
+	 */
 	public String getTextField () {
 		return txtEventId.getText();
 	}
 	
+	/**
+	 * Sets the value of the event ID text box
+	 * @param s String eventID
+	 */
 	public void setTextField(String s) {
 		txtEventId.setText(s);
 	}

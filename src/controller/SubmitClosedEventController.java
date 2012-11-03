@@ -1,9 +1,5 @@
 package controller;
 
-//====================================================================
-//This class provides the closed event submission controller
-//Rev 1  -M. Peltola   28-Oct-2012 Class created 
-//====================================================================	
 public class SubmitClosedEventController {
 	
 	//====================================================================
@@ -23,7 +19,7 @@ public class SubmitClosedEventController {
 	{
 		String eventID = "ABC1"; // Note ValidateEventIDController will accept this string!
 		// This is where we will interact with the server.
-		// NOTE WE CAN'T RECEIVE confirmation unless you use the specia;l ServerAccess IController interface that event was accepted by server
+		// NOTE WE CAN'T RECEIVE confirmation unless you use the special ServerAccess IController interface that event was accepted by server
 		return eventID;
 	}	
 
