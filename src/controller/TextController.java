@@ -1,0 +1,32 @@
+package controller;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import view.MainForm;
+import model.Model;
+
+public class TextController implements ActionListener {
+
+	Model model;
+	final MainForm mf;
+	
+	public TextController(Model model, MainForm mf) {
+		this.model = model;
+		this.mf = mf;
+	}
+
+	public void actionPerformed(ActionEvent ae) {
+		String value = mf.getTextField();
+		generateEventFromId(value);
+	}
+	
+	void generateEventFromId(String eventId) {
+		if (eventId.equalsIgnoreCase("ABC")) {
+			System.out.println("Got it! " + eventId);
+			mf.redraw();
+		} 
+		
+		// clear text once done.
+		mf.setTextField("");
+	}
+}
