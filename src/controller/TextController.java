@@ -14,10 +14,10 @@ public class TextController implements ActionListener {
 		this.model = model;
 		this.mf = mf;
 	}
-
+//cw
 	public void actionPerformed(ActionEvent ae) {
-		String value = mf.getTextField();
-		generateEventFromId(value);
+		String eventId = mf.getTextField();
+		generateEventFromId(eventId);
 	}
 	
 	void generateEventFromId(String eventId) {
@@ -29,6 +29,7 @@ public class TextController implements ActionListener {
 		else {
 			System.out.println("No Event ID");
 		}
+		
 		
 		// clear text once done.
 		mf.setTextField("");

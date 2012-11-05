@@ -14,7 +14,10 @@ public class Model {
     public int nextIndex; 
     String eventId;
 
-    static private Model modelInstance = null; 
+    static private Model modelInstance = null;
+	public static int Left;
+	public static int Right; 
+	
     
     public Model() {
 		nStep = 0;

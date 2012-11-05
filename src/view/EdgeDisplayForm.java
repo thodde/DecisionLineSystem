@@ -53,7 +53,7 @@ public class EdgeDisplayForm extends JFrame {
 	}
 	
 	public int GetOptionXCoord(Graphics g, int optionIndex) {
-		int xCoord = 0;
+		int xLeft = 0;
 
 		if (model.nOptionCount > 0) {
 			int w = getWidth();
@@ -66,11 +66,14 @@ public class EdgeDisplayForm extends JFrame {
 				int t = model.nOptionCount - 1;
 
 				int nSpacing = rw / t;
-				xCoord = bw + optionIndex * nSpacing;
+				xLeft = bw + optionIndex * nSpacing;
+				Model.Left = xLeft;
+				Model.Right = xLeft + 1;
+				
 			}
 		}
 
-		return xCoord;
+		return xLeft;
 	}
 
 	//====================================================================

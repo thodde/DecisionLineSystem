@@ -1,9 +1,16 @@
 package controller;
 
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+
+
+
+import client.*;
 import model.Model;
 import view.EdgeDisplayForm;
+import xml.Message;
 
-public class AddEdgeController {
+public class AddEdgeController implements  IController{
 
 	Model model;
 	EdgeDisplayForm form;
@@ -19,16 +26,41 @@ public class AddEdgeController {
 	}
 
 	/**
-	 * This method adds a new edge to the form
+	 * @author Hang, Wei.
+	 * This realize the send and receive message from the Sever, and after receive the message, we refresh the panel.
 	 */
-	public void processEdgeAddition() {
-
-		int index = form.GetClickOptionIndex(form.nLastXClick);
-
-		if (index >= 0 && index < model.nOptionCount) {
-			model.addNewEdge(index, form.nLastXClick, form.nLastYClick);
-			form.repaint();
+	
+	public void processEdgeAddition() {	
+		Message m = requestProcess();	
+	}
+	
+	
+	public Message requestProcess(){
+		String eventId=model.getEventID();
+		String request = Message.requestHeader();
+		request += "<addEdgeResponse id='"+eventId+"' left='"+Model.Left+"' right='"+Model.Right+"' height='"+form.nLastYClick+"' /></request>";
+		return new Message(request);
+	}
+	
+	@Override
+	public void process(Message m, Message response) {
+		Node addEdgeResponse = response.contents.getFirstChild();
+		Node addEdgeRequest = response.contents.getFirstChild();
+		NamedNodeMap map2 = addEdgeRequest.getAttributes();
+		NamedNodeMap map = addEdgeResponse.getAttributes();
+		
+		String eventId = map.getNamedItem("id").getNodeValue();
+		String eventId2 = map2.getNamedItem("id").getNodeValue();
+		Boolean flag =  Boolean.valueOf(map.getNamedItem("success").getNodeValue());
+		if(eventId == eventId2 ){
+			if (flag == true){
+				int index = form.GetClickOptionIndex(form.nLastXClick);
+				model.addNewEdge(index, form.nLastXClick, form.nLastYClick);
+				form.repaint();
+			}
 		}
 	}
+
 }
+
 
