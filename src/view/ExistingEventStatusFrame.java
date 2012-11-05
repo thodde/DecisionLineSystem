@@ -16,13 +16,12 @@ import javax.swing.JTextField;
 
 import controller.ForceEventDecisionController;
 
-
 public class ExistingEventStatusFrame extends JFrame{
 	
+	private static final long serialVersionUID = 1L;
 	ForceEventDecisionController forceDecision;
 	
 	public ExistingEventStatusFrame(String eventID){
-
 
 		setBounds(25,60,550,555);
 		setLayout(null);	
@@ -30,7 +29,6 @@ public class ExistingEventStatusFrame extends JFrame{
 	//CredentialsForm cp = new CredentialsForm();
 	//add(cp);
 	//cp.setVisible(true);		
-		
 		
 	
 	JPanel questionPanel = new JPanel();

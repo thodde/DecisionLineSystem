@@ -3,13 +3,9 @@ package view;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-//====================================================================
-//This class adds the GUI for managing an existing event 
-// placekeeper, not implemented
-//Rev 1  -M. Peltola   28-Oct-2012 Class created 
-//====================================================================	
 abstract public class ExistingEventStatus extends JPanel{
-	
+	private static final long serialVersionUID = 1L;
+
 	public ExistingEventStatus(String eventID){
 
 	setBounds(10,45,625,528);

@@ -7,9 +7,6 @@ import java.awt.Rectangle;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 //====================================================================
 //This class provides the  GUI elements which inform the user of
@@ -18,20 +15,10 @@ import java.awt.event.ActionEvent;
 //====================================================================
 public class StatusPanel extends JPanel{
 
+	private static final long serialVersionUID = 1L;
 	private boolean normal;
 	String statusMessage;
 
-	//final int left = 1;
-	//final int top = 11;
-	//final int width = 520;
-	//final int height = 125;
-
-
-	//====================================================================
-	//The constructor does the work of setting up the UI elements
-	//when they start a session with DLS 
-	//Rev 1  -M. Peltola   18-Oct-2012 Class created 
-	//====================================================================
 	public StatusPanel()
 	{
 		setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));		

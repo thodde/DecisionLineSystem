@@ -1,8 +1,5 @@
 package view;
 
-import java.awt.Color;
-
-import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -19,6 +16,7 @@ import javax.swing.JTextField;
 //====================================================================
 public class GenerateReportsPanel extends JPanel{
 	
+	private static final long serialVersionUID = 1L;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	
 	//====================================================================
@@ -74,12 +72,8 @@ public class GenerateReportsPanel extends JPanel{
 		rb4.setBounds(x, y+rbh*i++, w, 23);
 		add(rb4);
 
-		
 		JButton btnGenerateRequestedReports = new JButton("Generate requested reports");
 		btnGenerateRequestedReports.setBounds(180, 322, 205, 23);
 		add(btnGenerateRequestedReports);
 	}
-	
-	
-
 }

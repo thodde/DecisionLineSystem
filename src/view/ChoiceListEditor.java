@@ -26,7 +26,7 @@ public class ChoiceListEditor extends JFrame {
 	JPanel contentPane;
 	Model model;
 	final int AllItems = -1;
-	JList<String> itemList;
+	JList itemList;
 	String currentItem;
 	Vector<String> currentList;
 	JTextField txtEditField;
@@ -42,6 +42,7 @@ public class ChoiceListEditor extends JFrame {
 		this.model = m;
 		setTitle("Event Choices");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setResizable(false);
 		setSize(600, 450);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -49,7 +50,7 @@ public class ChoiceListEditor extends JFrame {
 		contentPane.setLayout(null);
 
 		//This is the list that holds all of the values
-		itemList = new JList<String>(externalList);
+		itemList = new JList(externalList);
 	    itemList.setBounds(50, 10, 430, 280);
 		itemList.setVisibleRowCount(4);
 		itemList.addListSelectionListener(new ValueReporter());

@@ -2,6 +2,7 @@ package view;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -22,11 +23,18 @@ public class CredentialsForm extends JFrame {
 	final int width = 577;
 	final int height = 60;
 	JTextField txtUsername;
-	JTextField txtPassword;
+	JPasswordField txtPassword;
 	JPanel contentPane;
 	Model model;
 	boolean moderator;
 	
+	/**
+	 * This constructor creates the credentials form for signing into an event.
+	 * It also keeps track of whether or not the current user is the moderator
+	 * for the event
+	 * @param m : Model
+	 * @param moderator : boolean that is set to true if the user is a moderator
+	 */
 	public CredentialsForm(Model m, boolean moderator)
 	{
 		this.model = m;
@@ -34,6 +42,7 @@ public class CredentialsForm extends JFrame {
 		setTitle("Draw2Choose Sign-In");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setSize(575, 100);
+		setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -52,7 +61,8 @@ public class CredentialsForm extends JFrame {
 		lblPassword.setBounds(162, 22, 112, 14);
 		add(lblPassword);
 		
-		txtPassword = new JTextField();
+		//makes it so that the password does not show up in plain text
+		txtPassword = new JPasswordField();
 		txtPassword.setBounds(276, 22, 86, 20);
 		add(txtPassword);
 		txtPassword.setColumns(10);
@@ -74,7 +84,7 @@ public class CredentialsForm extends JFrame {
 	/**
 	 * @return String: the password of the user
 	 */
-	public String getPassword() {
-		return txtPassword.getText();
+	public char[] getPassword() {
+		return txtPassword.getPassword();
 	}
 }

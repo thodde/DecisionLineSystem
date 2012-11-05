@@ -26,7 +26,13 @@ public class ValidateCredentialsController implements ActionListener {
 		this.moderator = moderator;
 	}
 	
-	public boolean credentialsAreValid(String user, String password) {
+	/**
+	 * Validates with the server that the credentials of the user are valid
+	 * @param user : String username
+	 * @param password : char[] the users password
+	 * @return boolean : determines if the credentials were accepted by the server
+	 */
+	public boolean credentialsAreValid(String user, char[] password) {
 		boolean stat;
 		
 		if(user == null || user.equals("")) {

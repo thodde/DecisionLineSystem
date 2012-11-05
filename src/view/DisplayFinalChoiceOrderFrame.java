@@ -38,13 +38,6 @@ public class DisplayFinalChoiceOrderFrame extends JFrame{
 		questionTextField.setText("What juice should I purchase?");
 		questionTextField.setEnabled(false);
 		
-		String [] theChoiceList = {
-				"Mango",
-				"Apple",
-				"Grape",
-				"Pomegranate"
-		};
-		
 		JPanel choicesPanel = new JPanel();
 		choicesPanel.setBounds(40, 240, 350, 230);
 		
@@ -62,7 +55,6 @@ public class DisplayFinalChoiceOrderFrame extends JFrame{
 		sp.setBounds(10, 630, 760, 55);
 		add(sp);
 		sp.setVisible(true);
-		
 		
 		JButton btnExit = new JButton("Exit");
 		btnExit.setBounds(372, 491, 89, 23);

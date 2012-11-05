@@ -1,9 +1,6 @@
 package controller;
 
-
-//import DLS.view.ExistingEventStatus;
 import view.ExistingEventStatusFrame;
-import view.MainForm;
 
 //====================================================================
 //This class provides the controller operation to setup the GUI 

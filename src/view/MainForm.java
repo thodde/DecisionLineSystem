@@ -40,6 +40,7 @@ public class MainForm extends JFrame {
 		setTitle("Draw 2 Choose");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(700, 500);
+		setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

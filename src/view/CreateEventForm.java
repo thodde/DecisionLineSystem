@@ -4,8 +4,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.util.Vector;
-
 import javax.swing.JTextField;
 
 import javax.swing.JFrame;
@@ -56,6 +54,7 @@ public class CreateEventForm extends JFrame {
 		setTitle("Create a Decision Lines Event");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setSize(630, 580);
+		setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -189,17 +188,13 @@ public class CreateEventForm extends JFrame {
 		return button;
 	}
 
+	/*
 	private void addLateCreateEventConfigControls() {
 		addList();
 		btnCreateThisEvent = createSubmitClosedEventButton();
 	}
+	
 
-	//====================================================================
-	// add list of choices
-	// The hard coded version will be replaced by empty list
-	// which is filled by moderator of clsoed event.
-	//Rev 1  -M. Peltola   27-Oct-2012 Class created 
-	//====================================================================
 	private void addList() {
 		Vector<String> theChoiceList = new Vector<String>();
 		theChoiceList.add("Mango");
@@ -213,6 +208,7 @@ public class CreateEventForm extends JFrame {
 
 		repaint();
 	}
+	*/
 	
 	public void redraw() {
 		this.repaint();

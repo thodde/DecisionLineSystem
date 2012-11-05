@@ -26,6 +26,7 @@ public class AdminForm extends JFrame {
 		setTitle("Draw2Choose Administrative Options");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setSize(625, 575);
+		setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
