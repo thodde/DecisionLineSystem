@@ -20,5 +20,4 @@ public class DebugHandler extends HandlerBase {
 		// continue on to the next one in the chain, as based on superclass behavior
 		super.process(response);
 	}
-
 }

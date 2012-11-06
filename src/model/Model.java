@@ -31,8 +31,7 @@ public class Model {
 		options = null;
 	}
     
-    static public Model getModel()
-    {
+    static public Model getModel() {
     	if (modelInstance == null)
     	{
     		modelInstance = new Model();
@@ -48,7 +47,6 @@ public class Model {
 	}
 
 	public boolean addOption(String eventOption) {
-
 		boolean status = false;
 		if (nOptionEntryCount < nOptionCount)
 		{

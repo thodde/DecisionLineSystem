@@ -36,17 +36,21 @@ public class TextController implements ActionListener {
 	 * Sets up an event based on the event ID
 	 * @param eventId : String
 	 */
-	void generateEventFromId(String eventId) {
+	public boolean generateEventFromId(String eventId) {
+		boolean valid;
 		//This is a sample ID for testing. Soon this will be replaced with XML controllers
 		if (eventId.equalsIgnoreCase("ABC")) {
 			model.setEventID(eventId);
 			mf.redraw();
+			valid = true;
 		} 
 		else {
 			System.out.println("No Event ID");
+			valid = false;
 		}
 		
 		// clear text once done.
 		mf.setTextField("");
+		return valid;
 	}
 }
