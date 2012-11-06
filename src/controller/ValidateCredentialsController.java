@@ -20,6 +20,12 @@ public class ValidateCredentialsController implements ActionListener {
 	CredentialsForm cf;
 	boolean moderator;
 	
+	/**
+	 * This constructor sets up the data needed to validate the users credentials with the server
+	 * @param m : Model object
+	 * @param cf : CredentialsForm object
+	 * @param moderator : boolean, true if the user is the moderator
+	 */
 	public ValidateCredentialsController(Model m, CredentialsForm cf, boolean moderator) {
 		this.model = m;
 		this.cf = cf;
@@ -35,6 +41,7 @@ public class ValidateCredentialsController implements ActionListener {
 	public boolean credentialsAreValid(String user, char[] password) {
 		boolean stat;
 		
+		//makes sure the user enters a valid username
 		if(user == null || user.equals("")) {
 			JOptionPane.showMessageDialog(null, "You must enter a username!");
 			stat = false;
@@ -45,6 +52,9 @@ public class ValidateCredentialsController implements ActionListener {
 		return stat;
 	}
 	
+	/**
+	 * Sends an XML request to the server asking if the credentials are valid
+	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		//Send XML Request to server to validate user
@@ -54,9 +64,9 @@ public class ValidateCredentialsController implements ActionListener {
 		if(isValid) {
 			cf.dispose();
 			
+			//create a new DecisionLineEvent form
 			EdgeDisplayForm edf = new EdgeDisplayForm(model, moderator);
 			edf.setVisible(true);
-			System.out.println("Moderator: " + moderator);
 		}
 	}
 }

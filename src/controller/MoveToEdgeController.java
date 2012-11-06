@@ -5,23 +5,18 @@ import java.awt.event.ActionListener;
 
 public class MoveToEdgeController implements ActionListener {
 
-
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 
 		//removeCreateEventPanel();
 
-//		String eventID = submitClosedEventController.submit(questionTextField.getText(), 
-//				rdbtnRoundRobin.isSelected(),
-//				numberOfChoicesListener.getCurrentValue(),
-//				numberOfRoundsListener.getCurrentValue(),
-//				choiceListEditor.getChoices() );
+		//String eventID = submitClosedEventController.submit(questionTextField.getText(), 
+		//		rdbtnRoundRobin.isSelected(),
+		//		numberOfChoicesListener.getCurrentValue(),
+		//		numberOfRoundsListener.getCurrentValue(),
+		//		choiceListEditor.getChoices() );
 
-//		if (eventID.length()>0)
-//		{
-//			//removeCreateEventPanel();
-//			mf.updateStatus(true, "Closed event submitted");
-
+//		if (eventID.length() > 0) {
 //			setupAddEdgeGUI(eventID, true);
 //		}
 	}

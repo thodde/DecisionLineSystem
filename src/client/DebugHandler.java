@@ -2,6 +2,11 @@ package client;
 
 import xml.Message;
 
+/**
+ * This class lets us know when messages are received from the server
+ * for testing purposes
+ * @author Trevor Hodde
+ */
 public class DebugHandler extends HandlerBase {
 
 	/**

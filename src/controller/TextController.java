@@ -5,31 +5,46 @@ import java.awt.event.ActionListener;
 import view.MainForm;
 import model.Model;
 
+/**
+ * This controller handles input from text boxes
+ * @author Trevor Hodde
+ */
 public class TextController implements ActionListener {
-
 	Model model;
 	final MainForm mf;
 	
+	/**
+	 * This constructor sets up the text box controller
+	 * @param model : Model object
+	 * @param mf : MainForm object
+	 */
 	public TextController(Model model, MainForm mf) {
 		this.model = model;
 		this.mf = mf;
 	}
-//cw
+
+	/**
+	 * Grabs the event ID from the text box when there is a change in text
+	 * and then creates a new event from the ID
+	 */
 	public void actionPerformed(ActionEvent ae) {
 		String eventId = mf.getTextField();
 		generateEventFromId(eventId);
 	}
 	
+	/**
+	 * Sets up an event based on the event ID
+	 * @param eventId : String
+	 */
 	void generateEventFromId(String eventId) {
+		//This is a sample ID for testing. Soon this will be replaced with XML controllers
 		if (eventId.equalsIgnoreCase("ABC")) {
-			System.out.println("Got it! " + eventId);
 			model.setEventID(eventId);
 			mf.redraw();
 		} 
 		else {
 			System.out.println("No Event ID");
 		}
-		
 		
 		// clear text once done.
 		mf.setTextField("");

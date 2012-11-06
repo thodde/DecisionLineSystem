@@ -41,20 +41,20 @@ public class ButtonController implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		switch(number) {
 		case MODERATOR_BUTTON_VALUE:
-			//do moderator stuff
+			//handle button clicks that have to do with the moderator
 			setupEventOptions();
 			break;
 		case USER_BUTTON_VALUE:
-			//do user stuff
+			//handle button clicks that have to do with the user
 			isValid = checkValidId();
 			loadCredentialsForm();
 			break;
 		case ADMIN_BUTTON_VALUE:
-			//do administrative stuff
+			//handle button clicks that have to do with the administrator
 			loadAdminForm();
 			break;
 		case EXIT_BUTTON_VALUE:
-			//Exit
+			//Handle Exit buttons throughout the application
 			frame.dispose();
 			break;
 		default:
@@ -63,22 +63,31 @@ public class ButtonController implements ActionListener {
 	}
 	
 	/**
-	 * This stuff happens when the user button is clicked
+	 * This method is called when the user button is clicked
+	 * on the MainForm
 	 */
 	public void loadCredentialsForm() {
+		//load up the credentials form
 		CredentialsForm cf = new CredentialsForm(model, false);
 		cf.setVisible(true);
 	}
 	
+	/**
+	 * This method checks to make sure that the event ID specified by the
+	 * user is a valid ID
+	 * @return boolean
+	 */
 	public boolean checkValidId() {
 		//In here we will check for a valid event ID with the server
 		return true;
 	}
 	
 	/**
-	 * This stuff happens when the moderator button is clicked
+	 * This method is called when the moderator button is clicked
+	 * on the MainForm
 	 */
 	public void setupEventOptions() {
+		//load up create event form for the moderator
 		CreateEventForm cef = new CreateEventForm(model);
 		cef.setVisible(true);
 	}
@@ -87,6 +96,7 @@ public class ButtonController implements ActionListener {
 	 * This stuff happens when the administrator button is clicked
 	 */
 	public void loadAdminForm() {
+		//load up the administrator form
 		AdminForm af = new AdminForm(model);
 		af.setVisible(true);
 	}

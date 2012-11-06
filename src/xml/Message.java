@@ -89,7 +89,6 @@ public class Message {
 		}
 	}  
 
-
 	/** Determine the success of the given message. */
 	public boolean success() {
 		return Boolean.valueOf(contents.getAttributes().getNamedItem(Parser.success).getNodeValue());

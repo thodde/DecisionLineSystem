@@ -15,12 +15,17 @@ import javax.swing.border.EmptyBorder;
 
 import controller.ButtonController;
 import controller.CreateNewEventController;
-import controller.MoveToEdgeController;
 import controller.SubmitClosedEventController;
 import controller.SubmitOpenEventController;
 
 import model.Model;
 
+/**
+ * This class sets up the form that allows the moderator
+ * to create a new DecisionLines Event. It is where all
+ * the options for an event can be specified
+ * @author Trevor Hodde
+ */
 public class CreateEventForm extends JFrame {
 	private static final long serialVersionUID = 1L;
 	JTextField textField_NumberOfChoices;
@@ -51,6 +56,7 @@ public class CreateEventForm extends JFrame {
 
 	public CreateEventForm(Model m) {
 		this.model = m;
+		//Set up the form that will hold all the controls
 		setTitle("Create a Decision Lines Event");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setSize(630, 580);
@@ -60,6 +66,7 @@ public class CreateEventForm extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
+		//add the text box for the question to be added
 		questionPanel = new JPanel();
 		questionPanel.setBounds(1, 8, 609, 93);
 		questionPanel.setBorder(BorderFactory.createTitledBorder("Event Question"));
@@ -73,6 +80,7 @@ public class CreateEventForm extends JFrame {
 		questionPanel.add(questionTextField, BorderLayout.CENTER);
 		questionTextField.setColumns(10);
 		
+		//create two separate button groups for event types and game play types to be determined
 		eventTypeButtonGroup = new ButtonGroup();
 		gamePlayTypeButtonGroup = new ButtonGroup();
 
@@ -82,6 +90,7 @@ public class CreateEventForm extends JFrame {
 		add(eventTypePanel);
 		eventTypePanel.setLayout(new BoxLayout(eventTypePanel, BoxLayout.Y_AXIS));
 
+		//create radio buttons for open/closed events in one button group
 		rdbtnClosedEvent = new JRadioButton("Closed Event");
 		eventTypeButtonGroup.add(rdbtnClosedEvent);
 		eventTypePanel.add(rdbtnClosedEvent);
@@ -97,6 +106,7 @@ public class CreateEventForm extends JFrame {
 		add(choiceModePanel);
 		choiceModePanel.setLayout(new BoxLayout(choiceModePanel, BoxLayout.Y_AXIS));
 
+		//create radio buttons for round robin and asynchronous game play
 		rdbtnAsynch = new JRadioButton("Asynch");
 		gamePlayTypeButtonGroup.add(rdbtnAsynch);
 		choiceModePanel.add(rdbtnAsynch);
@@ -106,6 +116,7 @@ public class CreateEventForm extends JFrame {
 		choiceModePanel.add(rdbtnRoundRobin);
 		rdbtnRoundRobin.setSelected(true);
 
+		//set up a box to enter the number of choices available
 		JPanel numberOfChoicesPanel = new JPanel();
 		numberOfChoicesPanel.setBounds(372, 113, 150, 53);
 		numberOfChoicesPanel.setBorder(BorderFactory.createTitledBorder("Number of Choices"));
@@ -115,6 +126,7 @@ public class CreateEventForm extends JFrame {
 		numberOfChoicesPanel.add(textField_NumberOfChoices);
 		textField_NumberOfChoices.setColumns(10);
 
+		//set up a box to enter the number of rounds to be played
 		JPanel numberOfRoundsPanel = new JPanel();
 		numberOfRoundsPanel.setBounds(372, 177, 150, 60);
 		numberOfRoundsPanel.setBorder(BorderFactory.createTitledBorder("Number of Rounds"));
@@ -138,6 +150,10 @@ public class CreateEventForm extends JFrame {
 		add(btnCancel);
 	}
 	
+	/**
+	 * This method is an accessor to determine the event type
+	 * @return String eventType
+	 */
 	public String getEventType() {
 		if (rdbtnClosedEvent.isSelected()) {
 			return "Closed";
@@ -147,6 +163,10 @@ public class CreateEventForm extends JFrame {
 		}
 	}
 	
+	/**
+	 * This method is an accessor to determine the game play type
+	 * @return String gameplayType
+	 */
 	public String getChoiceMode() {
 		if (rdbtnRoundRobin.isSelected()) {
 			return "Round Robin";
@@ -156,6 +176,10 @@ public class CreateEventForm extends JFrame {
 		}
 	}
 	
+	/**
+	 * This method is an accessor for the number of choices in this event
+	 * @return int numberOfChoices
+	 */
 	public int getNumberOfChoices() {
 		if(!textField_NumberOfChoices.getText().equals(""))
 			return Integer.parseInt(textField_NumberOfChoices.getText());
@@ -163,6 +187,10 @@ public class CreateEventForm extends JFrame {
 			return 1;
 	}
 	
+	/**
+	 * This method is an accessor for the number of rounds in this event
+	 * @return int numberOfRounds
+	 */
 	public int getNumberOfRounds() {
 		if(!textField_NumberOfRounds.getText().equals(""))
 			return Integer.parseInt(textField_NumberOfRounds.getText());
@@ -170,46 +198,17 @@ public class CreateEventForm extends JFrame {
 			return 1;
 	}
 	
+	/**
+	 * This method returns the question specified by the moderator for the event
+	 * @return
+	 */
 	public String getQuestion() {
 		return questionTextField.getText();
 	}
 
-	//====================================================================
-	// Creates the submit event create button for closed events
-	//of the create Event Panel 
-	//Rev 1  -M. Peltola   27-Oct-2012 Class created 
-	//====================================================================
-	JButton createSubmitClosedEventButton() {
-		JButton button = new JButton("Create this event");
-		button.setEnabled(true);
-		button.setBounds(117, 491, 163, 23);
-		button.addActionListener(new MoveToEdgeController());
-		add(button);
-		return button;
-	}
-
-	/*
-	private void addLateCreateEventConfigControls() {
-		addList();
-		btnCreateThisEvent = createSubmitClosedEventButton();
-	}
-	
-
-	private void addList() {
-		Vector<String> theChoiceList = new Vector<String>();
-		theChoiceList.add("Mango");
-		theChoiceList.add("Apple");
-		theChoiceList.add("Grape");
-		theChoiceList.add("Pomegranate");
-
-		choiceListEditor = new ChoiceListEditor("Choices", theChoiceList, false, model); 
-		choiceListEditor.setBounds(45, 250, 450, 235);
-		add(choiceListEditor);
-
-		repaint();
-	}
-	*/
-	
+	/**
+	 * Repaint the form
+	 */
 	public void redraw() {
 		this.repaint();
 	}

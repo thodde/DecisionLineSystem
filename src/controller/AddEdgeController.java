@@ -3,14 +3,16 @@ package controller;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
-
-
 import client.*;
 import model.Model;
 import view.EdgeDisplayForm;
 import xml.Message;
 
-public class AddEdgeController implements  IController{
+/**
+ * This class allows the user to add an edge to the DecisionLineSystem event board
+ * @author Trevor Hodde
+ */
+public class AddEdgeController implements  IController {
 
 	Model model;
 	EdgeDisplayForm form;
@@ -29,7 +31,6 @@ public class AddEdgeController implements  IController{
 	 * @author Hang, Wei.
 	 * This realize the send and receive message from the Sever, and after receive the message, we refresh the panel.
 	 */
-	
 	public void processEdgeAddition() {	
 		Message m = requestProcess();	
 	}
@@ -54,13 +55,12 @@ public class AddEdgeController implements  IController{
 		Boolean flag =  Boolean.valueOf(map.getNamedItem("success").getNodeValue());
 		if(eventId == eventId2 ){
 			if (flag == true){
-				int index = form.GetClickOptionIndex(form.nLastXClick);
+				int index = form.getClickOptionIndex(form.nLastXClick);
 				model.addNewEdge(index, form.nLastXClick, form.nLastYClick);
 				form.repaint();
 			}
 		}
 	}
-
 }
 
 

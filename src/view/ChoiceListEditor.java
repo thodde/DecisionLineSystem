@@ -7,6 +7,7 @@ import java.util.Vector;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -33,13 +34,18 @@ public class ChoiceListEditor extends JFrame {
 	JButton btnSubmit;
 	JButton btnAddChoice;
 	JButton btnRemoveChoice;
+	final int maxChoices;
+	int numChoices;
 	
 	/**
 	 * This constructor sets up the GUI for the list editor
 	 */
-	public ChoiceListEditor(String title, Vector<String> externalList, boolean onlyLastItemAdded, Model m) {
+	public ChoiceListEditor(String title, Vector<String> externalList, boolean onlyLastItemAdded, final int maxChoices, Model m) {
 		this.currentList = externalList;
 		this.model = m;
+		this.maxChoices = maxChoices;
+		this.numChoices = 0;
+		
 		setTitle("Event Choices");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setResizable(false);
@@ -68,6 +74,7 @@ public class ChoiceListEditor extends JFrame {
 		btnSubmit.setVisible(true);
 		contentPane.add(btnSubmit);
 		
+		//add a listener to the button to load up the credentials form when it is pushed
 		btnSubmit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -81,10 +88,17 @@ public class ChoiceListEditor extends JFrame {
 		btnAddChoice.setVisible(true);
 		contentPane.add(btnAddChoice);
 		
+		//if the add choice button is clicked, add the text to the list
 		btnAddChoice.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				addTextToChoices();
+				//makes sure that the user can only enter the number of choices allowed
+				if(numChoices < maxChoices) {
+					addTextToChoices();
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "You can only enter " + maxChoices + " choices!");
+				}
 			}
 		});
 		
@@ -95,10 +109,16 @@ public class ChoiceListEditor extends JFrame {
 		btnRemoveChoice.setEnabled(false);
 		contentPane.add(btnRemoveChoice);
 		
+		//if the remove choice button is clicked, remove the text from the list
 		btnRemoveChoice.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				removeTextFromChoices();
+				if(numChoices > 0) {
+					removeTextFromChoices();
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "There is nothing to remove!");
+				}
 			}
 		});
 	}
@@ -152,6 +172,7 @@ public class ChoiceListEditor extends JFrame {
 		currentItem = txtEditField.getText();
 		currentList.add(currentItem);
 		updateLocalList(currentList);
+		numChoices++;
 	}
 	
 	/**
@@ -162,6 +183,7 @@ public class ChoiceListEditor extends JFrame {
 		if(currentList.contains(currentItem)) {
 			currentList.remove(currentItem);
 			updateLocalList(currentList);
+			numChoices--;
 		}
 	}
 }

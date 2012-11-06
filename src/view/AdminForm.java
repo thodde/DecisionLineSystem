@@ -19,10 +19,14 @@ public class AdminForm extends JFrame {
 	JPanel contentPane;
 	Model model;
 	
-	public AdminForm(Model m)
-	{
+	/**
+	 * This constructor sets up the entire administrator form
+	 * @param m : Model object
+	 */
+	public AdminForm(Model m) {
 		this.model = m;
 		
+		//set up the form
 		setTitle("Draw2Choose Administrative Options");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setSize(625, 575);
@@ -32,19 +36,23 @@ public class AdminForm extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		//add a tabbed pane so we can view different tabs with different options
 		JTabbedPane tabbedAdminPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedAdminPane.setBounds(10, 30, 585, 451);
 		add(tabbedAdminPane);
 
+		//set up the manage event tabs
 		ManageEventsPanel mep = new ManageEventsPanel(model);
 		mep.setLayout(null);
 		tabbedAdminPane.addTab("Manage Events", mep);
 			
+		//set up the generate reports tab
         GenerateReportsPanel grp = new GenerateReportsPanel();
 		tabbedAdminPane.addTab("Generate Reports", grp);
 		grp.setLayout(null);
-						
-		JButton  btnExit = new JButton("Exit");
+				
+		//add the exit button
+		JButton btnExit = new JButton("Exit");
 		btnExit.setBounds(259, 492, 89, 23);
 		btnExit.addActionListener(new ButtonController(model, 3, this));
 		add(btnExit);

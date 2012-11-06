@@ -4,7 +4,10 @@ import client.ServerAccess;
 import view.MainForm;
 import xml.Message;
 
-/** Launch command-line Client to show minimal access needs. */
+/** 
+ * Launch command-line Client to show minimal access needs. 
+ * This class has mostly been borrowed from the Professor
+ */
 public class ClientLauncher {
 
 	// If requested by ClientLauncher (pass in '-server' as argument).

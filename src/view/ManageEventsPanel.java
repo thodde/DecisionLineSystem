@@ -10,12 +10,21 @@ import javax.swing.JTextField;
 import controller.PerformAdminOperationsController;
 import model.Model;
 
+/**
+ * This class handles all the administrative options
+ * such as deleting old events, force completing events, etc.
+ * @author Trevor Hodde
+ */
 public class ManageEventsPanel extends JPanel{
 	
 	private static final long serialVersionUID = 1L;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	Model model;
 
+	/**
+	 * Set up the manage events panel
+	 * @param m : Model object
+	 */
 	public ManageEventsPanel(Model m) {
 		this.model = m;
 		int y = 10;
@@ -125,6 +134,7 @@ public class ManageEventsPanel extends JPanel{
 		rb5Txt.setBounds(161, 5, 95, 20);
         rb5Panel.add(rb5Txt);
 		
+        //carries out all the actions specified above
 		JButton btnPerformRequestedOperations = new JButton("Perform requested Operations");
 		btnPerformRequestedOperations.setBounds(180, 322, 221, 23);
 		btnPerformRequestedOperations.addActionListener(new PerformAdminOperationsController(model, this));
