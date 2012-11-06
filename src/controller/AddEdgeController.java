@@ -12,8 +12,7 @@ import xml.Message;
  * This class allows the user to add an edge to the DecisionLineSystem event board
  * @author Trevor Hodde
  */
-public class AddEdgeController implements  IController {
-
+public class AddEdgeController implements IController {
 	Model model;
 	EdgeDisplayForm form;
 
@@ -36,7 +35,7 @@ public class AddEdgeController implements  IController {
 	}
 	
 	
-	public Message requestProcess(){
+	public Message requestProcess() {
 		String eventId=model.getEventID();
 		String request = Message.requestHeader();
 		request += "<addEdgeResponse id='"+eventId+"' left='"+Model.Left+"' right='"+Model.Right+"' height='"+form.nLastYClick+"' /></request>";
@@ -62,5 +61,3 @@ public class AddEdgeController implements  IController {
 		}
 	}
 }
-
-

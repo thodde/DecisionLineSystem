@@ -1,5 +1,6 @@
-package controller;
+package view;
 
+import controller.ValidateCredentialsController;
 import model.Model;
 import view.CredentialsForm;
 import junit.framework.TestCase;
@@ -14,6 +15,8 @@ public class TestCredentialsForm extends TestCase{
 		char[] password = {'3', '2', '1'};
 		assertTrue(vcc.credentialsAreValid("Anara Serra", password));
 		assertFalse(vcc.credentialsAreValid(null, null));
+		
+		String username = cf.getUsername();
+		password = cf.getPassword();
 	}
-	
 }

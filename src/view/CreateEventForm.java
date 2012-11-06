@@ -164,6 +164,18 @@ public class CreateEventForm extends JFrame {
 	}
 	
 	/**
+	 * This method is a mutator to set the event type
+	 */
+	public void setEventType(String eventType) {
+		if (eventType.equals("Closed")) {
+			rdbtnClosedEvent.setSelected(true);
+		}
+		else {
+			rdbtnOpenEvent.setSelected(true);
+		}
+	}
+	
+	/**
 	 * This method is an accessor to determine the game play type
 	 * @return String gameplayType
 	 */
@@ -173,6 +185,18 @@ public class CreateEventForm extends JFrame {
 		}
 		else {
 			return "Asynchronous";
+		}
+	}
+	
+	/**
+	 * This method is a mutator to set the choice mode
+	 */
+	public void setChoiceMode(String choiceMode) {
+		if (choiceMode.equals("Round Robin")) {
+			rdbtnRoundRobin.setSelected(true);
+		}
+		else {
+			rdbtnAsynch.setSelected(true);
 		}
 	}
 	
@@ -188,6 +212,14 @@ public class CreateEventForm extends JFrame {
 	}
 	
 	/**
+	 * This method is a mutator for setting the number of choices in the event
+	 * @param num
+	 */
+	public void setNumberOfChoices(int num) {
+		textField_NumberOfChoices.setText("0");
+	}
+	
+	/**
 	 * This method is an accessor for the number of rounds in this event
 	 * @return int numberOfRounds
 	 */
@@ -199,11 +231,27 @@ public class CreateEventForm extends JFrame {
 	}
 	
 	/**
+	 * This method is a mutator for setting the number of rounds in the event
+	 * @param num
+	 */
+	public void setNumberOfRounds(int num) {
+		textField_NumberOfRounds.setText("0");
+	}
+	
+	/**
 	 * This method returns the question specified by the moderator for the event
 	 * @return
 	 */
 	public String getQuestion() {
 		return questionTextField.getText();
+	}
+	
+	/**
+	 * This method is a mutator for setting the question for the event
+	 * @param num
+	 */
+	public void setQuestion(String question) {
+		questionTextField.setText("test");
 	}
 
 	/**

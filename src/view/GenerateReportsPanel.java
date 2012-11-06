@@ -7,29 +7,20 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-//====================================================================
-//This class provides the GUI elements for the admin
-//Generate Reports tab
-//NOTE: The code is still in the admin panel class and will be
-//relocated here in the near future -MAP
-//Rev 1  -M. Peltola   21-Oct-2012 Class created 
-//====================================================================
+/**
+ * This class provides the GUI elements for the admin Generate Reports tab
+ * @author Martti Peltola
+ */
 public class GenerateReportsPanel extends JPanel{
 	
 	private static final long serialVersionUID = 1L;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	
-	//====================================================================
-	//The constructor does the work of setting up the UI elements
-	//when they start a session with DLS 
-	//NOTE: The code is still in the admin panel class and will be
-	//relocated here in the near future -MAP
-	//--------------------------------------------------------------------
-	//Rev 1  -M. Peltola   21-Oct-2012 Method created 
-	//Rev 2  -M. Peltola   24-Oct-2012 Moved generate report UI element code from admin panel to here 
-	//====================================================================
+	/**
+	 * The constructor does the work of setting up the UI elements
+	 * when they start a session with DLS 
+	 */
 	public GenerateReportsPanel(){
-		
 		int y = 10;
 		int rbh = 40;
 		int i =0;
@@ -66,7 +57,6 @@ public class GenerateReportsPanel extends JPanel{
 		rb3.setBounds(x, y+rbh*i++, w, 23);
 		add(rb3);
 
-		
 		JRadioButton rb4 = new JRadioButton("Generate report of system error log");
 		buttonGroup.add(rb4);
 		rb4.setBounds(x, y+rbh*i++, w, 23);

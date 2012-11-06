@@ -1,14 +1,16 @@
 package controller;
 
+import model.Model;
+
 public class SubmitClosedEventController {
-	
+	Model model;
 	//====================================================================
 	//The constructor creates the controller which submits
 	// the new closed event to the server for acceptance
 	//Rev 1  -M. Peltola   28-Oct-2012 Class created 
 	//====================================================================
-	public SubmitClosedEventController (){
-	
+	public SubmitClosedEventController(Model m) {
+		this.model = m;
 	}	
 	//====================================================================
 	//The method submits the new closed event to the server and returns 
