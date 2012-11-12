@@ -24,7 +24,7 @@ public class ClientLauncher {
 			System.exit(0);
 		}
 		
-		Model model = new Model();
+		Model model = Model.getModel();
 		MainForm mf = new MainForm(model);
 		mf.setVisible(true);
 		

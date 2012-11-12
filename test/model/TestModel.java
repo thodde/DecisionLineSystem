@@ -7,11 +7,10 @@ public class TestModel extends TestCase {
 	
 	public static void testModel() {
 		model = null;
-		Model m = Model.getModel();
+		model = Model.getModel();
 		
-		model = new Model();
-		m = Model.getModel();
-		assertNotNull(m);
+		model = Model.getModel();
+		assertNotNull(model);
 		
 	}
 	
@@ -30,7 +29,8 @@ public class TestModel extends TestCase {
 	
 	public void testAddOption() {
 		String option = "test";
-		assertFalse(model.addOption(option));
+		model.initOptions(0);
+        assertFalse(model.addOption(option));
 		model.initOptions(5);
 		assertTrue(model.addOption(option));
 	}

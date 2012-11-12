@@ -9,7 +9,7 @@ import junit.framework.TestCase;
 
 public class TestButtonController extends TestCase {
 	public void testButtonController() {
-		Model model = new Model();
+		Model model = Model.getModel();
 		ButtonController bc0 = new ButtonController(model, 0, new JFrame());
 		ButtonController bc1 = new ButtonController(model, 1, new JFrame());
 		ButtonController bc2 = new ButtonController(model, 2, new JFrame());

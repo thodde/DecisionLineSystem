@@ -19,7 +19,7 @@ public class Model {
 	public static int Right; 
 	
     
-    public Model() {
+    private Model() {
 		nStep = 0;
         nextIndex = 0;
     	optionIndices = new int[100];

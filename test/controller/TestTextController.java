@@ -7,7 +7,7 @@ import junit.framework.TestCase;
 public class TestTextController extends TestCase {
 
 	public void testTextWorks () {
-		Model model = new Model();
+		Model model = Model.getModel();
 		
 		MainForm form = new MainForm(model);
 		
@@ -18,7 +18,7 @@ public class TestTextController extends TestCase {
 	}
 	
 	public void testTextFails() {
-		Model model = new Model();
+		Model model = Model.getModel();
 		
 		MainForm form = new MainForm(model);
 		

@@ -159,7 +159,7 @@ public class ChoiceListEditor extends JFrame {
 	 * Bring up the credentials for when the moderator is finished
 	 */
 	public void loadCredentialsForm() {
-		Model model = new Model();
+		Model model = Model.getModel();
 		CredentialsForm cf = new CredentialsForm(model, true);
 		cf.setVisible(true);
 		this.dispose();

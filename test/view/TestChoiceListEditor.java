@@ -7,7 +7,7 @@ import junit.framework.TestCase;
 
 public class TestChoiceListEditor extends TestCase {
 	public void testChoiceListEditor() {
-		Model model = new Model();
+		Model model = Model.getModel();
 		String title = "test";
 		Vector<String> list = new Vector<String>();
 		

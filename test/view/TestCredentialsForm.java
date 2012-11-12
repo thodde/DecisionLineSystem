@@ -8,7 +8,7 @@ import junit.framework.TestCase;
 public class TestCredentialsForm extends TestCase{
 
 	public void testCredentialsForm () {
-		Model model = new Model();
+		Model model = Model.getModel();
 		CredentialsForm cf = new CredentialsForm (model, true);
 		ValidateCredentialsController vcc = new ValidateCredentialsController(model, cf, true);
 

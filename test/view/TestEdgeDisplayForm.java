@@ -5,7 +5,7 @@ import junit.framework.TestCase;
 
 public class TestEdgeDisplayForm extends TestCase {
 	public void testEdgeDisplayForm() {
-		Model model = new Model();
+		Model model = Model.getModel();
 		EdgeDisplayForm edf = new EdgeDisplayForm(model, true);
 		
 		model.nOptionCount = 0;

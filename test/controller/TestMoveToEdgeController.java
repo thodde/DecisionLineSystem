@@ -7,7 +7,7 @@ import junit.framework.TestCase;
 
 public class TestMoveToEdgeController extends TestCase {
 	public void testMoveToEdgeController() {
-		Model model = new Model();
+		Model model = Model.getModel();
 		MoveToEdgeController mtec = new MoveToEdgeController(model);
 		mtec.actionPerformed(new ActionEvent(this, 0, "test"));
 	}

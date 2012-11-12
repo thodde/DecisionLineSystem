@@ -5,7 +5,7 @@ import junit.framework.TestCase;
 
 public class TestDisplayFinalChoiceOrderForm extends TestCase {
 	public void testDisplayFinalChoiceOrderForm() {
-		Model model = new Model();
+		Model model = Model.getModel();
 		DisplayFinalChoiceOrderFrame fcof = new DisplayFinalChoiceOrderFrame(model);
 	}
 }

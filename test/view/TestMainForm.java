@@ -5,7 +5,7 @@ import junit.framework.TestCase;
 
 public class TestMainForm extends TestCase {
 	public void testMainForm() {
-		Model model = new Model();
+		Model model = Model.getModel();
 		MainForm mf = new MainForm(model);
 		mf.setTextField("test");
 		mf.redraw();

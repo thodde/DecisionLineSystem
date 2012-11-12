@@ -8,7 +8,7 @@ import junit.framework.TestCase;
 
 public class TestCreateNewEventController extends TestCase {
 	public void testCreateNewEventController() {
-		Model model = new Model();
+		Model model = Model.getModel();
 		CreateNewEventController controller = new CreateNewEventController(model, new CreateEventForm(model));
 		controller.actionPerformed(new ActionEvent(this, 0, "test"));
 		controller.loadCredentialsForm();
