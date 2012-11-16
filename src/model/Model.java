@@ -1,10 +1,18 @@
 package model;
 
+import javax.swing.JFrame;
+
+import view.*;
 public class Model {
 	public int nOptionCount;
 	public int nOptionEntryCount;
 	public int nStep;
 	public String[] options;
+	public String question;
+	public String mode;
+	public String type;
+	public int rounds;
+	public int position;
 
 	public int nLastXClick;
 	public int nLastYClick;
@@ -12,12 +20,16 @@ public class Model {
 	public int[] optionIndices;
 	public int[] optionHeights;
     public int nextIndex; 
-    String eventId;
+   
 
     static private Model modelInstance = null;
 	public static int Left;
 	public static int Right; 
 	
+	
+	JFrame j;
+    DecisionLinesEvent event;
+    ChoiceListEditor cle;
     
     private Model() {
 		nStep = 0;
@@ -31,7 +43,7 @@ public class Model {
 		options = null;
 	}
     
-    static public Model getModel() {
+    public static Model getModel() {
     	if (modelInstance == null)
     	{
     		modelInstance = new Model();
@@ -39,6 +51,19 @@ public class Model {
     	
         return modelInstance;
     }
+    /**
+     * make the DecisionLinesEvent to be inner class in the model
+     * @author Hang, Wei
+     * 
+     * 
+     */
+    public void setDecisionLinesEvent (DecisionLinesEvent event) {
+		this.event = event;
+	}
+
+	public DecisionLinesEvent getDecisionLinesEvent() {
+		return event;
+	}
     
 	public void initOptions(int count) {
 		nOptionEntryCount = 0;
@@ -68,13 +93,6 @@ public class Model {
 		return f;
 	}
 	
-	public String getEventID() {
-		return eventId;
-	}
-	
-	public void setEventID(String id) {
-		eventId = id;
-	}
 		
 	public void addOptions(String[] eventOptions) {
 		nOptionCount = eventOptions.length;
@@ -91,5 +109,16 @@ public class Model {
 			optionHeights[nextIndex] = y;
 			nextIndex++;
 		}
+	}
+	/**
+	 * This is used for storing and getting the windows;
+	 * @author Hang, Wei
+	 * @param j
+	 */
+	public void setJFrame(JFrame j){
+		this.j = j;
+	}
+	public JFrame getJFrame(){
+		return this.j;
 	}
 }

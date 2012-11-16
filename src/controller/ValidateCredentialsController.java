@@ -7,7 +7,9 @@ import javax.swing.JOptionPane;
 
 import view.CredentialsForm;
 import view.EdgeDisplayForm;
-
+import xml.Message;
+import client.*;
+import model.Access;
 import model.Model;
 
 /**
@@ -53,20 +55,30 @@ public class ValidateCredentialsController implements ActionListener {
 	}
 	
 	/**
-	 * Sends an XML request to the server asking if the credentials are valid
+	 * This method can send the SignInRequest to the server
+	 * @author Hang, Wei
+	 * @param isvalid means if the user only type"" or leave the username blank
 	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		//Send XML Request to server to validate user
+		//Send XML Request to server 
 		boolean isValid = credentialsAreValid(cf.getUsername(), cf.getPassword());
+		if(isValid)	{
+		Model model = Model.getModel();
+		String eventId = model.getDecisionLinesEvent().getEventID();
+		// convert the char[] to String 
+		String s =new String(cf.getPassword());
+		String xmlString = Message.requestHeader() + "<signInRequest id='"+eventId +"'>"+
+				"<user name='"+ cf.getUsername() + "' password='" + s + "'/>" +
+				"</signInRequest>"+"</request>";
+		Message m = new Message (xmlString);
 		
-		//if the credentials are valid, close the form
-		if(isValid) {
-			cf.dispose();
-			
-			//create a new DecisionLineEvent form
-			EdgeDisplayForm edf = new EdgeDisplayForm(model, moderator);
-			edf.setVisible(true);
+		// get the ServerAccess, then send the request
+		Access ac = Access.getInstance();
+		ac.getAccess().sendRequest(m);
 		}
+		cf.dispose();
+		
 	}
 }
+

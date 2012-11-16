@@ -14,6 +14,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import controller.AddChoiceController;
+
+import model.DecisionLinesEvent;
 import model.Model;
 
 /**
@@ -28,15 +31,17 @@ public class ChoiceListEditor extends JFrame {
 	Model model;
 	final int AllItems = -1;
 	JList itemList;
-	String currentItem;
-	Vector<String> currentList;
+	public String currentItem;
+	public Vector<String> currentList;
 	JTextField txtEditField;
 	JButton btnSubmit;
 	JButton btnAddChoice;
 	JButton btnRemoveChoice;
 	final int maxChoices;
 	int numChoices;
-	
+	String choice;
+	DecisionLinesEvent event = DecisionLinesEvent.getInstance();
+	String type = event.getType();
 	/**
 	 * This constructor sets up the GUI for the list editor
 	 */
@@ -72,15 +77,16 @@ public class ChoiceListEditor extends JFrame {
 		btnSubmit = new JButton("Submit");
 		btnSubmit.setBounds(250, 350, 100, 25);
 		btnSubmit.setVisible(true);
+		btnSubmit.setEnabled(false);
 		contentPane.add(btnSubmit);
 		
 		//add a listener to the button to load up the credentials form when it is pushed
-		btnSubmit.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				loadCredentialsForm();
-			}
-		});
+		btnSubmit.addActionListener(new AddChoiceController( this,event) );
+		
+		//allows the moderator to remove a choice
+		btnRemoveChoice = new JButton("Remove Item");
+		btnRemoveChoice.setBounds(380, 300, 100, 25);
+		btnRemoveChoice.setVisible(true);
 		
 		//allows the moderator to add a choice
 		btnAddChoice = new JButton("Add Item");
@@ -88,24 +94,41 @@ public class ChoiceListEditor extends JFrame {
 		btnAddChoice.setVisible(true);
 		contentPane.add(btnAddChoice);
 		
+		/**
+		 * This method will depend on the event type; because in open event, every user can only add one choice; in closed
+		 * event, moderator add all the event 
+		 * @author Hang, Wei
+		 *
+		 */
 		//if the add choice button is clicked, add the text to the list
 		btnAddChoice.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				//makes sure that the user can only enter the number of choices allowed
-				if(numChoices < maxChoices) {
-					addTextToChoices();
+				// This event is an open event, then every user can only enter 1 choice
+				if(type == "open"){
+					if(numChoices < 1) {
+						addTextToChoices();
+						btnSubmit.setEnabled(true);
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "You can only enter 1 choice!");
+					}
 				}
-				else {
-					JOptionPane.showMessageDialog(null, "You can only enter " + maxChoices + " choices!");
+				// This event is a closed event, then moderator add all the choice
+				else{
+					if(numChoices < maxChoices){
+						addTextToChoices();
+						// All the choice is added into list, so the submit button can be enabled;
+						if(numChoices == maxChoices){
+							btnSubmit.setEnabled(true);
+						}
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "You can only enter" + maxChoices + "choices!");
+					}
 				}
 			}
 		});
-		
-		//allows the moderator to remove a choice
-		btnRemoveChoice = new JButton("Remove Item");
-		btnRemoveChoice.setBounds(380, 300, 100, 25);
-		btnRemoveChoice.setVisible(true);
 		btnRemoveChoice.setEnabled(false);
 		contentPane.add(btnRemoveChoice);
 		
@@ -173,6 +196,20 @@ public class ChoiceListEditor extends JFrame {
 		currentList.add(currentItem);
 		updateLocalList(currentList);
 		numChoices++;
+	}
+	/**
+	 * This method can refresh the choice list, so user in the open event can see the choice being added;
+	 * @author Hang, Wei
+	 * 
+	 */
+	public void refreshChoiceList(){
+		Vector<String> vc = new Vector<String>();
+		for(int i=0;i<event.getCuri();i++){
+			choice = event.getChoice(i);
+			vc.add(choice);
+			updateLocalList(vc);
+			model.setJFrame(this);
+		}
 	}
 	
 	/**

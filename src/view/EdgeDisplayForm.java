@@ -10,8 +10,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import xml.Message;
+
 import controller.AddEdgeController;
+import controller.AddEdgeResponseController;
 import controller.ButtonController;
+import model.Access;
 import model.Model;
 
 /**
@@ -21,7 +25,7 @@ import model.Model;
 public class EdgeDisplayForm extends JFrame {
 	private static final long serialVersionUID = 1L;
 	Model model;
-	AddEdgeController edgeController; 
+	AddEdgeResponseController edgeController; 
 	public int nLastXClick;
 	public int nLastYClick;
 	int[] xCoords;
@@ -30,10 +34,9 @@ public class EdgeDisplayForm extends JFrame {
 	/**
 	 * Constructor for setting up the edge display form
 	 * @param m : Model object
-	 * @param moderator : boolean, true if the user is the moderator of the event
+	 * 
 	 */
-	public EdgeDisplayForm(Model m, boolean moderator) {
-		this.model = m;
+	public EdgeDisplayForm() {
 		
 		//creates the form
 		setTitle("Decision Lines Event");
@@ -51,17 +54,12 @@ public class EdgeDisplayForm extends JFrame {
 		btnExitButton.addActionListener(new ButtonController(model, 3, this));
 		btnExitButton.setVisible(true);
 		contentPane.add(btnExitButton);
-		
-		//allows adges to be added
-		edgeController = new AddEdgeController(model, this);
-		addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				nLastXClick = arg0.getX();
-				nLastYClick = arg0.getY();
-				edgeController.processEdgeAddition();
-			}
-		});
+		contentPane.addMouseListener(new AddEdgeController(this));
+	}
+	
+	public void redraw(){
+		this.repaint();
+		model.setJFrame(this);
 	}
 	
 	public int getOptionXCoord(Graphics g, int optionIndex) {
@@ -80,7 +78,7 @@ public class EdgeDisplayForm extends JFrame {
 				int nSpacing = rw / t;
 				xLeft = bw + optionIndex * nSpacing;
 				Model.Left = xLeft;
-				Model.Right = xLeft + 1;
+				Model.Right = xLeft + nSpacing;
 			}
 		}
 
@@ -130,6 +128,7 @@ public class EdgeDisplayForm extends JFrame {
 					if (optionIndex < model.nOptionCount) {
 						g.drawLine(xCoords[optionIndex], y, xCoords[optionIndex + 1],y);
 					}
+					model.setJFrame(this);
 				}
 			}
 		}

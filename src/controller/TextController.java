@@ -29,14 +29,15 @@ public class TextController implements ActionListener {
 	 */
 	public void actionPerformed(ActionEvent ae) {
 		String eventId = mf.getTextField();
-		generateEventFromId(eventId);
+		model.getDecisionLinesEvent().setEventID(eventId);
+		//generateEventFromId(eventId);
 	}
 	
 	/**
 	 * Sets up an event based on the event ID
 	 * @param eventId : String
 	 */
-	public boolean generateEventFromId(String eventId) {
+	/*public boolean generateEventFromId(String eventId) {
 		boolean valid;
 		//This is a sample ID for testing. Soon this will be replaced with XML controllers
 		if (eventId.equalsIgnoreCase("ABC")) {
@@ -52,5 +53,5 @@ public class TextController implements ActionListener {
 		// clear text once done.
 		mf.setTextField("");
 		return valid;
-	}
+	}*/
 }

@@ -1,111 +1,107 @@
 package model;
 
+
 /**
- * This entity maintains information about a decision line event
- * @author Martti Peltola
+ * This DesicisionLinesEvent entity has many attributes and method. 
+ * It is used to store the information we need about the Decision Line Event
+ * @author Hang, Wei
+ * 
  */
 public class DecisionLinesEvent {
 
-	private int numRounds;
-	private int numChoices;
-	private boolean closedEvent; 
-	private boolean roundRobin;
-	private Line[] lines;
+	public String question;
+	public String mode;
+	public String type;
+	public int rounds;
+	public int position;
+	public String eventId;
+	public int option;
+	public String Choices[] = new String [option];
+	public int i;
+	static DecisionLinesEvent instance = null;
+	
+	public DecisionLinesEvent(){	
+	}
+	
+	public static DecisionLinesEvent getInstance() {
+		if (instance == null) {
+			instance = new DecisionLinesEvent();
+		}
+		return instance;
+	}
 
-	/**
-	 * This constructor sets up the basic decison line event
-	 * @param numRounds : number of rounds
-	 * @param numChoices : number of choices
-	 * @param closedEvent : event is closed
-	 * @param roundRobinEvent : event is round robin
-     * @author Martti Peltola
-	 */
-	public DecisionLinesEvent(int numRounds, int numChoices, boolean closedEvent, boolean roundRobin) {
-		this.numRounds = numRounds;
-		this.numChoices = numChoices;
-		this.closedEvent = closedEvent; 
-		this.roundRobin = roundRobin; 
+    public String getMode() {
+		return mode;
+	}
+	
+	public void setMode(String mode) {
+		this.mode = mode;
+	}
+    
+	 public int getRounds() {
+		return rounds;
+	}
 		
-		 lines = new Line[numChoices];
+	public void setRounds(int rounds) {
+		this.rounds = rounds;
+	}
+	
+	public int getPostion() {
+		return position;
+	}
+			
+	public void setPosition(int position) {
+		this.position = position;
+	}
+	
+	public String getType() {
+		return type;
+	}
+		
+	public void setType(String type) {
+		this.type = type;
+	}
+		
+	public String getQuestion (){
+		return question;
+	}
+		
+	public void setQuestion(String question) {
+		this.question = question;
 	}
 
-	/**
-	 * This method returns the number of rounds
-	 * @return : number of rounds
-	 * @author Martti Peltola
-    */
-	public int getNumberOfRounds(){
-		return numRounds;
+	public String getEventID() {
+		return eventId;
 	}
-
-	/**
-	 * This method returns the number of choices
-	 * @return : number of choices
-	 * @author Martti Peltola
-     */
-	public int getNumberOfChoices(){
-		return numChoices;
+	
+	public void setEventID(String eventId) {
+		this.eventId = eventId;
 	}
-
-	/**
-	 * This method returns true if the event is closed
-	 * @return : true if closed event
-	 * @author Martti Peltola
-     */
-	public boolean isClosedEvent(){
-		return closedEvent;
+	
+	public int getOption() {
+		return option;
 	}
-
-	/**
-	 * This method returns true if the event is round robin
-	 * @return : true if round robin
-	 * @author Martti Peltola
-     */
-	public boolean isRoundRobinEvent(){
-		return roundRobin;
+			
+	public void setOption(int option) {
+		this.option = option;
 	}
-
-	/**
-	 * This method returns a prioritized list of choices
-	 * @return : prioritized list of choices
-	 * @author Martti Peltola
-	 */
-	public String[] prioritizedChoices()
-	{
-		String priChoices[] = null;
-
-		return priChoices;
+	
+	public String getChoice(int i) {
+		return Choices[i];
 	}
-
-	/**
-	 * This method returns if the edge is valid
-	 * @param e : the edge being tested for validiry
-     * @return : true if edge is valid
-	 * @author Martti Peltola
-	 */
-	public boolean isValidEdge(Edge e){
-		boolean validEdge = true;
-
-		return validEdge;
+	
+	public void setChoice (int i, String choice) {
+		Choices[i] = choice;
+		setCuri(i);
 	}
-
-	/**
-	 * This method adds a new edge to the event if the edge is valid
-	 * @param e : the new edge being we wish to add to event
-	 * @return : true if new edge is valid
-	 * @author Martti Peltola
-	 */
-	public boolean addEdge(Edge e){
-		boolean validAdd = true;
-
-		return validAdd;
+	public void setCuri(int i) {
+		this.i = i;
 	}
-
-	/**
-	 * This method adds a new edge to the event if the new choice is valid
-	 * @return : true if new choice is valid
-	 * @author Martti Peltola
-	 */
+	
+	public int getCuri(){
+		return i;
+	}
+/*
 	public boolean setChoice(int position, String choiceText ){
 		boolean validChoice = false;
 
@@ -127,11 +123,7 @@ public class DecisionLinesEvent {
 		return validChoice;
 	}
 	
-	/**
-	 * This method searches the event lines for the existence of the choice
-	 * @return : true if choice is already present
-	 * @author Martti Peltola
-	 */
+
 	public boolean doesChoiceExist(String choice)
 	{
 		boolean exists = false;
@@ -152,12 +144,12 @@ public class DecisionLinesEvent {
 		return exists;
 		
 	}
+*/
+	
+	
+	
 
-	/**
-	 * This method returns if the event is done
-	 * @return : true if event is done
-	 * @author Martti Peltola
-     */
+
 	public boolean isDone(){
 		boolean done = false;
 

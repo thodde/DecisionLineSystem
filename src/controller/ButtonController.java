@@ -46,7 +46,7 @@ public class ButtonController implements ActionListener {
 			break;
 		case USER_BUTTON_VALUE:
 			//handle button clicks that have to do with the user
-			isValid = checkValidId();
+			//isValid = checkValidId();
 			loadCredentialsForm();
 			break;
 		case ADMIN_BUTTON_VALUE:
@@ -79,6 +79,7 @@ public class ButtonController implements ActionListener {
 	 */
 	public boolean checkValidId() {
 		//In here we will check for a valid event ID with the server
+		
 		return true;
 	}
 	

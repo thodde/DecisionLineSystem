@@ -74,6 +74,7 @@
       <xs:element ref='connectResponse'/>
       <xs:element ref='createResponse'/>
       <xs:element ref='forceResponse'/>
+      <xs:element ref='joinResponse'/>
       <xs:element ref='removeResponse'/>
       <xs:element ref='reportResponse'/>
       <xs:element ref='signInResponse'/>
@@ -98,6 +99,7 @@
       <xs:element ref='connectRequest'/>
       <xs:element ref='createRequest'/>
       <xs:element ref='forceRequest'/>
+      <xs:element ref='kickRequest'/>
       <xs:element ref='removeRequest'/>
       <xs:element ref='reportRequest'/>
       <xs:element ref='signInRequest'/>
@@ -131,10 +133,11 @@
       <xs:element ref='user' minOccurs='1' maxOccurs='1'/>
     </xs:sequence>
 
-    <xs:attribute name='type'       type='eventType' use='required'/>
-    <xs:attribute name='question'   type='xs:string' use='required'/>
-    <xs:attribute name='numChoices' type='xs:int'    use='required'/>
-    <xs:attribute name='numRounds'  type='xs:int'    use='required'/>
+    <xs:attribute name='behavior'   type="behaviorType" use="required"/>
+    <xs:attribute name='type'       type='eventType'    use='required'/>
+    <xs:attribute name='question'   type='xs:string'    use='required'/>
+    <xs:attribute name='numChoices' type='xs:int'       use='required'/>
+    <xs:attribute name='numRounds'  type='xs:int'       use='required'/>
 
   </xs:complexType>
 </xs:element>
@@ -161,15 +164,29 @@
 </xs:element>
 
 
+<!--  when user joins -->
+<xs:element name='joinResponse'> 
+ <xs:complexType>
+    <!-- user that is joining given event -->
+    <xs:sequence>
+      <xs:element ref='user' minOccurs='1' maxOccurs='unbounded'/>
+    </xs:sequence>
+
+    <xs:attribute name='id'         type='xs:string' use='required'/> 
+ </xs:complexType>
+ </xs:element>
+
 <!-- in signinResponse, client is given their ordinal number (0-based) -->
 <xs:element name='signInResponse'> 
  <xs:complexType>
     <!-- all choices that exist, one at a time, as (string,index) entries -->
     <xs:sequence>
       <xs:element ref='choice' minOccurs='0' maxOccurs='unbounded'/>
+      <xs:element ref='user' minOccurs='0' maxOccurs='unbounded'/>
     </xs:sequence>
 
     <xs:attribute name='id'         type='xs:string' use='required'/>   
+    <xs:attribute name='behavior'   type="behaviorType" use='required'/>
     <xs:attribute name='type'       type='eventType' use='required'/>
     <xs:attribute name='question'   type='xs:string' use='required'/>
     <xs:attribute name='numChoices' type='xs:int'    use='required'/>
@@ -323,4 +340,28 @@
   </xs:complexType>
 </xs:element>
 
+
+<!--  Kick User Request [must be round robin] -->
+<!-- _______________________ -->
+
+<xs:element name='kickRequest'> 
+  <xs:complexType>
+    <!-- remove a user from this event -->
+    <xs:attribute name='id'   type='xs:string' use='optional'/>
+
+    <!-- remove user from this event id. -->
+    <xs:attribute name='user'      type='xs:string' use='required'/>
+
+  </xs:complexType>
+</xs:element>
+
+<!-- client receives this [in fact everyone gets this] -->
+<xs:element name='kickResponse'>
+  <xs:complexType>
+    <xs:attribute name='completed'  type='xs:boolean' use='optional'/>
+  </xs:complexType>
+</xs:element>
+
+
 </xs:schema>
+

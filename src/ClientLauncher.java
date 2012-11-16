@@ -1,3 +1,4 @@
+import model.Access;
 import model.Model;
 import client.DebugHandler;
 import client.ServerAccess;
@@ -40,7 +41,9 @@ public class ClientLauncher {
 		// try to connect to the server. Once connected, messages are going to be processed by 
 		// SampleClientMessageHandler. For now we just continue on with the initialization because
 		// no message is actually sent by the connect method.
+		
 		ServerAccess sa = new ServerAccess(host, 9371);
+		
 		if (!sa.connect(handler)) {
 			System.out.println("Unable to connect to server (" + host + "). Exiting.");
 			//System.exit(0);
@@ -50,6 +53,11 @@ public class ClientLauncher {
 		
 		// send an introductory connect request now that we have created (but not made visible!)
 		// the GUI
+		
+		// set the ac to the global value
+		Access ac = Access.getInstance();
+		ac.setAccess(sa);
+		
 		String xmlString = Message.requestHeader() + "<connectRequest/></request>";
 		Message m = new Message (xmlString);
 		sa.sendRequest(m);
