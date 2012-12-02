@@ -8,17 +8,7 @@ public class TestModel extends TestCase {
 	public static void testModel() {
 		model = null;
 		model = Model.getModel();
-		
-		model = Model.getModel();
 		assertNotNull(model);
-		
-	}
-	
-	public void testID() {
-		String id = "test";
-		model.setEventID(id);
-		
-		assertEquals(model.getEventID(), id);
 	}
 	
 	public void testEventType() {

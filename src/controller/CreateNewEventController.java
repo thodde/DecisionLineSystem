@@ -65,8 +65,6 @@ public class CreateNewEventController implements ActionListener {
 		//assuming the id is valid, add the current choices to the new DecisionLines Event
 		if (eventID.length() > 0) {
 			Vector<String> existingChoices = new Vector<String>();
-			existingChoices.add("Choice1");
-			existingChoices.add("Choice2");
 			//load up the open event choice form
 			ChoiceListEditor cle = new ChoiceListEditor(question, existingChoices, false, 1, model);
 			cle.setVisible(true);
@@ -89,8 +87,6 @@ public class CreateNewEventController implements ActionListener {
 	public void getChoices() {
 		Vector<String> existingChoices = new Vector<String>();
 		//adding some temporary data
-		existingChoices.add("Choice1");
-		existingChoices.add("Choice2");
 		//load up the choice editor so the moderator can add/remove choices
 		ChoiceListEditor cle = new ChoiceListEditor("Choices", existingChoices, true, numChoices, model);
 		cle.setVisible(true);

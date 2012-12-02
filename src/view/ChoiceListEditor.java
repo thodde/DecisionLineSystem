@@ -124,7 +124,7 @@ public class ChoiceListEditor extends JFrame {
 						}
 					}
 					else {
-						JOptionPane.showMessageDialog(null, "You can only enter" + maxChoices + "choices!");
+						JOptionPane.showMessageDialog(null, "You can only enter " + maxChoices + " choices!");
 					}
 				}
 			}
@@ -144,6 +144,8 @@ public class ChoiceListEditor extends JFrame {
 				}
 			}
 		});
+		
+		
 	}
 
 	/**

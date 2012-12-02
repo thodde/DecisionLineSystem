@@ -1,7 +1,5 @@
 package client;
 
-
-
 import controller.*;
 import xml.Message;
 
@@ -23,19 +21,22 @@ public class ClientMessageHandler implements IMessageHandler {
 		if (type.equals ("connectResponse")) {
 			// What happens now that we are connected? Now do nothing
 			//new ConnectController().process(response);
-		}else if(type.equals("signInResponse")){
+		}
+		else if(type.equals("signInResponse")){
 			new ValidateCredentialsResponseController().process(response);
-		} else if(type.equals("createResponse")){
-			new modCreateResponseController().process(response);
-		} else if(type.equals("addChoiceResponse")){
+		}
+		//else if(type.equals("createResponse")){
+		//	new modCreateResponseController().process(response);
+		//}
+		else if(type.equals("addChoiceResponse")){
 			new AddChoiceResponseController().process(response);
 		}
 		else if(type.equals("addEdgeResponse")){
 			new AddEdgeResponseController().process(response);
 		}
-		else if(type.equals("TurnResponse")){
-			new TurnResponseController().process(response);
-		}
+		//else if(type.equals("TurnResponse")){
+		//	new TurnResponseController().process(response);
+		//}
 	
 	}
 }

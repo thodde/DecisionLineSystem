@@ -2,7 +2,7 @@ package model;
 
 import junit.framework.TestCase;
 
-public class testEdge  extends TestCase{
+public class TestEdge  extends TestCase{
 
 	
 	public void testEdge(){

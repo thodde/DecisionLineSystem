@@ -2,7 +2,7 @@ package model;
 
 import junit.framework.TestCase;
 
-public class testLine extends TestCase {
+public class TestLine extends TestCase {
 
 	public void testLine(){
 		Line line = new Line(5,"Apple", 3);

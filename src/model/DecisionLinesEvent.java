@@ -145,10 +145,6 @@ public class DecisionLinesEvent {
 		
 	}
 */
-	
-	
-	
-
 
 	public boolean isDone(){
 		boolean done = false;
