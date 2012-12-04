@@ -19,8 +19,6 @@ import xml.*;
  * 
  *
  */
-
-
 public class ValidateCredentialsResponseController {
 	public ValidateCredentialsResponseController(){
 	

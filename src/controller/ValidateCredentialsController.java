@@ -64,21 +64,20 @@ public class ValidateCredentialsController implements ActionListener {
 		//Send XML Request to server 
 		boolean isValid = credentialsAreValid(cf.getUsername(), cf.getPassword());
 		if(isValid)	{
-		Model model = Model.getModel();
-		String eventId = model.getDecisionLinesEvent().getEventID();
-		// convert the char[] to String 
-		String s =new String(cf.getPassword());
-		String xmlString = Message.requestHeader() + "<signInRequest id='"+eventId +"'>"+
-				"<user name='"+ cf.getUsername() + "' password='" + s + "'/>" +
-				"</signInRequest>"+"</request>";
-		Message m = new Message (xmlString);
-		
-		// get the ServerAccess, then send the request
-		Access ac = Access.getInstance();
-		ac.getAccess().sendRequest(m);
+			Model model = Model.getModel();
+			String eventId = model.getDecisionLinesEvent().getEventID();
+			// convert the char[] to String 
+			String s =new String(cf.getPassword());
+			String xmlString = Message.requestHeader() + "<signInRequest id='"+eventId +"'>"+
+					"<user name='"+ cf.getUsername() + "' password='" + s + "'/>" +
+					"</signInRequest>"+"</request>";
+			Message m = new Message (xmlString);
+			
+			// get the ServerAccess, then send the request
+			Access ac = Access.getInstance();
+			ac.getAccess().sendRequest(m);
 		}
 		cf.dispose();
-		
 	}
 }
 

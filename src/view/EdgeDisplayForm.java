@@ -34,10 +34,8 @@ public class EdgeDisplayForm extends JFrame {
 	/**
 	 * Constructor for setting up the edge display form
 	 * @param m : Model object
-	 * 
 	 */
 	public EdgeDisplayForm() {
-		
 		//creates the form
 		setTitle("Decision Lines Event");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -21,14 +21,12 @@ public class Model {
 	public int[] optionHeights;
     public int nextIndex; 
    
-
-    static private Model modelInstance = null;
+    private static Model modelInstance = null;
 	public static int Left;
 	public static int Right; 
 	
 	
 	JFrame j;
-    DecisionLinesEvent event;
     ChoiceListEditor cle;
     
     private Model() {
@@ -51,18 +49,21 @@ public class Model {
     	
         return modelInstance;
     }
+    
+    public static DecisionLinesEvent getEvent() {
+    	return DecisionLinesEvent.getInstance();
+    }
+    
     /**
      * make the DecisionLinesEvent to be inner class in the model
      * @author Hang, Wei
-     * 
-     * 
      */
     public void setDecisionLinesEvent (DecisionLinesEvent event) {
-		this.event = event;
+		event = DecisionLinesEvent.getInstance();
 	}
 
 	public DecisionLinesEvent getDecisionLinesEvent() {
-		return event;
+		return DecisionLinesEvent.getInstance();
 	}
     
 	public void initOptions(int count) {

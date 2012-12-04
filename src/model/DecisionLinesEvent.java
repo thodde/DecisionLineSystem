@@ -1,11 +1,9 @@
 package model;
 
-
 /**
  * This DesicisionLinesEvent entity has many attributes and method. 
  * It is used to store the information we need about the Decision Line Event
  * @author Hang, Wei
- * 
  */
 public class DecisionLinesEvent {
 
@@ -16,12 +14,22 @@ public class DecisionLinesEvent {
 	public int position;
 	public String eventId;
 	public int option;
-	public String Choices[] = new String [option];
+	public String choices[];
 	public int i;
-	static DecisionLinesEvent instance = null;
+	public static DecisionLinesEvent instance;
 	
-	public DecisionLinesEvent(){	
-	}
+	private DecisionLinesEvent() {
+	     question = "";
+	     eventId = "";
+	     position = 0;
+	     type = "";
+	     mode = "";
+	     rounds = 0;
+	     eventId = "";
+	     option = 0;
+	     choices = new String[option];
+	     instance = null;
+	 }
 	
 	public static DecisionLinesEvent getInstance() {
 		if (instance == null) {
@@ -87,11 +95,11 @@ public class DecisionLinesEvent {
 	}
 	
 	public String getChoice(int i) {
-		return Choices[i];
+		return choices[i];
 	}
 	
 	public void setChoice (int i, String choice) {
-		Choices[i] = choice;
+		choices[i] = choice;
 		setCuri(i);
 	}
 	public void setCuri(int i) {
@@ -102,47 +110,33 @@ public class DecisionLinesEvent {
 		return i;
 	}
 /*
-	public boolean setChoice(int position, String choiceText ){
+	public boolean setChoice(int position, String choiceText ) {
 		boolean validChoice = false;
 
-		if (position >= 0 && position < numChoices)
-		{
-			if (lines[position] == null)
-			{
-
-				if(!doesChoiceExist(choiceText)){
-
+		if (position >= 0 && position < numChoices) {
+			if (lines[position] == null) {
+				if(!doesChoiceExist(choiceText)) {
 					Line newChoice = new Line(0, choiceText, position);
-
 					lines[position] = newChoice;
 					validChoice = true;
 				}
 			}
 		}
-
 		return validChoice;
 	}
-	
 
-	public boolean doesChoiceExist(String choice)
-	{
+	public boolean doesChoiceExist(String choice) {
 		boolean exists = false;
 		
-		for (int i=0; i < numChoices; i++)
-		{
-			if (lines[i] != null)
-			{
-				if(lines[i].getChoice().equals(choice))
-				{
+		for (int i=0; i < numChoices; i++) {
+			if (lines[i] != null) {
+				if(lines[i].getChoice().equals(choice)) {
 					exists = true;
 					break;
 				}
 			}
-		
 		}
-		
 		return exists;
-		
 	}
 */
 

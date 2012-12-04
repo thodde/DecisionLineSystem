@@ -48,7 +48,8 @@ public class CreateNewEventController implements ActionListener {
 		
 		//if the moderator has chosen an open event, set it up
 		if (eventType.equals("Open")) {
-			loadCredentialsForm();
+			getChoices();
+			//loadCredentialsForm();
 		}
 		else { //otherwise, allow the moderator to specify the choices
 			getChoices();

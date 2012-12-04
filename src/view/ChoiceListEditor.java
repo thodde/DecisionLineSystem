@@ -81,7 +81,7 @@ public class ChoiceListEditor extends JFrame {
 		contentPane.add(btnSubmit);
 		
 		//add a listener to the button to load up the credentials form when it is pushed
-		btnSubmit.addActionListener(new AddChoiceController( this,event) );
+		btnSubmit.addActionListener(new AddChoiceController(this));
 		
 		//allows the moderator to remove a choice
 		btnRemoveChoice = new JButton("Remove Item");
@@ -144,8 +144,6 @@ public class ChoiceListEditor extends JFrame {
 				}
 			}
 		});
-		
-		
 	}
 
 	/**
@@ -202,7 +200,6 @@ public class ChoiceListEditor extends JFrame {
 	/**
 	 * This method can refresh the choice list, so user in the open event can see the choice being added;
 	 * @author Hang, Wei
-	 * 
 	 */
 	public void refreshChoiceList(){
 		Vector<String> vc = new Vector<String>();
@@ -216,6 +213,7 @@ public class ChoiceListEditor extends JFrame {
 	
 	/**
 	 * Removes a choice from the list box
+	 * @author Trevor Hodde
 	 */
 	public void removeTextFromChoices() {
 		currentItem = itemList.getSelectedValue().toString();
