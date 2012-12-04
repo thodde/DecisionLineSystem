@@ -19,7 +19,7 @@ public class Line {
 	 * @param position : ordinal (0th, 1st, 2nd, ..) position of this line instance in the event instance
 	 * @author Martti Peltola
 	 */
-	public Line (int n, String choice,int position){
+	public Line(int n, String choice, int position) {
 		// choice text of line 
 		this.choice = choice;
 		
@@ -38,7 +38,7 @@ public class Line {
 	 * @return : the choice text
 	 * @author Martti Peltola
      */
-	public String getChoice(){
+	public String getChoice() {
 		return choice;
 	}
 	
@@ -47,8 +47,7 @@ public class Line {
 	 * @return : edges on line
 	 * @author Martti Peltola
      */
-	public Edge[] getEdges()
-	{
+	public Edge[] getEdges() {
 		return edges;
 	}
 
@@ -57,7 +56,7 @@ public class Line {
 	 * @return : the current number of edges on line
 	 * @author Martti Peltola
      */
-	public int getCurrentCount(){
+	public int getCurrentCount() {
 		return currentCount;
 	}
 	
@@ -67,7 +66,7 @@ public class Line {
 	 * @return : number of edges allowed
 	 * @author Martti Peltola
      */
-	public int getTotalEdgeCount(){
+	public int getTotalEdgeCount() {
 		return totalEdgeCount;
 	}	
 	
@@ -76,7 +75,7 @@ public class Line {
 	 * @return : line position
 	 * @author Martti Peltola
      */
-	public int getLinePosition(){
+	public int getLinePosition() {
 		return position;
 	}
 	
@@ -87,7 +86,7 @@ public class Line {
 	 * @return : true if we were able to add the edge
 	 * @author Martti Peltola
 	 */
-	public boolean addEdge (Edge e){
+	public boolean addEdge(Edge e) {
 		boolean valid = false;
 		if(isValidNewEdge(e)){
 			edges[currentCount] = e;
@@ -103,25 +102,20 @@ public class Line {
 	 * @return : true if the edge is valid for this line
 	 * @author Martti Peltola
 	 */
-	public boolean  isValidNewEdge (Edge e){
+	public boolean isValidNewEdge(Edge e) {
 		boolean valid = true;
 		
-		if (currentCount < totalEdgeCount)
-		{
-			for(int i = 0; i<currentCount; i++)
-			{
-				if (edges[i].conflictsWith(e))
-				{
+		if (currentCount < totalEdgeCount) {
+			for(int i = 0; i<currentCount; i++) {
+				if (edges[i].conflictsWith(e)) {
 					valid = false;
 					break;
 				}
 			}
 		}
-		else
-		{
+		else {
 			valid = false;
 		}
-		
 		return valid;
 	}
 	
@@ -131,10 +125,8 @@ public class Line {
 	 * @return : next Edge 
 	 * @author Martti Peltola
 	 */
-	public Edge nextEdge(int n)
-	{
+	public Edge nextEdge(int n) {
 		Edge e = null;
-
 		return e;
 	}
 }

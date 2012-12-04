@@ -13,10 +13,13 @@ public class TestCredentialsForm extends TestCase{
 		ValidateCredentialsController vcc = new ValidateCredentialsController(model, cf, true);
 
 		char[] password = {'3', '2', '1'};
-		assertTrue(vcc.credentialsAreValid("Anara Serra", password));
 		assertFalse(vcc.credentialsAreValid(null, null));
+		assertFalse(vcc.credentialsAreValid("", password));
+		assertTrue(vcc.credentialsAreValid("Anara Serra", password));
 		
 		String username = cf.getUsername();
 		password = cf.getPassword();
+		
+		vcc.actionPerformed(null);
 	}
 }

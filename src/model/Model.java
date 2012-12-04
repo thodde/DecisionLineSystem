@@ -97,7 +97,7 @@ public class Model {
 		
 	public void addOptions(String[] eventOptions) {
 		nOptionCount = eventOptions.length;
-		options = eventOptions.clone();
+		options = eventOptions;
 	}
 
 	public void addNewEdge(int optionIndex, int x, int y) {

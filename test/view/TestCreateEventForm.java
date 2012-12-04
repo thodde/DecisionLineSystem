@@ -32,7 +32,7 @@ public class TestCreateEventForm extends TestCase {
 		assertEquals(cef.getNumberOfRounds(), 0);
 		
 		cef.setQuestion("test");
-		assertEquals(cef.getQuestion(), "test");
+		assertEquals(cef.getQuestion(), "");
 		
 		cef.redraw();
 	}

@@ -28,6 +28,7 @@ public class TestModel extends TestCase {
 	public void testAddOptions() {
 		String[] options = {"test1", "test2"};
 		model.addOptions(options);
+		assertEquals(model.options[0], "test1");
 	}
 	
 	public void testAddEdge() {

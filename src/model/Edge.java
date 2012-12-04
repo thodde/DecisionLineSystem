@@ -19,14 +19,12 @@ public class Edge {
 	 * @param height : height of edge
 	 * @author Martti Peltola
 	 */
-	public  Edge (int left, int right, int height)
-	{
+	public Edge (int left, int right, int height) {
 		// pre conditions we must pass
-		if (left+1 != right)
-		{
+		if (left+1 != right) {
 	    }
 		
-		if (height<0){
+		if (height<0) {
 			
 		}
 			
@@ -62,12 +60,10 @@ public class Edge {
 	 * @return : true if the 2 edges are in conflict
 	 * @author Martti Peltola
 	 */
-	boolean conflictsWith(Edge e)
-	{
+	boolean conflictsWith(Edge e) {
 		boolean conflicts = false;
 		
-		if (right == e.getRight() && left == e.getLeft() && Math.abs(height- e.getHeight()) <= conflictLimit )
-		{
+		if (right == e.getRight() && left == e.getLeft() && Math.abs(height- e.getHeight()) <= conflictLimit ) {
 			conflicts = true;
 		}
 		
