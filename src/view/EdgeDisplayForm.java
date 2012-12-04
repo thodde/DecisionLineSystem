@@ -2,20 +2,15 @@ package view;
 
 import java.awt.FontMetrics;
 import java.awt.Graphics;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import xml.Message;
-
 import controller.AddEdgeController;
 import controller.AddEdgeResponseController;
 import controller.ButtonController;
-import model.Access;
 import model.Model;
 
 /**

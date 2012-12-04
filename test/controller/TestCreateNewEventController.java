@@ -11,6 +11,5 @@ public class TestCreateNewEventController extends TestCase {
 		Model model = Model.getModel();
 		CreateNewEventController controller = new CreateNewEventController(model, new CreateEventForm(model));
 		controller.actionPerformed(new ActionEvent(this, 0, "test"));
-		controller.loadCredentialsForm();
 	}
 }

@@ -8,7 +8,6 @@ import javax.swing.JOptionPane;
 import view.CredentialsForm;
 import view.EdgeDisplayForm;
 import xml.Message;
-import client.*;
 import model.Access;
 import model.Model;
 
@@ -20,6 +19,7 @@ import model.Model;
 public class ValidateCredentialsController implements ActionListener {
 	Model model;
 	CredentialsForm cf;
+	EdgeDisplayForm edf;
 	boolean moderator;
 	
 	/**
@@ -70,7 +70,7 @@ public class ValidateCredentialsController implements ActionListener {
 			String s =new String(cf.getPassword());
 			String xmlString = Message.requestHeader() + "<signInRequest id='"+eventId +"'>"+
 					"<user name='"+ cf.getUsername() + "' password='" + s + "'/>" +
-					"</signInRequest>"+"</request>";
+					"</signInRequest></request>";
 			Message m = new Message (xmlString);
 			
 			// get the ServerAccess, then send the request
@@ -78,6 +78,8 @@ public class ValidateCredentialsController implements ActionListener {
 			ac.getAccess().sendRequest(m);
 		}
 		cf.dispose();
+		edf = new EdgeDisplayForm();
+		edf.setVisible(true);
 	}
 }
 

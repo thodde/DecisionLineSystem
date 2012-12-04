@@ -251,7 +251,7 @@ public class CreateEventForm extends JFrame {
 	 * @param num
 	 */
 	public void setQuestion(String question) {
-		questionTextField.setText("test");
+		questionTextField.setText("");
 	}
 
 	/**

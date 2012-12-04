@@ -2,7 +2,6 @@ package controller;
 
 import view.EdgeDisplayForm;
 import xml.Message;
-import model.Model;
 import junit.framework.TestCase;
 
 public class TestAddEdgeController extends TestCase {

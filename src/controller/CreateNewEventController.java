@@ -4,10 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
 
+import model.DecisionLinesEvent;
 import model.Model;
 import view.ChoiceListEditor;
 import view.CreateEventForm;
-import view.CredentialsForm;
 
 /**
  * This class handles the events from the event options page from the moderator
@@ -15,14 +15,15 @@ import view.CredentialsForm;
  * @author Trevor Hodde
  */
 public class CreateNewEventController implements ActionListener {
-	Model model;
-	CreateEventForm frame;
-	String question;
-	String eventType;
-	String choiceMode;
-	int numChoices;
-	int numRounds;
-	SubmitOpenEventController submitOpenEventController;
+	public Model model;
+	public CreateEventForm frame;
+	public String question;
+	public String eventType;
+	public String choiceMode;
+	public int numChoices;
+	public int numRounds;
+	public SubmitOpenEventController submitOpenEventController;
+	public DecisionLinesEvent dle;
 
 	/**
 	 * Constructor to set up a new event
@@ -32,13 +33,12 @@ public class CreateNewEventController implements ActionListener {
 	public CreateNewEventController(Model m, CreateEventForm f) {
 		this.model = m;
 		this.frame = f;
+		submitOpenEventController = new SubmitOpenEventController(m);
+		dle = DecisionLinesEvent.getInstance();
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		//hide the event setup form
-		frame.dispose();
-		
 		//get references to all the needed info from the last form
 		question = frame.getQuestion();
 		eventType = frame.getEventType();
@@ -46,10 +46,12 @@ public class CreateNewEventController implements ActionListener {
 		numChoices = frame.getNumberOfChoices();
 		numRounds = frame.getNumberOfRounds();
 		
+		//hide the event setup form
+		frame.dispose();
+		
 		//if the moderator has chosen an open event, set it up
-		if (eventType.equals("Open")) {
-			getChoices();
-			//loadCredentialsForm();
+		if (eventType.equalsIgnoreCase("Open")) {
+			submitOpenEvent();
 		}
 		else { //otherwise, allow the moderator to specify the choices
 			getChoices();
@@ -57,28 +59,26 @@ public class CreateNewEventController implements ActionListener {
 	}
 	
 	/**
-	 * If the moderator specifies an Open event, let the users add their own chocies to the list
+	 * If the moderator specifies an Open event, let the users add their own choices to the list
 	 */
 	public void submitOpenEvent() {
 		//build a valid event id
 		String eventID = submitOpenEventController.submit(question, choiceMode, numChoices, numRounds);
 		
+		dle.setEventID(eventID);
+		dle.setMode(choiceMode);
+		dle.setQuestion(question);
+		dle.setType(eventType);
+		dle.setRounds(numRounds);
+		dle.setNumChoices(numChoices);
+		
 		//assuming the id is valid, add the current choices to the new DecisionLines Event
 		if (eventID.length() > 0) {
 			Vector<String> existingChoices = new Vector<String>();
 			//load up the open event choice form
-			ChoiceListEditor cle = new ChoiceListEditor(question, existingChoices, false, 1, model);
+			ChoiceListEditor cle = new ChoiceListEditor(question, existingChoices, false, numChoices, model);
 			cle.setVisible(true);
 		}
-	}
-	
-	/**
-	 * Load the credentials form when the moderator is done specifying
-	 * the choices for this event
-	 */
-	public void loadCredentialsForm() {
-		CredentialsForm cf = new CredentialsForm(model, true);
-		cf.setVisible(true);
 	}
 	
 	/**
@@ -87,7 +87,6 @@ public class CreateNewEventController implements ActionListener {
 	 */
 	public void getChoices() {
 		Vector<String> existingChoices = new Vector<String>();
-		//adding some temporary data
 		//load up the choice editor so the moderator can add/remove choices
 		ChoiceListEditor cle = new ChoiceListEditor("Choices", existingChoices, true, numChoices, model);
 		cle.setVisible(true);

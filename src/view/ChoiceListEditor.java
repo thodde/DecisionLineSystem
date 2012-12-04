@@ -30,7 +30,7 @@ public class ChoiceListEditor extends JFrame {
 	JPanel contentPane;
 	Model model;
 	final int AllItems = -1;
-	JList itemList;
+	JList<String> itemList;
 	public String currentItem;
 	public Vector<String> currentList;
 	JTextField txtEditField;
@@ -42,6 +42,7 @@ public class ChoiceListEditor extends JFrame {
 	String choice;
 	DecisionLinesEvent event = DecisionLinesEvent.getInstance();
 	String type = event.getType();
+	
 	/**
 	 * This constructor sets up the GUI for the list editor
 	 */
@@ -61,7 +62,7 @@ public class ChoiceListEditor extends JFrame {
 		contentPane.setLayout(null);
 
 		//This is the list that holds all of the values
-		itemList = new JList(externalList);
+		itemList = new JList<String>(externalList);
 	    itemList.setBounds(50, 10, 430, 280);
 		itemList.setVisibleRowCount(4);
 		itemList.addListSelectionListener(new ValueReporter());
@@ -172,7 +173,7 @@ public class ChoiceListEditor extends JFrame {
 	private class ValueReporter implements ListSelectionListener {
 	    public void valueChanged(ListSelectionEvent event) {
 	    	if (!event.getValueIsAdjusting()) 
-	    		txtEditField.setText(itemList.getSelectedValue().toString());
+	    		txtEditField.setText("");
 	      
 	    	btnRemoveChoice.setEnabled(true);
 	    }
@@ -196,6 +197,10 @@ public class ChoiceListEditor extends JFrame {
 		currentList.add(currentItem);
 		updateLocalList(currentList);
 		numChoices++;
+		
+		if(numChoices == maxChoices) {
+			btnSubmit.setEnabled(true);
+		}
 	}
 	/**
 	 * This method can refresh the choice list, so user in the open event can see the choice being added;
@@ -216,11 +221,17 @@ public class ChoiceListEditor extends JFrame {
 	 * @author Trevor Hodde
 	 */
 	public void removeTextFromChoices() {
-		currentItem = itemList.getSelectedValue().toString();
-		if(currentList.contains(currentItem)) {
-			currentList.remove(currentItem);
-			updateLocalList(currentList);
-			numChoices--;
+		if(itemList.getSelectedValue() != null) {
+			currentItem = itemList.getSelectedValue().toString();
+			if(currentList.contains(currentItem)) {
+				currentList.remove(currentItem);
+				updateLocalList(currentList);
+				numChoices--;
+				
+				if(numChoices < maxChoices) {
+					btnSubmit.setEnabled(false);
+				}
+			}
 		}
 	}
 }

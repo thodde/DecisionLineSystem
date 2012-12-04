@@ -3,8 +3,6 @@ package model;
 import junit.framework.TestCase;
 
 public class TestEdge  extends TestCase{
-
-	
 	public void testEdge(){
 		Edge e = new Edge(5,4,23);
 		assertEquals(e.getLeft(),5);
@@ -18,9 +16,6 @@ public class TestEdge  extends TestCase{
 		assertTrue(e.conflictsWith(e4));
 		
 		Edge e5 = new Edge(5,4,31);
-		assertFalse(e.conflictsWith(e5));
-			
+		assertFalse(e.conflictsWith(e5));	
 	}
-	
-	
 }

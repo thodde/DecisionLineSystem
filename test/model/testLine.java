@@ -3,7 +3,6 @@ package model;
 import junit.framework.TestCase;
 
 public class TestLine extends TestCase {
-
 	public void testLine(){
 		Line line = new Line(5,"Apple", 3);
 		
@@ -27,7 +26,5 @@ public class TestLine extends TestCase {
 		assertEquals(line.addEdge(eGood),true);
 		assertEquals(line.addEdge(eBad),false);
 		assertEquals(line.getCurrentCount(),2);
-
 	}
-	
 }

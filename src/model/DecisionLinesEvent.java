@@ -1,5 +1,8 @@
 package model;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * This DesicisionLinesEvent entity has many attributes and method. 
  * It is used to store the information we need about the Decision Line Event
@@ -14,7 +17,8 @@ public class DecisionLinesEvent {
 	public int position;
 	public String eventId;
 	public int option;
-	public String choices[];
+	public List<String> choices;
+	public int numChoices;
 	public int i;
 	public static DecisionLinesEvent instance;
 	
@@ -27,7 +31,8 @@ public class DecisionLinesEvent {
 	     rounds = 0;
 	     eventId = "";
 	     option = 0;
-	     choices = new String[option];
+	     choices = new LinkedList<String>();
+	     numChoices = choices.size();
 	     instance = null;
 	 }
 	
@@ -95,13 +100,16 @@ public class DecisionLinesEvent {
 	}
 	
 	public String getChoice(int i) {
-		return choices[i];
+		return choices.get(i);
 	}
 	
 	public void setChoice (int i, String choice) {
-		choices[i] = choice;
-		setCuri(i);
+		if(!choices.contains(choice)) {
+			choices.add(i, choice);
+			setCuri(i);
+		}
 	}
+	
 	public void setCuri(int i) {
 		this.i = i;
 	}
@@ -144,5 +152,13 @@ public class DecisionLinesEvent {
 		boolean done = false;
 
 		return done;
+	}
+
+	public void setNumChoices(int numChoices) {
+		this.numChoices = numChoices;
+	}
+	
+	public int getNumChoices() {
+		return numChoices;
 	}
 }
