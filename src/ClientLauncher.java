@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 import model.Access;
 import model.Model;
 import client.DebugHandler;
@@ -14,11 +16,16 @@ public class ClientLauncher {
 	// If requested by ClientLauncher (pass in '-server' as argument).
 	public static final String serverHost = "72.249.186.243";
 	
+	//default port in case something gets screwed up
+	public static int port = 9371;
+	
 	/**
 	 * Note that to simplify the coding of this command-client, it declares that it can throw an Exception,
 	 * which is typically the failed connection to a server.
 	 */
 	public static void main(String[] args) throws Exception {
+		Scanner sc = new Scanner(System.in);
+		
 		// FIRST thing to do is register the protocol being used. There will be a single class protocol
 		// that will be defined and which everyone will use. For now, demonstrate with skeleton protocol.
 		if (!Message.configure("draw2choose.xsd")) {
@@ -38,10 +45,19 @@ public class ClientLauncher {
 		// create message chain
 		DebugHandler handler = new DebugHandler();
 		
+		do {
+			//get port from user because servers will be using different ports
+			System.out.print("Enter the port number: ");
+			port = sc.nextInt();
+
+		} while(port < 9000 || port > 11000);
+		
+		sc.close();
+		
 		// try to connect to the server. Once connected, messages are going to be processed by 
 		// SampleClientMessageHandler. For now we just continue on with the initialization because
-		// no message is actually sent by the connect method.
-		ServerAccess sa = new ServerAccess(host, 9371);
+		// no message is actually sent by the connect method.		
+		ServerAccess sa = new ServerAccess(host, port);
 		if (!sa.connect(handler)) {
 			System.out.println("Unable to connect to server (" + host + "). Exiting.");
 			//System.exit(0);

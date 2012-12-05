@@ -30,7 +30,7 @@ public class AddChoiceController implements ActionListener{
 			//send the request of adding choice
 			String postion = String.valueOf(event.getPostion());
 			String xml = Message.requestHeader() + "<addChoiceRequest id='"+event.getEventID() +"'"+
-					" number='" + postion + "' choice='" + choice + "'/>" +"</request>";	
+					" number='" + postion + "' choice='" + choice + "'/></request>";	
 			Message m = new Message (xml);
 			Access ac = Access.getInstance();
 			ac.getAccess().sendRequest(m);
@@ -39,12 +39,12 @@ public class AddChoiceController implements ActionListener{
 			cf.setVisible(true);
 			cle.dispose();
 		}
-		else { // This is in the closed event, only moderator can add all the choice
+		else { // This is in the closed event, only moderator can add all the choices
 			for (int i = 0; i < cle.currentList.size(); i++) {
 				 String choice = cle.currentList.get(i);
 				 event.setChoice(i, choice);
 				 String xml = Message.requestHeader() + "<addChoiceRequest id='"+event.getEventID() +"'"+
-							" number='" + i +  "' choice='" + choice + "'/>" +"</request>";	
+							" number='" + i +  "' choice='" + choice + "'/></request>";	
 				 Message m = new Message (xml);
 				 Access ac = Access.getInstance();
 				 ac.getAccess().sendRequest(m);

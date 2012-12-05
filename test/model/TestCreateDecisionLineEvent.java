@@ -2,9 +2,9 @@ package model;
 
 import junit.framework.TestCase;
 
-public class TestDecisionLineEvent extends TestCase{
+public class TestCreateDecisionLineEvent extends TestCase{
 	
-	public void testDecisionLineEvent() {
+	public void testCreateDecisionLineEvent() {
 		DecisionLinesEvent  dle = DecisionLinesEvent.getInstance();
 		
 		//assertEquals(dle.getRounds(),3);

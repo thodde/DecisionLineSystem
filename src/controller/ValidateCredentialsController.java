@@ -9,6 +9,7 @@ import view.CredentialsForm;
 import view.EdgeDisplayForm;
 import xml.Message;
 import model.Access;
+import model.DecisionLinesEvent;
 import model.Model;
 
 /**
@@ -67,8 +68,11 @@ public class ValidateCredentialsController implements ActionListener {
 			Model model = Model.getModel();
 			String eventId = model.getDecisionLinesEvent().getEventID();
 			// convert the char[] to String 
-			String s =new String(cf.getPassword());
-			String xmlString = Message.requestHeader() + "<signInRequest id='"+eventId +"'>"+
+			DecisionLinesEvent event = DecisionLinesEvent.getInstance();
+			String s = new String(cf.getPassword());
+			event.setUsername(cf.getUsername());
+			event.setPassword(s);
+			String xmlString = Message.requestHeader() + "<signInRequest id='" + eventId + "'>"+
 					"<user name='"+ cf.getUsername() + "' password='" + s + "'/>" +
 					"</signInRequest></request>";
 			Message m = new Message (xmlString);

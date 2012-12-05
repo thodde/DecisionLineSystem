@@ -30,7 +30,7 @@ public class ChoiceListEditor extends JFrame {
 	JPanel contentPane;
 	Model model;
 	final int AllItems = -1;
-	JList<String> itemList;
+	JList itemList;
 	public String currentItem;
 	public Vector<String> currentList;
 	JTextField txtEditField;

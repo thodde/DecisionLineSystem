@@ -9,7 +9,6 @@ import java.util.List;
  * @author Hang, Wei
  */
 public class DecisionLinesEvent {
-
 	public String question;
 	public String mode;
 	public String type;
@@ -21,6 +20,8 @@ public class DecisionLinesEvent {
 	public int numChoices;
 	public int i;
 	public static DecisionLinesEvent instance;
+	public String username;
+	public String password;
 	
 	private DecisionLinesEvent() {
 	     question = "";
@@ -34,6 +35,8 @@ public class DecisionLinesEvent {
 	     choices = new LinkedList<String>();
 	     numChoices = choices.size();
 	     instance = null;
+	     username = "";
+	     password = "";
 	 }
 	
 	public static DecisionLinesEvent getInstance() {
@@ -160,5 +163,21 @@ public class DecisionLinesEvent {
 	
 	public int getNumChoices() {
 		return numChoices;
+	}
+	
+	public String getUsername(){
+		return username;
+	}
+	
+	public void setUsername(String username){
+		this.username = username;
+	}
+	
+	public String getPassword(){
+		return password;
+	}
+	
+	public void setPassword(String password){
+		this.password = password;
 	}
 }

@@ -25,7 +25,6 @@ public class Model {
 	public static int Left;
 	public static int Right; 
 	
-	
 	JFrame j;
     ChoiceListEditor cle;
     

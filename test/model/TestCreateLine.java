@@ -2,8 +2,8 @@ package model;
 
 import junit.framework.TestCase;
 
-public class TestLine extends TestCase {
-	public void testLine(){
+public class TestCreateLine extends TestCase {
+	public void testCreateLine(){
 		Line line = new Line(5,"Apple", 3);
 		
 		assertEquals(line.getTotalEdgeCount(),5);

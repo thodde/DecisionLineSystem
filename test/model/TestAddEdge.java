@@ -2,8 +2,8 @@ package model;
 
 import junit.framework.TestCase;
 
-public class TestEdge  extends TestCase{
-	public void testEdge(){
+public class TestAddEdge  extends TestCase{
+	public void testAddEdge(){
 		Edge e = new Edge(5,4,23);
 		assertEquals(e.getLeft(),5);
 		assertEquals(e.getRight(),4);
