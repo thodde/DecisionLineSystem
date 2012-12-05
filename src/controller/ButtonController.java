@@ -47,9 +47,8 @@ public class ButtonController implements ActionListener {
 			break;
 		case USER_BUTTON_VALUE:
 			//handle button clicks that have to do with the user
-			//isValid = checkValidId();
-			loadCredentialsForm();
 			model.getDecisionLinesEvent().eventId = ((MainForm)frame).getTextField();
+			loadCredentialsForm();
 			break;
 		case ADMIN_BUTTON_VALUE:
 			//handle button clicks that have to do with the administrator
