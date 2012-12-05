@@ -13,6 +13,7 @@ public class Model {
 	public String type;
 	public int rounds;
 	public int position;
+	public boolean isModerator;
 
 	public int nLastXClick;
 	public int nLastYClick;
@@ -38,6 +39,7 @@ public class Model {
 		nOptionEntryCount = 0;
 		
 		options = null;
+		isModerator = false;
 	}
     
     public static Model getModel() {

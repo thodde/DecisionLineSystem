@@ -15,8 +15,6 @@ import javax.swing.border.EmptyBorder;
 
 import controller.ButtonController;
 import controller.CreateNewEventController;
-import controller.SubmitClosedEventController;
-import controller.SubmitOpenEventController;
 
 import model.Model;
 
@@ -41,9 +39,6 @@ public class CreateEventForm extends JFrame {
 	
 	final ButtonGroup eventTypeButtonGroup;
 	final ButtonGroup gamePlayTypeButtonGroup;
-	
-	SubmitClosedEventController submitClosedEventController;
-	SubmitOpenEventController submitOpenEventController;
 
 	JPanel questionPanel;
 
@@ -56,6 +51,7 @@ public class CreateEventForm extends JFrame {
 
 	public CreateEventForm(Model m) {
 		this.model = m;
+		m.isModerator = true;
 		//Set up the form that will hold all the controls
 		setTitle("Create a Decision Lines Event");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -146,7 +142,7 @@ public class CreateEventForm extends JFrame {
 		//when this button is clicked, the current form exits
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.setBounds(372, 491, 89, 23);
-		btnCancel.addActionListener(new ButtonController(model, 3, this));
+		btnCancel.addActionListener(new ButtonController(3, this));
 		add(btnCancel);
 	}
 	

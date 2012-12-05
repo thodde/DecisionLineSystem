@@ -66,6 +66,6 @@ public class DisplayFinalChoiceOrderFrame extends JFrame{
 		add(btnExit);
 
 		//set the exit button listener
-		btnExit.addActionListener(new ButtonController(model, 3, this));
+		btnExit.addActionListener(new ButtonController(3, this));
 	}
 }

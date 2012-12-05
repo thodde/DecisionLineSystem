@@ -10,10 +10,10 @@ import junit.framework.TestCase;
 public class TestButtonController extends TestCase {
 	public void testButtonController() {
 		Model model = Model.getModel();
-		ButtonController bc0 = new ButtonController(model, 0, new JFrame());
-		ButtonController bc1 = new ButtonController(model, 1, new JFrame());
-		ButtonController bc2 = new ButtonController(model, 2, new JFrame());
-		ButtonController bc3 = new ButtonController(model, 3, new JFrame());
+		ButtonController bc0 = new ButtonController(0, new JFrame());
+		ButtonController bc1 = new ButtonController(1, new JFrame());
+		ButtonController bc2 = new ButtonController(2, new JFrame());
+		ButtonController bc3 = new ButtonController(3, new JFrame());
 		assertTrue(bc0.checkValidId());
 		
 		bc0.loadCredentialsForm();

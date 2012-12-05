@@ -99,7 +99,7 @@ public class ValidateCredentialsResponseController {
 		
 		//if this is in open mode, go to the set choice screen
 		if(type.equals("open")){
-			ChoiceListEditor acs = new ChoiceListEditor(name, vc, false, list.getLength(), model);
+			ChoiceListEditor acs = new ChoiceListEditor(false);
 			acs.setVisible(true);
 		}
 		//if this in close mode, go the the add edge screen

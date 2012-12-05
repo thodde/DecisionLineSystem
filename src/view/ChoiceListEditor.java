@@ -32,7 +32,6 @@ public class ChoiceListEditor extends JFrame {
 	final int AllItems = -1;
 	JList itemList;
 	public String currentItem;
-	public Vector<String> currentList;
 	JTextField txtEditField;
 	JButton btnSubmit;
 	JButton btnAddChoice;
@@ -40,16 +39,17 @@ public class ChoiceListEditor extends JFrame {
 	final int maxChoices;
 	int numChoices;
 	String choice;
-	DecisionLinesEvent event = DecisionLinesEvent.getInstance();
-	String type = event.getType();
+	public DecisionLinesEvent event;
+	String type;
 	
 	/**
 	 * This constructor sets up the GUI for the list editor
 	 */
-	public ChoiceListEditor(String title, Vector<String> externalList, boolean onlyLastItemAdded, final int maxChoices, Model m) {
-		this.currentList = externalList;
-		this.model = m;
-		this.maxChoices = maxChoices;
+	public ChoiceListEditor(boolean onlyLastItemAdded) {
+		this.model = Model.getModel();
+		event = model.getDecisionLinesEvent();
+		type = event.getType();
+		this.maxChoices = event.getNumChoices();
 		this.numChoices = 0;
 		
 		setTitle("Event Choices");
@@ -62,7 +62,7 @@ public class ChoiceListEditor extends JFrame {
 		contentPane.setLayout(null);
 
 		//This is the list that holds all of the values
-		itemList = new JList(externalList);
+		itemList = new JList(new Vector<String>(event.choices));
 	    itemList.setBounds(50, 10, 430, 280);
 		itemList.setVisibleRowCount(4);
 		itemList.addListSelectionListener(new ValueReporter());
@@ -162,7 +162,7 @@ public class ChoiceListEditor extends JFrame {
 	 * @return Vector<String>
 	 */
 	public Vector<String> getChoices(){
-		return currentList;
+		return new Vector<String>(event.choices);
 	}
 	
 	/**
@@ -183,8 +183,7 @@ public class ChoiceListEditor extends JFrame {
 	 * Bring up the credentials for when the moderator is finished
 	 */
 	public void loadCredentialsForm() {
-		Model model = Model.getModel();
-		CredentialsForm cf = new CredentialsForm(model, true);
+		CredentialsForm cf = new CredentialsForm(true);
 		cf.setVisible(true);
 		this.dispose();
 	}
@@ -194,8 +193,8 @@ public class ChoiceListEditor extends JFrame {
 	 */
 	public void addTextToChoices() {
 		currentItem = txtEditField.getText();
-		currentList.add(currentItem);
-		updateLocalList(currentList);
+		event.choices.add(currentItem);
+		updateLocalList(new Vector<String>(event.choices));
 		numChoices++;
 		
 		if(numChoices == maxChoices) {
@@ -223,9 +222,9 @@ public class ChoiceListEditor extends JFrame {
 	public void removeTextFromChoices() {
 		if(itemList.getSelectedValue() != null) {
 			currentItem = itemList.getSelectedValue().toString();
-			if(currentList.contains(currentItem)) {
-				currentList.remove(currentItem);
-				updateLocalList(currentList);
+			if(event.choices.contains(currentItem)) {
+				event.choices.remove(currentItem);
+				updateLocalList(new Vector<String>(event.choices));
 				numChoices--;
 				
 				if(numChoices < maxChoices) {

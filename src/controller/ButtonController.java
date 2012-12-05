@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import view.AdminForm;
 import view.CreateEventForm;
 import view.CredentialsForm;
+import view.MainForm;
 import model.Model;
 
 /**
@@ -31,8 +32,8 @@ public class ButtonController implements ActionListener {
 	JFrame frame;
 	
 	/** Constructor records all information. */
-	public ButtonController(Model m, int n, JFrame f) {
-		model = m;
+	public ButtonController(int n, JFrame f) {
+		model = Model.getModel();
 		frame = f;
 		number = n;
 	}
@@ -48,6 +49,7 @@ public class ButtonController implements ActionListener {
 			//handle button clicks that have to do with the user
 			//isValid = checkValidId();
 			loadCredentialsForm();
+			model.getDecisionLinesEvent().eventId = ((MainForm)frame).getTextField();
 			break;
 		case ADMIN_BUTTON_VALUE:
 			//handle button clicks that have to do with the administrator
@@ -68,7 +70,7 @@ public class ButtonController implements ActionListener {
 	 */
 	public void loadCredentialsForm() {
 		//load up the credentials form
-		CredentialsForm cf = new CredentialsForm(model, false);
+		CredentialsForm cf = new CredentialsForm(false);
 		cf.setVisible(true);
 	}
 	

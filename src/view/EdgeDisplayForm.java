@@ -44,7 +44,7 @@ public class EdgeDisplayForm extends JFrame {
 		//sets the exit button up
 		JButton btnExitButton = new JButton("Exit");
 		btnExitButton.setBounds(300, 400, 90, 25);
-		btnExitButton.addActionListener(new ButtonController(model, 3, this));
+		btnExitButton.addActionListener(new ButtonController(3, this));
 		btnExitButton.setVisible(true);
 		contentPane.add(btnExitButton);
 		contentPane.addMouseListener(new AddEdgeController(this));

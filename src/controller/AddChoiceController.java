@@ -24,9 +24,13 @@ public class AddChoiceController implements ActionListener{
 	}
 
 	public void actionPerformed(ActionEvent arg0) {
-		// This is in open event
-		if(event.getType().equalsIgnoreCase("open")){
-			String choice = cle.currentList.size() + "";
+		if (Model.getModel().isModerator) {
+			cf = new CredentialsForm(true);
+			cf.setVisible(true);
+			cle.dispose();
+		}
+		else {
+			String choice = cle.event.choices.size() + "";
 			//send the request of adding choice
 			String postion = String.valueOf(event.getPostion());
 			String xml = Message.requestHeader() + "<addChoiceRequest id='"+event.getEventID() +"'"+
@@ -35,13 +39,30 @@ public class AddChoiceController implements ActionListener{
 			Access ac = Access.getInstance();
 			ac.getAccess().sendRequest(m);
 			
-			cf = new CredentialsForm(Model.getModel(), false);
+			cf = new CredentialsForm(false);
+			cf.setVisible(true);
+			cle.dispose();
+			
+		}
+		/*
+		// This is in open event
+		if(event.getType().equalsIgnoreCase("open")){
+			String choice = cle.event.choices.size() + "";
+			//send the request of adding choice
+			String postion = String.valueOf(event.getPostion());
+			String xml = Message.requestHeader() + "<addChoiceRequest id='"+event.getEventID() +"'"+
+					" number='" + postion + "' choice='" + choice + "'/></request>";	
+			Message m = new Message (xml);
+			Access ac = Access.getInstance();
+			ac.getAccess().sendRequest(m);
+			
+			cf = new CredentialsForm(false);
 			cf.setVisible(true);
 			cle.dispose();
 		}
 		else { // This is in the closed event, only moderator can add all the choices
-			for (int i = 0; i < cle.currentList.size(); i++) {
-				 String choice = cle.currentList.get(i);
+			for (int i = 0; i < cle.event.choices.size(); i++) {
+				 String choice = cle.event.choices.get(i);
 				 event.setChoice(i, choice);
 				 String xml = Message.requestHeader() + "<addChoiceRequest id='"+event.getEventID() +"'"+
 							" number='" + i +  "' choice='" + choice + "'/></request>";	
@@ -49,9 +70,10 @@ public class AddChoiceController implements ActionListener{
 				 Access ac = Access.getInstance();
 				 ac.getAccess().sendRequest(m);
 			}
-			cf = new CredentialsForm(Model.getModel(), false);
+			cf = new CredentialsForm(false);
 			cf.setVisible(true);
 			cle.dispose();
 		}
+		*/
 	}
 }

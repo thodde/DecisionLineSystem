@@ -10,7 +10,7 @@ import junit.framework.TestCase;
 
 public class TestAddChoiceController extends TestCase {
 	public void testAddChoiceController() {
-		AddChoiceController acc = new AddChoiceController(new ChoiceListEditor("test", new Vector<String>(), false, 0, Model.getModel()));
+		AddChoiceController acc = new AddChoiceController(new ChoiceListEditor(false));
 		DecisionLinesEvent dle = DecisionLinesEvent.getInstance();
 		dle.setType("open");
 		dle.setType("closed");

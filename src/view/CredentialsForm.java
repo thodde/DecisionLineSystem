@@ -35,9 +35,9 @@ public class CredentialsForm extends JFrame {
 	 * @param m : Model
 	 * @param moderator : boolean that is set to true if the user is a moderator
 	 */
-	public CredentialsForm(Model m, boolean moderator)
+	public CredentialsForm(boolean moderator)
 	{
-		this.model = m;
+		this.model = Model.getModel();
 		this.moderator = moderator;
 		setTitle("Draw2Choose Sign-In");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -71,7 +71,7 @@ public class CredentialsForm extends JFrame {
 		btnSubmitCredentials.setBounds(396, 22, 145, 23);
 		add(btnSubmitCredentials);
 		
-		btnSubmitCredentials.addActionListener(new ValidateCredentialsController(model, this, moderator));
+		btnSubmitCredentials.addActionListener(new ValidateCredentialsController(this, moderator));
 	}
 	
 	/**

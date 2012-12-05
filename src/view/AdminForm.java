@@ -54,7 +54,7 @@ public class AdminForm extends JFrame {
 		//add the exit button
 		JButton btnExit = new JButton("Exit");
 		btnExit.setBounds(259, 492, 89, 23);
-		btnExit.addActionListener(new ButtonController(model, 3, this));
+		btnExit.addActionListener(new ButtonController(3, this));
 		add(btnExit);
 	}
 }

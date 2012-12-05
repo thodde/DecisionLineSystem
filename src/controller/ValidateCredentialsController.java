@@ -29,8 +29,8 @@ public class ValidateCredentialsController implements ActionListener {
 	 * @param cf : CredentialsForm object
 	 * @param moderator : boolean, true if the user is the moderator
 	 */
-	public ValidateCredentialsController(Model m, CredentialsForm cf, boolean moderator) {
-		this.model = m;
+	public ValidateCredentialsController(CredentialsForm cf, boolean moderator) {
+		this.model = Model.getModel();
 		this.cf = cf;
 		this.moderator = moderator;
 	}
@@ -63,27 +63,48 @@ public class ValidateCredentialsController implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		//Send XML Request to server 
-		boolean isValid = credentialsAreValid(cf.getUsername(), cf.getPassword());
-		if(isValid)	{
-			Model model = Model.getModel();
-			String eventId = model.getDecisionLinesEvent().getEventID();
-			// convert the char[] to String 
-			DecisionLinesEvent event = DecisionLinesEvent.getInstance();
-			String s = new String(cf.getPassword());
-			event.setUsername(cf.getUsername());
-			event.setPassword(s);
-			String xmlString = Message.requestHeader() + "<signInRequest id='" + eventId + "'>"+
-					"<user name='"+ cf.getUsername() + "' password='" + s + "'/>" +
-					"</signInRequest></request>";
-			Message m = new Message (xmlString);
+		if (moderator) {
+			DecisionLinesEvent dle = model.getDecisionLinesEvent();
 			
-			// get the ServerAccess, then send the request
+			String xml = Message.requestHeader() + "<createRequest behavior='"+ dle.getMode()+"' type='"+dle.getType()+"' question='"
+					+dle.getQuestion() + "' numChoices='"+dle.getNumChoices()+"' numRounds='"+dle.getRounds()+"'>";
+			for (int i = 0; i < dle.choices.size(); i++) {
+				xml += "<choice value='" + dle.choices.get(i) + "' index='" + i + "'/>";
+			}
+			xml += "<user name='"+ cf.getUsername() + "' password='" + new String(cf.getPassword()) + "'/>" +
+					"</createRequest>"+"</request>";
+			Message m = new Message (xml);
 			Access ac = Access.getInstance();
 			ac.getAccess().sendRequest(m);
+			
+			cf.dispose();
+			edf = new EdgeDisplayForm();
+			edf.setVisible(true);
 		}
-		cf.dispose();
-		edf = new EdgeDisplayForm();
-		edf.setVisible(true);
+		else {
+			//TODO non moderators need to go to the choice screen
+			boolean isValid = credentialsAreValid(cf.getUsername(), cf.getPassword());
+			if(isValid)	{
+				Model model = Model.getModel();
+				String eventId = model.getDecisionLinesEvent().getEventID();
+				// convert the char[] to String 
+				DecisionLinesEvent event = DecisionLinesEvent.getInstance();
+				String s = new String(cf.getPassword());
+				event.setUsername(cf.getUsername());
+				event.setPassword(s);
+				String xmlString = Message.requestHeader() + "<signInRequest id='" + eventId + "'>"+
+						"<user name='"+ cf.getUsername() + "' password='" + s + "'/>" +
+						"</signInRequest></request>";
+				Message m = new Message (xmlString);
+				
+				// get the ServerAccess, then send the request
+				Access ac = Access.getInstance();
+				ac.getAccess().sendRequest(m);
+			}
+			cf.dispose();
+			edf = new EdgeDisplayForm();
+			edf.setVisible(true);
+		}
 	}
 }
 

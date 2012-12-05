@@ -65,19 +65,19 @@ public class MainForm extends JFrame {
 		buttons = new JButton[4];
 		buttons[0] = new JButton("Moderator");
 		buttons[0].setBounds(110, 300, 90, 25);
-		buttons[0].addActionListener(new ButtonController(model, 0, this));
+		buttons[0].addActionListener(new ButtonController(0, this));
 		contentPane.add(buttons[0]);
 		buttons[1] = new JButton("User");
 		buttons[1].setBounds(110*2, 300, 90, 25);
-		buttons[1].addActionListener(new ButtonController(model, 1, this));
+		buttons[1].addActionListener(new ButtonController(1, this));
 		contentPane.add(buttons[1]);
 		buttons[2] = new JButton("Administrator");
 		buttons[2].setBounds(110*3, 300, 90, 25);
-		buttons[2].addActionListener(new ButtonController(model, 2, this));
+		buttons[2].addActionListener(new ButtonController(2, this));
 		contentPane.add(buttons[2]);
 		buttons[3] = new JButton("Exit");
 		buttons[3].setBounds(110*4, 300, 90, 25);
-		buttons[3].addActionListener(new ButtonController(model, 3, this));
+		buttons[3].addActionListener(new ButtonController(3, this));
 		contentPane.add(buttons[3]);
     }
 	

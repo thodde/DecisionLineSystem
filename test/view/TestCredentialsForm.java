@@ -9,8 +9,8 @@ public class TestCredentialsForm extends TestCase{
 
 	public void testCredentialsForm () {
 		Model model = Model.getModel();
-		CredentialsForm cf = new CredentialsForm (model, true);
-		ValidateCredentialsController vcc = new ValidateCredentialsController(model, cf, true);
+		CredentialsForm cf = new CredentialsForm (true);
+		ValidateCredentialsController vcc = new ValidateCredentialsController(cf, true);
 
 		char[] password = {'3', '2', '1'};
 		assertFalse(vcc.credentialsAreValid(null, null));

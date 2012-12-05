@@ -11,7 +11,7 @@ public class TestChoiceListEditor extends TestCase {
 		String title = "test";
 		Vector<String> list = new Vector<String>();
 		
-		ChoiceListEditor cle = new ChoiceListEditor(title, list, false, 1, model);
+		ChoiceListEditor cle = new ChoiceListEditor(false);
 		cle.addTextToChoices();
 		list = cle.getChoices();
 		cle.loadCredentialsForm();
