@@ -62,7 +62,7 @@ public class ChoiceListEditor extends JFrame {
 		contentPane.setLayout(null);
 
 		//This is the list that holds all of the values
-		itemList = new JList<String>(externalList);
+		itemList = new JList(externalList);
 	    itemList.setBounds(50, 10, 430, 280);
 		itemList.setVisibleRowCount(4);
 		itemList.addListSelectionListener(new ValueReporter());

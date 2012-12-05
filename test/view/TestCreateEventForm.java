@@ -1,6 +1,5 @@
 package view;
 
-import controller.CreateNewEventController;
 import model.Model;
 import junit.framework.TestCase;
 
@@ -9,17 +8,17 @@ public class TestCreateEventForm extends TestCase {
 		Model model = Model.getModel();
 		CreateEventForm cef = new CreateEventForm(model);
 		
-		cef.setEventType("Closed");
-		assertEquals(cef.getEventType(), "Closed");
+		cef.setEventType("closed");
+		assertEquals(cef.getEventType(), "closed");
 		
-		cef.setEventType("Open");
-		assertEquals(cef.getEventType(), "Open");
+		cef.setEventType("open");
+		assertEquals(cef.getEventType(), "open");
 		
-		cef.setChoiceMode("Round Robin");
-		assertEquals(cef.getChoiceMode(), "Round Robin");
+		cef.setChoiceMode("roundRobin");
+		assertEquals(cef.getChoiceMode(), "roundRobin");
 		
-		cef.setChoiceMode("Asynchronous");
-		assertEquals(cef.getChoiceMode(), "Asynchronous");
+		cef.setChoiceMode("asynchronous");
+		assertEquals(cef.getChoiceMode(), "asynchronous");
 		
 		assertEquals(cef.getNumberOfChoices(), 1);
 		

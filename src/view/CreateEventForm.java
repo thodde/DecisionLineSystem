@@ -156,10 +156,10 @@ public class CreateEventForm extends JFrame {
 	 */
 	public String getEventType() {
 		if (rdbtnClosedEvent.isSelected()) {
-			return "Closed";
+			return "closed";
 		}
 		else {
-			return "Open";
+			return "open";
 		}
 	}
 	
@@ -167,7 +167,7 @@ public class CreateEventForm extends JFrame {
 	 * This method is a mutator to set the event type
 	 */
 	public void setEventType(String eventType) {
-		if (eventType.equals("Closed")) {
+		if (eventType.equalsIgnoreCase("closed")) {
 			rdbtnClosedEvent.setSelected(true);
 		}
 		else {
@@ -181,10 +181,10 @@ public class CreateEventForm extends JFrame {
 	 */
 	public String getChoiceMode() {
 		if (rdbtnRoundRobin.isSelected()) {
-			return "Round Robin";
+			return "roundRobin";
 		}
 		else {
-			return "Asynchronous";
+			return "asynchronous";
 		}
 	}
 	
@@ -192,7 +192,7 @@ public class CreateEventForm extends JFrame {
 	 * This method is a mutator to set the choice mode
 	 */
 	public void setChoiceMode(String choiceMode) {
-		if (choiceMode.equals("Round Robin")) {
+		if (choiceMode.equalsIgnoreCase("roundRobin")) {
 			rdbtnRoundRobin.setSelected(true);
 		}
 		else {
