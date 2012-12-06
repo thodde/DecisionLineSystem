@@ -16,14 +16,12 @@ import xml.*;
  * This class takes charge of the SignInResponse, it stores the information into event entity,
  * It can handle the SignInResponse
  * @author Hang, Wei
- * 
- *
  */
 public class ValidateCredentialsResponseController {
 	public ValidateCredentialsResponseController(){
 	
 	}
-	public void process(Message response){
+	public void process(Message response) {
 		
 		Model model = Model.getModel();
 		DecisionLinesEvent event = model.getDecisionLinesEvent();
@@ -33,7 +31,6 @@ public class ValidateCredentialsResponseController {
 		String id = map.getNamedItem("id").getNodeValue();
 		System.out.println("id:" + id);
 		event.setEventID(id);
-		
 
 		String type = map.getNamedItem("type").getNodeValue();
 		System.out.println("type: " + type);
@@ -73,8 +70,6 @@ public class ValidateCredentialsResponseController {
 			System.out.println("choice"+index+" is:"+ choice);
 			event.setChoice(index, choice);
 		}
-			
-		
 		
 		/*	//get the first choice ie. choice 0
 		node = node.getFirstChild();
@@ -96,17 +91,15 @@ public class ValidateCredentialsResponseController {
 			event.setChoice(i, choice);
 		}*/
 		
-		
 		//if this is in open mode, go to the set choice screen
-		if(type.equals("open")){
+		if(type.equals("open")) {
 			ChoiceListEditor acs = new ChoiceListEditor(false);
 			acs.setVisible(true);
 		}
 		//if this in close mode, go the the add edge screen
-		else if(type.equals("closed")){
+		else if(type.equals("closed")) {
 			EdgeDisplayForm edf = new EdgeDisplayForm();
 			edf.setVisible(true);
 		}
-		
 	}
 }

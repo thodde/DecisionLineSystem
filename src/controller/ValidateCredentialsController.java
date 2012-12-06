@@ -58,7 +58,7 @@ public class ValidateCredentialsController implements ActionListener {
 	/**
 	 * This method can send the SignInRequest to the server
 	 * @author Hang, Wei
-	 * @param isvalid means if the user only type"" or leave the username blank
+	 * @param isvalid means if the user leaves the user name blank
 	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {

@@ -99,7 +99,6 @@ public class ChoiceListEditor extends JFrame {
 		 * This method will depend on the event type; because in open event, every user can only add one choice; in closed
 		 * event, moderator add all the event 
 		 * @author Hang, Wei
-		 *
 		 */
 		//if the add choice button is clicked, add the text to the list
 		btnAddChoice.addActionListener(new ActionListener() {
@@ -112,7 +111,7 @@ public class ChoiceListEditor extends JFrame {
 						btnSubmit.setEnabled(true);
 					}
 					else {
-						JOptionPane.showMessageDialog(null, "You can only enter 1 choice!");
+						JOptionPane.showMessageDialog(null, "You can only enter 1 choice in an open event!");
 					}
 				}
 				// This event is a closed event, then moderator add all the choice
@@ -192,13 +191,16 @@ public class ChoiceListEditor extends JFrame {
 	 * Adds the new choice to the list box
 	 */
 	public void addTextToChoices() {
-		currentItem = txtEditField.getText();
-		event.choices.add(currentItem);
-		updateLocalList(new Vector<String>(event.choices));
-		numChoices++;
+		if(!txtEditField.getText().equals("")) {
+			currentItem = txtEditField.getText();
+			event.choices.add(currentItem);
+			updateLocalList(new Vector<String>(event.choices));
+			numChoices++;
 		
-		if(numChoices == maxChoices) {
-			btnSubmit.setEnabled(true);
+			if(numChoices == maxChoices) {
+				btnSubmit.setEnabled(true);
+				btnAddChoice.setEnabled(false);
+			}
 		}
 	}
 	/**
@@ -229,6 +231,7 @@ public class ChoiceListEditor extends JFrame {
 				
 				if(numChoices < maxChoices) {
 					btnSubmit.setEnabled(false);
+					btnAddChoice.setEnabled(true);
 				}
 			}
 		}

@@ -1,6 +1,5 @@
 package controller;
 
-
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -12,7 +11,6 @@ import xml.Message;
 /**
  * This class is used for sending the addEdgeRequest message to the server
  * @author Hang, Wei
- *
  */
 public class AddEdgeController extends MouseAdapter{
 	EdgeDisplayForm edf;
@@ -31,11 +29,8 @@ public class AddEdgeController extends MouseAdapter{
 			+"' right='"+Model.Right+"' height='"+ nLastYClick+"' /></request>";;
 
 		Message m = new Message (xmlString);
-			
 		// get the ServerAccess, then send the request
 		Access ac = Access.getInstance();
 		ac.getAccess().sendRequest(m);
-
-
 	}
 }

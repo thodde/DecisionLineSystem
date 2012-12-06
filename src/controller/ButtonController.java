@@ -20,7 +20,6 @@ public class ButtonController implements ActionListener {
 	final int USER_BUTTON_VALUE = 1;
 	final int ADMIN_BUTTON_VALUE = 2;
 	final int EXIT_BUTTON_VALUE = 3;
-	boolean isValid;
 	
 	/** The box being controlled. */
 	final int number;
@@ -48,6 +47,7 @@ public class ButtonController implements ActionListener {
 		case USER_BUTTON_VALUE:
 			//handle button clicks that have to do with the user
 			model.getDecisionLinesEvent().eventId = ((MainForm)frame).getTextField();
+			((MainForm)frame).dispose();
 			loadCredentialsForm();
 			break;
 		case ADMIN_BUTTON_VALUE:
@@ -71,17 +71,6 @@ public class ButtonController implements ActionListener {
 		//load up the credentials form
 		CredentialsForm cf = new CredentialsForm(false);
 		cf.setVisible(true);
-	}
-	
-	/**
-	 * This method checks to make sure that the event ID specified by the
-	 * user is a valid ID
-	 * @return boolean
-	 */
-	public boolean checkValidId() {
-		//In here we will check for a valid event ID with the server
-		
-		return true;
 	}
 	
 	/**

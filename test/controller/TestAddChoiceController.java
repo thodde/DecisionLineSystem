@@ -1,10 +1,6 @@
 package controller;
 
-import java.util.Vector;
-
 import model.DecisionLinesEvent;
-import model.Model;
-
 import view.ChoiceListEditor;
 import junit.framework.TestCase;
 

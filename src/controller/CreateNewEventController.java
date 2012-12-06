@@ -2,14 +2,13 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Vector;
 
-import model.Access;
+import javax.swing.JOptionPane;
+
 import model.DecisionLinesEvent;
 import model.Model;
 import view.ChoiceListEditor;
 import view.CreateEventForm;
-import xml.Message;
 
 /**
  * This class handles the events from the event options page from the moderator
@@ -40,6 +39,12 @@ public class CreateNewEventController implements ActionListener {
 		String choiceMode = frame.getChoiceMode();
 		int numChoices = frame.getNumberOfChoices();
 		int numRounds = frame.getNumberOfRounds();
+		
+		if((eventType.equalsIgnoreCase("open")) && (numChoices > 1)) {
+			JOptionPane.showMessageDialog(null, "Each user gets only 1 choice for open events.\n" +
+					"Setting Number of Choices to 1...");
+			numChoices = 1;
+		}
 		
 		dle.setMode(choiceMode);
 		dle.setQuestion(question);
