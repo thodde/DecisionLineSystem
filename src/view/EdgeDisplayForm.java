@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.FontMetrics;
 import java.awt.Graphics;
 
 import javax.swing.JButton;
@@ -11,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import controller.AddEdgeController;
 import controller.AddEdgeResponseController;
 import controller.ButtonController;
+import model.DecisionLinesEvent;
 import model.Model;
 
 /**
@@ -31,11 +31,14 @@ public class EdgeDisplayForm extends JFrame {
 	 * @param m : Model object
 	 */
 	public EdgeDisplayForm() {
+		model = Model.getModel();
 		//creates the form
 		setTitle("Decision Lines Event");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		setSize(700, 500);
+		
+		setLayout(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -48,6 +51,7 @@ public class EdgeDisplayForm extends JFrame {
 		btnExitButton.setVisible(true);
 		contentPane.add(btnExitButton);
 		contentPane.addMouseListener(new AddEdgeController(this));
+		
 	}
 	
 	public void redraw(){
@@ -78,12 +82,8 @@ public class EdgeDisplayForm extends JFrame {
 		return xLeft;
 	}
 
-	//====================================================================
-	//This method returns the the option index for the passed x coordinate
-	//Rev 1  -M. Peltola   7-Oct-2012 Class created 
-	//====================================================================
 	public int getClickOptionIndex(int x) {
-		int index = 0; //model.nOptionCount+1;
+		int index = 0;
 
 		if (x > 0 && x < xCoords[model.nOptionCount - 1]) {
 			while (x > xCoords[index] && index < model.nOptionCount-1) {
@@ -94,36 +94,13 @@ public class EdgeDisplayForm extends JFrame {
 		return index - 1;
 	}
 
-	//====================================================================
-	//This method draws the options, vertical lines, and any added edges
-	//Rev 1  -M. Peltola   7-Oct-2012 method created 
-	//====================================================================
-	public void paintComponent(Graphics g) {
-		if (model.nOptionCount > 0) {
-
-			FontMetrics fm = g.getFontMetrics();
-			int h = getHeight();
-
-			for (int x = 0; x < model.nOptionCount; x++) {
-				if (model.options[x] != null) {
-
-					int lineXCoord = getOptionXCoord(g, x);
-					g.drawLine(lineXCoord, 25, lineXCoord, h-55 - fm.getHeight());
-					int optionNameWidth = fm.stringWidth(model.options[x]);
-					g.drawString(model.options[x], lineXCoord - optionNameWidth / 2, h-55);
-				}
-			}
-
-			if (model.nextIndex > 0) {
-				for (int index = 0; index < model.nextIndex; index++) {
-					int optionIndex = model.optionIndices[index];
-					int y = model.optionHeights[index];
-					if (optionIndex < model.nOptionCount) {
-						g.drawLine(xCoords[optionIndex], y, xCoords[optionIndex + 1],y);
-					}
-					model.setJFrame(this);
-				}
-			}
+	@Override
+	public void paint(Graphics g) {
+		super.paint(g);
+		
+		DecisionLinesEvent event = model.getDecisionLinesEvent();
+		for (int i = 0; i < event.choices.size(); i++) {
+			g.drawString(event.choices.get(i), 100 * i + 5, 55);
 		}
 	}
 }

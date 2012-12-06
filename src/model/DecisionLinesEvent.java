@@ -22,6 +22,7 @@ public class DecisionLinesEvent {
 	public static DecisionLinesEvent instance;
 	public String username;
 	public String password;
+	public Edge[] edges;
 	
 	private DecisionLinesEvent() {
 	     question = "";
@@ -37,6 +38,7 @@ public class DecisionLinesEvent {
 	     instance = null;
 	     username = "";
 	     password = "";
+	     edges = new Edge[choices.size()];
 	 }
 	
 	public static DecisionLinesEvent getInstance() {
@@ -44,6 +46,10 @@ public class DecisionLinesEvent {
 			instance = new DecisionLinesEvent();
 		}
 		return instance;
+	}
+	
+	public Edge[] getEdges() {
+		return edges;
 	}
 
     public String getMode() {
