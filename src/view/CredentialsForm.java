@@ -7,6 +7,8 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.border.EmptyBorder;
+
+import model.DecisionLinesEvent;
 import model.Model;
 import controller.ValidateCredentialsController;
 
@@ -25,8 +27,17 @@ public class CredentialsForm extends JFrame {
 	JTextField txtUsername;
 	JPasswordField txtPassword;
 	JPanel contentPane;
-	Model model;
-	boolean moderator;
+	public boolean isNewEvent;
+	JButton btnSubmitCredentials;
+	public DecisionLinesEvent partialEvent = null;
+	public String eventId = "";
+	
+	public CredentialsForm(DecisionLinesEvent partialEvent) {
+		setupForm();
+		btnSubmitCredentials.addActionListener(new ValidateCredentialsController(this));
+		isNewEvent = true;
+		this.partialEvent = partialEvent;
+	}
 	
 	/**
 	 * This constructor creates the credentials form for signing into an event.
@@ -35,10 +46,15 @@ public class CredentialsForm extends JFrame {
 	 * @param m : Model
 	 * @param moderator : boolean that is set to true if the user is a moderator
 	 */
-	public CredentialsForm(boolean moderator)
-	{
-		this.model = Model.getModel();
-		this.moderator = moderator;
+	public CredentialsForm(String decisionLinesId) {
+		setupForm();
+		btnSubmitCredentials.addActionListener(new ValidateCredentialsController(this));
+		isNewEvent = false;
+		eventId = decisionLinesId;
+	}
+
+	
+	private void setupForm() {
 		setTitle("Draw2Choose Sign-In");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setSize(575, 100);
@@ -67,12 +83,12 @@ public class CredentialsForm extends JFrame {
 		add(txtPassword);
 		txtPassword.setColumns(10);
 		
-		JButton btnSubmitCredentials = new JButton("Submit Credentials");
+		btnSubmitCredentials = new JButton("Submit Credentials");
 		btnSubmitCredentials.setBounds(396, 22, 145, 23);
 		add(btnSubmitCredentials);
-		
-		btnSubmitCredentials.addActionListener(new ValidateCredentialsController(this, moderator));
 	}
+	
+
 	
 	/**
 	 * @return String: the username of the user

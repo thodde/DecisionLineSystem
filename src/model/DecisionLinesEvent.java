@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -19,12 +20,13 @@ public class DecisionLinesEvent {
 	public List<String> choices;
 	public int numChoices;
 	public int i;
-	public static DecisionLinesEvent instance;
+	//public static DecisionLinesEvent instance;
 	public String username;
 	public String password;
-	public Edge[] edges;
+	//public Edge[] edges;
+	private ArrayList<Edge> edges;
 	
-	private DecisionLinesEvent() {
+	public DecisionLinesEvent() {
 	     question = "";
 	     eventId = "";
 	     position = 0;
@@ -35,20 +37,24 @@ public class DecisionLinesEvent {
 	     option = 0;
 	     choices = new LinkedList<String>();
 	     numChoices = choices.size();
-	     instance = null;
+	     //instance = null;
 	     username = "";
 	     password = "";
-	     edges = new Edge[choices.size()];
+	     edges = null;
 	 }
 	
+	/* Unnecessary, the model above this is a singleton
 	public static DecisionLinesEvent getInstance() {
 		if (instance == null) {
 			instance = new DecisionLinesEvent();
 		}
 		return instance;
 	}
+	*/
 	
-	public Edge[] getEdges() {
+	public ArrayList<Edge> getEdges() {
+		if (edges == null)
+			edges = new ArrayList<Edge>();
 		return edges;
 	}
 

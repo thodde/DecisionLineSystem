@@ -9,6 +9,7 @@ import model.DecisionLinesEvent;
 import model.Model;
 import view.ChoiceListEditor;
 import view.CreateEventForm;
+import view.CredentialsForm;
 
 /**
  * This class handles the events from the event options page from the moderator
@@ -18,17 +19,17 @@ import view.CreateEventForm;
 public class CreateNewEventController implements ActionListener {
 	public Model model;
 	public CreateEventForm frame;
-	public DecisionLinesEvent dle;
+	DecisionLinesEvent event;
 
 	/**
 	 * Constructor to set up a new event
 	 * @param m : Model object
 	 * @param f : CreateEventForm object
 	 */
-	public CreateNewEventController(Model m, CreateEventForm f) {
-		this.model = m;
+	public CreateNewEventController(CreateEventForm f) {
+		this.model = Model.getModel();
 		this.frame = f;
-		dle = DecisionLinesEvent.getInstance();
+		//dle = Model.getModel().getDecisionLinesEvent();
 	}
 	
 	@Override
@@ -46,12 +47,14 @@ public class CreateNewEventController implements ActionListener {
 			numChoices = 1;
 		}
 		
-		dle.setMode(choiceMode);
-		dle.setQuestion(question);
-		dle.setType(eventType);
-		dle.setRounds(numRounds);
-		dle.setNumChoices(numChoices);
-		model.setDecisionLinesEvent(dle);
+		event = new DecisionLinesEvent();
+		event.setMode(choiceMode);
+		event.setQuestion(question);
+		event.setType(eventType);
+		event.setRounds(numRounds);
+		event.setNumChoices(numChoices);
+		// no, you cannot set this here.  You have to submit it to the server
+		//model.setDecisionLinesEvent(event);
 		
 		//hide the event setup form
 		frame.dispose();
@@ -65,7 +68,8 @@ public class CreateNewEventController implements ActionListener {
 	 */
 	public void getChoices() {
 		//load up the choice editor so the moderator can add/remove choices
-		ChoiceListEditor cle = new ChoiceListEditor(true);
-		cle.setVisible(true);
+		CredentialsForm cf = new CredentialsForm(event);
+		//ChoiceListEditor cle = new CredentialsForm(true);
+		cf.setVisible(true);
 	}
 }

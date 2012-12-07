@@ -23,16 +23,17 @@ public class ClientMessageHandler implements IMessageHandler {
 			//new ConnectController().process(response);
 		}
 		else if(type.equals("signInResponse")){
-			new ValidateCredentialsResponseController().process(response);
+			new ValidateCredentialsResponseXMLController().process(response);
 		}
-		//else if(type.equals("createResponse")){
-		//	new modCreateResponseController().process(response);
-		//}
+		else if(type.equals("createResponse")){
+			new CreateEventResponseXMLController().process(response);
+			//new modCreateResponseController().process(response);
+		}
 		else if(type.equals("addChoiceResponse")){
-			new AddChoiceResponseController().process(response);
+			new AddChoiceResponseXMLController().process(response);
 		}
 		else if(type.equals("addEdgeResponse")){
-			new AddEdgeResponseController().process(response);
+			new AddEdgeResponseXMLController().process(response);
 		}
 		//else if(type.equals("TurnResponse")){
 		//	new TurnResponseController().process(response);

@@ -4,6 +4,14 @@ import javax.swing.JFrame;
 
 import view.*;
 public class Model {
+	//public int rounds;
+	//public int position;
+
+	//public int nLastXClick;
+	//public int nLastYClick;
+	private DecisionLinesEvent event;
+	
+	/* Unnecessary, these are stored under the DecisionLineEvent
 	public int nOptionCount;
 	public int nOptionEntryCount;
 	public int nStep;
@@ -11,25 +19,22 @@ public class Model {
 	public String question;
 	public String mode;
 	public String type;
-	public int rounds;
-	public int position;
-	public boolean isModerator;
 
-	public int nLastXClick;
-	public int nLastYClick;
-	
 	public int[] optionIndices;
 	public int[] optionHeights;
     public int nextIndex; 
-   
-    private static Model modelInstance = null;
 	public static int Left;
 	public static int Right; 
+    */
+   
+    private static Model modelInstance = null;
 	
 	JFrame j;
     ChoiceListEditor cle;
     
     private Model() {
+    	event = null;
+    	/*
 		nStep = 0;
         nextIndex = 0;
     	optionIndices = new int[100];
@@ -39,7 +44,7 @@ public class Model {
 		nOptionEntryCount = 0;
 		
 		options = null;
-		isModerator = false;
+		*/
 	}
     
     public static Model getModel() {
@@ -51,8 +56,12 @@ public class Model {
         return modelInstance;
     }
     
-    public static DecisionLinesEvent getEvent() {
-    	return DecisionLinesEvent.getInstance();
+    public DecisionLinesEvent getDecisionLinesEvent() {
+    	if (event == null) {
+    		event = new DecisionLinesEvent();
+    	}
+    		
+    	return event;
     }
     
     /**
@@ -60,13 +69,17 @@ public class Model {
      * @author Hang, Wei
      */
     public void setDecisionLinesEvent (DecisionLinesEvent event) {
-		event = DecisionLinesEvent.getInstance();
+		this.event = event;
 	}
 
+    /*
 	public DecisionLinesEvent getDecisionLinesEvent() {
-		return DecisionLinesEvent.getInstance();
+		if (event == null)
+		return event;
 	}
+	*/
     
+    /*
 	public void initOptions(int count) {
 		nOptionEntryCount = 0;
 		nOptionCount = count;
@@ -100,7 +113,9 @@ public class Model {
 		nOptionCount = eventOptions.length;
 		options = eventOptions;
 	}
+	*/
 
+    /*
 	public void addNewEdge(int optionIndex, int x, int y) {
 		nLastXClick = x;
 		nLastYClick = y;
@@ -112,11 +127,13 @@ public class Model {
 			nextIndex++;
 		}
 	}
+	*/
 	/**
 	 * This is used for storing and getting the windows;
 	 * @author Hang, Wei
 	 * @param j
 	 */
+    //The model should not have a reference to the view
 	public void setJFrame(JFrame j){
 		this.j = j;
 	}

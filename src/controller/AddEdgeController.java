@@ -23,14 +23,22 @@ public class AddEdgeController extends MouseAdapter{
 		Model model = Model.getModel();
 		int nLastXClick = arg.getX();
 		int nLastYClick = arg.getY();
+		int choiceId = decodeChoiceId(nLastXClick, nLastYClick);
 		String eventId = model.getDecisionLinesEvent().getEventID();
-		// convert to the char[] to String 
-		String xmlString = Message.requestHeader()+"<addEdgeRequest id='"+eventId+"' left='"+Model.Left
-			+"' right='"+Model.Right+"' height='"+ nLastYClick+"' /></request>";;
+		// convert to the char[] to String
+		//TODO This is the right idea, send it to an XML string and DO NOT write it to the model just yet
+		// but first you must verify that the height is valid 
+		String xmlString = Message.requestHeader()+"<addEdgeRequest id='"+eventId+"' left='"+ choiceId
+			+"' right='"+(choiceId+1)+"' height='"+ nLastYClick+"' /></request>";;
 
 		Message m = new Message (xmlString);
 		// get the ServerAccess, then send the request
 		Access ac = Access.getInstance();
 		ac.getAccess().sendRequest(m);
+	}
+	
+	//TODO code
+	private int decodeChoiceId(int xClick, int yClick) {
+		return 0;
 	}
 }

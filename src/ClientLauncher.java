@@ -1,5 +1,6 @@
 import model.Access;
 import model.Model;
+import client.ClientMessageHandler;
 import client.DebugHandler;
 import client.ServerAccess;
 import view.MainForm;
@@ -44,7 +45,8 @@ public class ClientLauncher {
 		}
 		
 		// create message chain
-		DebugHandler handler = new DebugHandler();
+		//DebugHandler handler = new DebugHandler();
+		ClientMessageHandler handler = new ClientMessageHandler();
 		
 		// try to connect to the server. Once connected, messages are going to be processed by 
 		// SampleClientMessageHandler. For now we just continue on with the initialization because
@@ -52,7 +54,7 @@ public class ClientLauncher {
 		ServerAccess sa = new ServerAccess(host, port);
 		if (!sa.connect(handler)) {
 			System.out.println("Unable to connect to server (" + host + "). Exiting.");
-			//System.exit(0);
+			System.exit(0);
 		}
 		System.out.println("Connected to " + host);
 		

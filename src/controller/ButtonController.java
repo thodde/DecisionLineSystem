@@ -46,9 +46,9 @@ public class ButtonController implements ActionListener {
 			break;
 		case USER_BUTTON_VALUE:
 			//handle button clicks that have to do with the user
-			model.getDecisionLinesEvent().eventId = ((MainForm)frame).getTextField();
-			((MainForm)frame).dispose();
-			loadCredentialsForm();
+			String eventId = ((MainForm)frame).getTextField();
+			//((MainForm)frame).dispose();
+			loadCredentialsForm(eventId);
 			break;
 		case ADMIN_BUTTON_VALUE:
 			//handle button clicks that have to do with the administrator
@@ -67,9 +67,9 @@ public class ButtonController implements ActionListener {
 	 * This method is called when the user button is clicked
 	 * on the MainForm
 	 */
-	public void loadCredentialsForm() {
+	public void loadCredentialsForm(String dleId) {
 		//load up the credentials form
-		CredentialsForm cf = new CredentialsForm(false);
+		CredentialsForm cf = new CredentialsForm(dleId);
 		cf.setVisible(true);
 	}
 	
@@ -79,7 +79,7 @@ public class ButtonController implements ActionListener {
 	 */
 	public void setupEventOptions() {
 		//load up create event form for the moderator
-		CreateEventForm cef = new CreateEventForm(model);
+		CreateEventForm cef = new CreateEventForm();
 		cef.setVisible(true);
 	}
 	

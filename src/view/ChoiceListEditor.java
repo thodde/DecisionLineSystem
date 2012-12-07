@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
@@ -30,7 +31,7 @@ public class ChoiceListEditor extends JFrame {
 	JPanel contentPane;
 	Model model;
 	final int AllItems = -1;
-	JList itemList;
+	List itemList;
 	public String currentItem;
 	JTextField txtEditField;
 	JButton btnSubmit;
@@ -39,17 +40,20 @@ public class ChoiceListEditor extends JFrame {
 	final int maxChoices;
 	int numChoices;
 	String choice;
-	public DecisionLinesEvent event;
+	private DecisionLinesEvent event;
 	String type;
 	
 	/**
 	 * This constructor sets up the GUI for the list editor
 	 */
-	public ChoiceListEditor(boolean onlyLastItemAdded) {
+	public ChoiceListEditor() {
 		this.model = Model.getModel();
 		event = model.getDecisionLinesEvent();
 		type = event.getType();
-		this.maxChoices = event.getNumChoices();
+		if (event.position == 0)
+			this.maxChoices = event.getNumChoices();
+		else
+			this.maxChoices = 1;
 		this.numChoices = 0;
 		
 		setTitle("Event Choices");
@@ -62,10 +66,14 @@ public class ChoiceListEditor extends JFrame {
 		contentPane.setLayout(null);
 
 		//This is the list that holds all of the values
+		itemList = new List(10, false);
+	    itemList.setBounds(50, 10, 430, 280);
+		/*
 		itemList = new JList(new Vector<String>(event.choices));
 	    itemList.setBounds(50, 10, 430, 280);
-		itemList.setVisibleRowCount(4);
+		itemList.setVisibleRowCount(8);
 		itemList.addListSelectionListener(new ValueReporter());
+		*/
 		contentPane.add(itemList);
 
 		//text box for entering new choices
@@ -147,21 +155,11 @@ public class ChoiceListEditor extends JFrame {
 	}
 
 	/**
-	 * Updates the JList after adding or removing an element
-	 * @param externalList : Vector<String> a list of elements to be 
-	 * added to the JList
-	 */
-	public void updateLocalList(Vector<String> externalList){
-		itemList.setListData(externalList);
-		repaint();
-	}
-
-	/**
 	 * Returns a list of choices
 	 * @return Vector<String>
 	 */
-	public Vector<String> getChoices(){
-		return new Vector<String>(event.choices);
+	public List getChoices(){
+		return itemList;
 	}
 	
 	/**
@@ -169,6 +167,7 @@ public class ChoiceListEditor extends JFrame {
 	 * and allows the user to remove the item
 	 * @author Martti Peltola
 	 */
+	/*
 	private class ValueReporter implements ListSelectionListener {
 	    public void valueChanged(ListSelectionEvent event) {
 	    	if (!event.getValueIsAdjusting()) 
@@ -176,16 +175,7 @@ public class ChoiceListEditor extends JFrame {
 	      
 	    	btnRemoveChoice.setEnabled(true);
 	    }
-	}
-	
-	/**
-	 * Bring up the credentials for when the moderator is finished
-	 */
-	public void loadCredentialsForm() {
-		CredentialsForm cf = new CredentialsForm(true);
-		cf.setVisible(true);
-		this.dispose();
-	}
+	}*/
 	
 	/**
 	 * Adds the new choice to the list box
@@ -193,8 +183,8 @@ public class ChoiceListEditor extends JFrame {
 	public void addTextToChoices() {
 		if(!txtEditField.getText().equals("")) {
 			currentItem = txtEditField.getText();
-			event.choices.add(currentItem);
-			updateLocalList(new Vector<String>(event.choices));
+			itemList.add(currentItem);
+			
 			numChoices++;
 		
 			if(numChoices == maxChoices) {
@@ -207,6 +197,7 @@ public class ChoiceListEditor extends JFrame {
 	 * This method can refresh the choice list, so user in the open event can see the choice being added;
 	 * @author Hang, Wei
 	 */
+	/*
 	public void refreshChoiceList(){
 		Vector<String> vc = new Vector<String>();
 		for(int i=0;i<event.getCuri();i++){
@@ -215,13 +206,25 @@ public class ChoiceListEditor extends JFrame {
 			updateLocalList(vc);
 			model.setJFrame(this);
 		}
-	}
+	} */
 	
 	/**
 	 * Removes a choice from the list box
 	 * @author Trevor Hodde
 	 */
 	public void removeTextFromChoices() {
+		itemList.remove(itemList.getSelectedItem());
+		numChoices--;
+		
+		if(numChoices < maxChoices) {
+			btnSubmit.setEnabled(false);
+			btnAddChoice.setEnabled(true);
+		}
+		
+		/*
+		itemList.remove(itemList.getSelectedItem().)
+		itemList.getSelectedItem()
+		
 		if(itemList.getSelectedValue() != null) {
 			currentItem = itemList.getSelectedValue().toString();
 			if(event.choices.contains(currentItem)) {
@@ -235,5 +238,6 @@ public class ChoiceListEditor extends JFrame {
 				}
 			}
 		}
+		*/
 	}
 }

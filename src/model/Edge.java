@@ -70,4 +70,18 @@ public class Edge {
 		return conflicts;
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (o == null)
+			return false;
+		
+		if (!(o instanceof Edge))
+			return false;
+		
+		Edge e = (Edge) o;
+		if (right == e.right && left == e.left && height == e.height)
+			return true;
+		
+		return false;
+	}
 }

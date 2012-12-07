@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controller.AddEdgeController;
-import controller.AddEdgeResponseController;
+import controller.AddEdgeResponseXMLController;
 import controller.ButtonController;
 import model.DecisionLinesEvent;
 import model.Model;
@@ -20,9 +20,11 @@ import model.Model;
 public class EdgeDisplayForm extends JFrame {
 	private static final long serialVersionUID = 1L;
 	Model model;
-	AddEdgeResponseController edgeController; 
+	AddEdgeResponseXMLController edgeController; 
 	public int nLastXClick;
 	public int nLastYClick;
+	public static final int CHOICEWIDTH = 100;
+	public static final int CHOICEHEIGHT = 55;
 	int[] xCoords;
 	JPanel contentPane;
 
@@ -58,7 +60,7 @@ public class EdgeDisplayForm extends JFrame {
 		this.repaint();
 		model.setJFrame(this);
 	}
-	
+	/*
 	public int getOptionXCoord(Graphics g, int optionIndex) {
 		int xLeft = 0;
 
@@ -93,6 +95,16 @@ public class EdgeDisplayForm extends JFrame {
 
 		return index - 1;
 	}
+	*/
+	public int getChoiceXLocation(int choicePosition) {
+		return choicePosition * CHOICEWIDTH + 5;
+	}
+	
+	public int getChoiceYLocation(int choicePosition) {
+		return CHOICEHEIGHT;
+	}
+	
+	
 
 	@Override
 	public void paint(Graphics g) {
@@ -100,7 +112,7 @@ public class EdgeDisplayForm extends JFrame {
 		
 		DecisionLinesEvent event = model.getDecisionLinesEvent();
 		for (int i = 0; i < event.choices.size(); i++) {
-			g.drawString(event.choices.get(i), 100 * i + 5, 55);
+			g.drawString(event.choices.get(i), getChoiceXLocation(i), getChoiceYLocation(i));
 		}
 	}
 }

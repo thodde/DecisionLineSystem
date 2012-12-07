@@ -49,9 +49,8 @@ public class CreateEventForm extends JFrame {
 	final int maxRounds = 8;
 	Model model;
 
-	public CreateEventForm(Model m) {
-		this.model = m;
-		m.isModerator = true;
+	public CreateEventForm() {
+		this.model = Model.getModel();
 		//Set up the form that will hold all the controls
 		setTitle("Create a Decision Lines Event");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -136,7 +135,7 @@ public class CreateEventForm extends JFrame {
 		btnCreateThisEvent = new JButton("Create this event");
 		btnCreateThisEvent.setEnabled(true);
 		btnCreateThisEvent.setBounds(117, 491, 163, 23);
-		btnCreateThisEvent.addActionListener(new CreateNewEventController(model, this));
+		btnCreateThisEvent.addActionListener(new CreateNewEventController(this));
 		add(btnCreateThisEvent);
 
 		//when this button is clicked, the current form exits
