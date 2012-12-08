@@ -2,6 +2,11 @@ package model;
 
 import java.util.ArrayList;
 
+/**
+ * This class stores all the information needed
+ * by a Decision Line Event
+ * @author Trevor Hodde
+ */
 public class DecisionLinesEvent {
 	public String question;
 	public String mode;
@@ -14,6 +19,10 @@ public class DecisionLinesEvent {
 	public String password;
 	private ArrayList<Edge> edges;
 	
+	/**
+	 * This constructor sets default values to 
+	 * all the data used by the Decision Line Event
+	 */
 	public DecisionLinesEvent() {
 	     question = "";
 	     eventId = "";
@@ -129,6 +138,7 @@ public class DecisionLinesEvent {
 	 * @return int[] the next edge on the line
 	 */
 	private int[] getNextEdge(int choice, int height) {
+		
 		//TODO: code
 		return null;
 	}
