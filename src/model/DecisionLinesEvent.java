@@ -115,10 +115,21 @@ public class DecisionLinesEvent {
 	
 	/**
 	 * This method will return the final choice of the decision line event
-	 * @return String the final choice of the event
+	 * @return String: the final choice of the event
 	 */
 	public String determineFinalOrder() {
 		return "";
 		//TODO: code
+	}
+	
+	/**
+	 * This method gets the closest edge to the current position on the line
+	 * @param choice int: the choice that we are currently on
+	 * @param height: int the height on the decision line
+	 * @return int[] the next edge on the line
+	 */
+	private int[] getNextEdge(int choice, int height) {
+		//TODO: code
+		return null;
 	}
 }
