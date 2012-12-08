@@ -6,11 +6,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 import view.CredentialsForm;
-import view.EdgeDisplayForm;
 import xml.Message;
 import model.Access;
 import model.DecisionLinesEvent;
-import model.Model;
 
 /**
  * This class sends an XML request to the server to 
@@ -64,9 +62,6 @@ public class ValidateCredentialsController implements ActionListener {
 					+event.getQuestion() + "' numChoices='"+event.getNumChoices()+"' numRounds='"+event.getRounds()+"'>" +
 					"<user name='"+ cf.getUsername() + "' password='" + new String(cf.getPassword()) + "'/>" +
 					"</createRequest>"+"</request>";
-			//for (int i = 0; i < dle.choices.size(); i++) {
-			//	xml += "<choice value='" + dle.choices.get(i) + "' index='" + i + "'/>";
-			//}
 			Message m = new Message (xml);
 			Access ac = Access.getInstance();
 			ac.getAccess().sendRequest(m);

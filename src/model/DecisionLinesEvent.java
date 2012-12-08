@@ -69,7 +69,7 @@ public class DecisionLinesEvent {
 		this.type = type;
 	}
 		
-	public String getQuestion (){
+	public String getQuestion() {
 		return question;
 	}
 		
@@ -84,46 +84,14 @@ public class DecisionLinesEvent {
 	public void setEventID(String eventId) {
 		this.eventId = eventId;
 	}
-	/*
-	public int getOption() {
-		return option;
-	}
-			
-	public void setOption(int option) {
-		this.option = option;
-	}
-	*/
+
 	public String getChoice(int i) {
 		return choices[i];
 	}
 	
-	public void setChoice (int i, String choice) {
+	public void setChoice(int i, String choice) {
 		choices[i] = choice;
 	}
-	
-	public void setCuri(int i) {
-		this.i = i;
-	}
-	
-	public int getCuri() {
-		return i;
-	}
-/*
-	public boolean setChoice(int position, String choiceText) {
-		boolean validChoice = false;
-
-		if (position >= 0 && position < numChoices) {
-			if (lines[position] == null) {
-				if(!doesChoiceExist(choiceText)) {
-					Line newChoice = new Line(0, choiceText, position);
-					lines[position] = newChoice;
-					validChoice = true;
-				}
-			}
-		}
-		return validChoice;
-	}
-*/
 
 	public boolean isDone() {
 		boolean done = false;
@@ -152,7 +120,7 @@ public class DecisionLinesEvent {
 		return password;
 	}
 	
-	public void setPassword(String password){
+	public void setPassword(String password) {
 		this.password = password;
 	}
 }
