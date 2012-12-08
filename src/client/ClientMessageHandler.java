@@ -6,7 +6,6 @@ import xml.Message;
 /**
  * This class is used for dealing with the response message send from the server;
  * @author Hang, Wei
- *
  */
 public class ClientMessageHandler implements IMessageHandler {
 
@@ -19,7 +18,6 @@ public class ClientMessageHandler implements IMessageHandler {
 		String type = response.contents.getFirstChild().getLocalName();
 
 		if (type.equals ("connectResponse")) {
-			// What happens now that we are connected? Now do nothing
 			//new ConnectController().process(response);
 		}
 		else if(type.equals("signInResponse")){
@@ -27,7 +25,6 @@ public class ClientMessageHandler implements IMessageHandler {
 		}
 		else if(type.equals("createResponse")){
 			new CreateEventResponseXMLController().process(response);
-			//new modCreateResponseController().process(response);
 		}
 		else if(type.equals("addChoiceResponse")){
 			new AddChoiceResponseXMLController().process(response);
@@ -35,10 +32,9 @@ public class ClientMessageHandler implements IMessageHandler {
 		else if(type.equals("addEdgeResponse")){
 			new AddEdgeResponseXMLController().process(response);
 		}
-		//else if(type.equals("TurnResponse")){
-		//	new TurnResponseController().process(response);
-		//}
-	
+		else if(type.equals("turnResponse")){
+			new TurnResponseXMLController().process(response);
+		}
 	}
 }
 

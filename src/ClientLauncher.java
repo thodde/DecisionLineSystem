@@ -1,7 +1,6 @@
 import model.Access;
 import model.Model;
 import client.ClientMessageHandler;
-import client.DebugHandler;
 import client.ServerAccess;
 import view.MainForm;
 import xml.Message;

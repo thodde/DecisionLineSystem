@@ -1,6 +1,8 @@
 package view;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Toolkit;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -41,6 +43,13 @@ public class EdgeDisplayForm extends JFrame {
 		setResizable(false);
 		setSize(700, 500);
 		
+		Toolkit toolkit = Toolkit.getDefaultToolkit();
+	    Dimension screenSize = toolkit.getScreenSize();
+	    //Following three lines make the form centered
+	    int x = (screenSize.width - this.getWidth())/2;
+	    int y = (screenSize.height - this.getHeight())/2;
+	    this.setLocation(x, y);
+		
 		setLayout(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -58,46 +67,13 @@ public class EdgeDisplayForm extends JFrame {
 		model.setJFrame(this);
 	}
 	
+	/**
+	 * This method repaints the frame on the current form
+	 */
 	public void redraw(){
 		this.repaint();
 		model.setJFrame(this);
 	}
-	/*
-	public int getOptionXCoord(Graphics g, int optionIndex) {
-		int xLeft = 0;
-
-		if (model.nOptionCount > 0) {
-			int w = getWidth();
-
-			// border width
-			int bw = 45;
-			int rw = w - 2 * bw;
-
-			if (model.nOptionCount > 1) {
-				int t = model.nOptionCount - 1;
-
-				int nSpacing = rw / t;
-				xLeft = bw + optionIndex * nSpacing;
-				Model.Left = xLeft;
-				Model.Right = xLeft + nSpacing;
-			}
-		}
-
-		return xLeft;
-	}
-
-	public int getClickOptionIndex(int x) {
-		int index = 0;
-
-		if (x > 0 && x < xCoords[model.nOptionCount - 1]) {
-			while (x > xCoords[index] && index < model.nOptionCount-1) {
-				index++;
-			}
-		}
-
-		return index - 1;
-	}
-	*/
 	
 	/**
 	 * Returns the position of the current choice line
@@ -117,17 +93,22 @@ public class EdgeDisplayForm extends JFrame {
 		return CHOICEHEIGHT;
 	}
 	
+	/**
+	 * This method paints the edges, lines and choices in the correct places
+	 */
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
 		Edge currentEdge;
 		
+		//This loop paints the choices above the lines and the decision lines
 		DecisionLinesEvent event = model.getDecisionLinesEvent();
 		for (int i = 0; i < event.choices.length; i++) {
 			g.drawString(event.choices[i], getChoiceXLocation(i), getChoiceYLocation(i));
 			g.drawLine(getChoiceXLocation(i) + 20, getChoiceYLocation(i) + 10, getChoiceXLocation(i) + 20, getChoiceYLocation(i) + 350);
 		}
 		
+		//this loops paints the edges between the correct lines
 		for(int i = 0; i < event.getEdges().size(); i++) {
 			currentEdge = event.getEdges().get(i);
 			g.drawLine(getChoiceXLocation(currentEdge.getLeft()) + 20, currentEdge.getHeight() + 10, getChoiceXLocation(currentEdge.getRight()) + 20, currentEdge.getHeight() + 10);

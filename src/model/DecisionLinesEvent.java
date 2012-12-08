@@ -9,10 +9,7 @@ public class DecisionLinesEvent {
 	public int rounds;
 	public int position;
 	public String eventId;
-	public int option;
 	public String[] choices;
-	public int numChoices;
-	public int i;
 	public String username;
 	public String password;
 	private ArrayList<Edge> edges;
@@ -25,7 +22,6 @@ public class DecisionLinesEvent {
 	     mode = "";
 	     rounds = 0;
 	     eventId = "";
-	     option = 0;
 	     username = "";
 	     password = "";
 	     edges = null;
@@ -93,19 +89,12 @@ public class DecisionLinesEvent {
 		choices[i] = choice;
 	}
 
-	public boolean isDone() {
-		boolean done = false;
-
-		return done;
-	}
-
 	public void setNumChoices(int numChoices) {
-		this.numChoices = numChoices;
 		choices = new String[numChoices];
 	}
 	
 	public int getNumChoices() {
-		return numChoices;
+		return choices.length;
 	}
 	
 	public String getUsername() {
@@ -122,5 +111,14 @@ public class DecisionLinesEvent {
 	
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	/**
+	 * This method will return the final choice of the decision line event
+	 * @return String the final choice of the event
+	 */
+	public String determineFinalOrder() {
+		return "";
+		//TODO: code
 	}
 }

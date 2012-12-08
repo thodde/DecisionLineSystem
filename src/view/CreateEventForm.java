@@ -4,6 +4,9 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 import javax.swing.JTextField;
 
 import javax.swing.JFrame;
@@ -56,6 +59,14 @@ public class CreateEventForm extends JFrame {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setSize(630, 580);
 		setResizable(false);
+		
+		Toolkit toolkit = Toolkit.getDefaultToolkit();
+	    Dimension screenSize = toolkit.getScreenSize();
+	    //Following three lines make the form centered
+	    int x = (screenSize.width - this.getWidth())/2;
+	    int y = (screenSize.height - this.getHeight())/2;
+	    this.setLocation(x, y);
+	    
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

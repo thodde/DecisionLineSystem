@@ -1,22 +1,19 @@
 package view;
 
+import java.awt.Dimension;
 import java.awt.List;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 import controller.AddChoiceController;
-
 import model.DecisionLinesEvent;
 import model.Model;
 
@@ -60,6 +57,14 @@ public class ChoiceListEditor extends JFrame {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setResizable(false);
 		setSize(600, 450);
+		
+		Toolkit toolkit = Toolkit.getDefaultToolkit();
+	    Dimension screenSize = toolkit.getScreenSize();
+	    //Following three lines make the form centered
+	    int x = (screenSize.width - this.getWidth())/2;
+	    int y = (screenSize.height - this.getHeight())/2;
+	    this.setLocation(x, y);
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

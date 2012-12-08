@@ -24,6 +24,9 @@ public class ValidateCredentialsResponseXMLController implements IMessageHandler
 	
 	}
 	
+	/**
+	 * This method takes all the info from the server response
+	 */
 	public void process(Message response) {
 		Model model = Model.getModel();
 		DecisionLinesEvent event = model.getDecisionLinesEvent();
@@ -34,34 +37,30 @@ public class ValidateCredentialsResponseXMLController implements IMessageHandler
 		System.out.println("id:" + id);
 		event.setEventID(id);
 
+		//Type is open or closed
 		String type = map.getNamedItem("type").getNodeValue();
-		System.out.println("type: " + type);
 		event.setType(type);
 		
+		//Mode is round robin or asynch
 		String mode = map.getNamedItem("behavior").getNodeValue();
-		System.out.println("behavior: " + mode);
 		event.setMode(mode);
 		
 		String name = map.getNamedItem("question").getNodeValue();
-		System.out.println("name: " + name);
 		event.setQuestion(name);
 		
 		String numChoices = map.getNamedItem("numChoices").getNodeValue();
 		int option = Integer.parseInt(numChoices);
-		System.out.println("number of choices: " + numChoices);
 		event.setNumChoices(option);
 		
 		String numRounds = map.getNamedItem("numRounds").getNodeValue();
 		int q = Integer.parseInt(numRounds);
-		System.out.println("number of Round: " + numRounds);
 		event.setRounds(q);
 		
 		String p = map.getNamedItem("position").getNodeValue();
 		int position = Integer.parseInt(p);
-		System.out.println("this user's position is: " +p);
 		event.setPosition(position);
 		
-	    //get the every choice in the XML message to store into evnet.choice
+	    //get the every choice in the XML message to store into event.choice
 		Vector<String> vc = new Vector<String>();
 		NodeList list = node.getChildNodes();
 		for (int index = 0; index < list.getLength(); index++) {
@@ -77,6 +76,8 @@ public class ValidateCredentialsResponseXMLController implements IMessageHandler
 		
 		if (position == 0) { // user is the moderator
 			boolean hasAllChoices = true;
+			Model.getModel().myTurn = true;
+			
 			for (int i = 0; i < option; i++) 
 				if (event.choices[i] == null)
 					hasAllChoices = false;

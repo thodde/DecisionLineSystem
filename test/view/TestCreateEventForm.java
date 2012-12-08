@@ -1,11 +1,9 @@
 package view;
 
-import model.Model;
 import junit.framework.TestCase;
 
 public class TestCreateEventForm extends TestCase {
 	public void testCreateEventForm() {
-		Model model = Model.getModel();
 		CreateEventForm cef = new CreateEventForm();
 		
 		cef.setEventType("closed");

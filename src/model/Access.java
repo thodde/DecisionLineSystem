@@ -5,9 +5,7 @@ import client.ServerAccess;
 /**
  * This class is used to store the Server acess, and make it to singleton, so it will be easier to get the access state
  * @author Hang, Wei
- *
  */
-
 public class Access {
 	
 	static Access instance = null;

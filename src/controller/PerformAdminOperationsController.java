@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 import model.Model;
 
 /**
- * This controller will deal with all of the options specified on the
+ * This controller deals with all of the options specified on the
  * administrator form.
  * @author Trevor Hodde
  */

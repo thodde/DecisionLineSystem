@@ -6,6 +6,7 @@ import view.*;
 public class Model {
 	private DecisionLinesEvent event;
     private static Model modelInstance = null;
+    public boolean myTurn = false;
 	
 	JFrame j;
     ChoiceListEditor cle;

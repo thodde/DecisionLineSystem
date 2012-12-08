@@ -1,5 +1,8 @@
 package view;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -8,8 +11,6 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import controller.ButtonController;
-import controller.TextController;
-
 import model.Model;
 
 /**
@@ -41,6 +42,13 @@ public class MainForm extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(700, 500);
 		setResizable(false);
+		Toolkit toolkit = Toolkit.getDefaultToolkit();
+	    Dimension screenSize = toolkit.getScreenSize();
+	    //Following three lines make the form centered
+	    int x = (screenSize.width - this.getWidth())/2;
+	    int y = (screenSize.height - this.getHeight())/2;
+	    this.setLocation(x, y);
+	    
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -58,7 +66,6 @@ public class MainForm extends JFrame {
 		//creates the event ID text box
 		txtEventId = new JTextField();
 		txtEventId.setBounds(290, 150, 100, 25);
-		txtEventId.addActionListener(new TextController(model, this));
 		this.add(txtEventId);
 		
 		//sets up all the buttons on the main form and gives a reference to their controllers

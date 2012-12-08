@@ -36,16 +36,32 @@ public class AddEdgeController extends MouseAdapter{
 		String eventId = model.getDecisionLinesEvent().getEventID();
 		
 		//as long as the click is valid 
-		if (nLastYClick > 50 && nLastYClick < 400 && choiceId != -1 && choiceId < model.getDecisionLinesEvent().getNumChoices() - 1) {
-			System.out.println("Click: " + nLastYClick);
-			String xmlString = Message.requestHeader()+"<addEdgeRequest id='"+eventId+"' left='"+ choiceId
-					+"' right='"+(choiceId+1)+"' height='"+ nLastYClick+"' /></request>";
+		if (Model.getModel().myTurn && nLastYClick > 50 && nLastYClick < 400 && choiceId != -1 && choiceId < model.getDecisionLinesEvent().getNumChoices() - 1) {
+			String xmlString = Message.requestHeader() + "<addEdgeRequest id='" + eventId + "' left='" + choiceId
+					+ "' right='" + (choiceId+1) + "' height='" + nLastYClick + "' /></request>";
+			
+			if(Model.getModel().getDecisionLinesEvent().getMode().equals("roundRobin")) {
+				Model.getModel().myTurn = false;
+			}
+			else {
+				//TODO: Handles Asynch stuff
+				//compare # edges played
+				//doesnt exceed number of rounds
+				//hasnt received turn request completed yet
+			}
+				
 			Message m = new Message (xmlString);
 			Access ac = Access.getInstance();
 			ac.getAccess().sendRequest(m);
 		}
 	}
 	
+	/**
+	 * This method determines which lines were clicked between and
+	 * displays an edge appropriately
+	 * @param xClick int the click placement
+	 * @return int click position
+	 */
 	private int decodeChoiceId(int xClick) {
 		if(xClick < 20) {
 			return -1;
