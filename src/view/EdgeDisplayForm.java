@@ -11,6 +11,7 @@ import controller.AddEdgeController;
 import controller.AddEdgeResponseXMLController;
 import controller.ButtonController;
 import model.DecisionLinesEvent;
+import model.Edge;
 import model.Model;
 
 /**
@@ -54,6 +55,7 @@ public class EdgeDisplayForm extends JFrame {
 		contentPane.add(btnExitButton);
 		contentPane.addMouseListener(new AddEdgeController(this));
 		
+		model.setJFrame(this);
 	}
 	
 	public void redraw(){
@@ -96,23 +98,39 @@ public class EdgeDisplayForm extends JFrame {
 		return index - 1;
 	}
 	*/
+	
+	/**
+	 * Returns the position of the current choice line
+	 * @param choicePosition int
+	 * @return int position of choice line
+	 */
 	public int getChoiceXLocation(int choicePosition) {
-		return choicePosition * CHOICEWIDTH + 5;
+		return choicePosition * CHOICEWIDTH + 20;
 	}
 	
+	/**
+	 * Return the length of the current choice line
+	 * @param choicePosition int
+	 * @return int height of choice line
+	 */
 	public int getChoiceYLocation(int choicePosition) {
 		return CHOICEHEIGHT;
 	}
 	
-	
-
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
+		Edge currentEdge;
 		
 		DecisionLinesEvent event = model.getDecisionLinesEvent();
-		for (int i = 0; i < event.choices.size(); i++) {
-			g.drawString(event.choices.get(i), getChoiceXLocation(i), getChoiceYLocation(i));
+		for (int i = 0; i < event.choices.length; i++) {
+			g.drawString(event.choices[i], getChoiceXLocation(i), getChoiceYLocation(i));
+			g.drawLine(getChoiceXLocation(i) + 20, getChoiceYLocation(i) + 10, getChoiceXLocation(i) + 20, getChoiceYLocation(i) + 350);
+		}
+		
+		for(int i = 0; i < event.getEdges().size(); i++) {
+			currentEdge = event.getEdges().get(i);
+			g.drawLine(getChoiceXLocation(currentEdge.getLeft()) + 20, currentEdge.getHeight() + 10, getChoiceXLocation(currentEdge.getRight()) + 20, currentEdge.getHeight() + 10);
 		}
 	}
 }

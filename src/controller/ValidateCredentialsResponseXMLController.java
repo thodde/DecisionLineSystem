@@ -20,9 +20,10 @@ import xml.*;
  * @author Hang, Wei
  */
 public class ValidateCredentialsResponseXMLController implements IMessageHandler {
-	public ValidateCredentialsResponseXMLController(){
+	public ValidateCredentialsResponseXMLController() {
 	
 	}
+	
 	public void process(Message response) {
 		Model model = Model.getModel();
 		DecisionLinesEvent event = model.getDecisionLinesEvent();
@@ -42,13 +43,13 @@ public class ValidateCredentialsResponseXMLController implements IMessageHandler
 		event.setMode(mode);
 		
 		String name = map.getNamedItem("question").getNodeValue();
-		System.out.println("name: "+ name);
+		System.out.println("name: " + name);
 		event.setQuestion(name);
 		
-		String numchoices = map.getNamedItem("numChoices").getNodeValue();
-		int option = Integer.parseInt(numchoices);
-		System.out.println("number of choices: "+numchoices);
-		event.setOption(option);
+		String numChoices = map.getNamedItem("numChoices").getNodeValue();
+		int option = Integer.parseInt(numChoices);
+		System.out.println("number of choices: " + numChoices);
+		event.setNumChoices(option);
 		
 		String numRounds = map.getNamedItem("numRounds").getNodeValue();
 		int q = Integer.parseInt(numRounds);
@@ -65,30 +66,31 @@ public class ValidateCredentialsResponseXMLController implements IMessageHandler
 		NodeList list = node.getChildNodes();
 		for (int index = 0; index < list.getLength(); index++) {
 			Node n = list.item(index);
-			String choice = n.getAttributes().getNamedItem("value").getNodeValue();
-			int valIndex = Integer.parseInt(n.getAttributes().getNamedItem("index").getNodeValue());
-			event.setChoice(valIndex, choice);
-			vc.add(choice);
-			System.out.println("choice"+valIndex+" is:"+ choice);
-			event.setChoice(index, choice);
+			if(n.getNodeName().equals("choice")) {
+				String choice = n.getAttributes().getNamedItem("value").getNodeValue();
+				int valIndex = Integer.parseInt(n.getAttributes().getNamedItem("index").getNodeValue());
+				event.setChoice(valIndex, choice);
+				vc.add(choice);
+				event.setChoice(index, choice);
+			}
 		}
 		
 		if (position == 0) { // user is the moderator
 			boolean hasAllChoices = true;
 			for (int i = 0; i < option; i++) 
-				if (event.choices.get(i) == null)
+				if (event.choices[i] == null)
 					hasAllChoices = false;
 			
 			if (!hasAllChoices) {
-				//ChoiceListEditor acs = new ChoiceListEditor(false, event);
-				//acs.setVisible(true);
+				ChoiceListEditor cle = new ChoiceListEditor();
+				cle.setVisible(true);
 				return;
 			}
 		}
 		else { //user is not a moderator
-			if (type.equals("open") && event.choices.get(position) == null) { 
-				//ChoiceListEditor acs = new ChoiceListEditor(false, event);
-				//acs.setVisible(true);
+			if (type.equals("open") && event.choices[position] == null) {
+				ChoiceListEditor cle = new ChoiceListEditor();
+				cle.setVisible(true);
 				return;
 			}
 		}

@@ -1,5 +1,7 @@
 package view;
 
+import java.awt.List;
+import java.util.ArrayList;
 import java.util.Vector;
 
 import model.Model;
@@ -9,11 +11,10 @@ public class TestChoiceListEditor extends TestCase {
 	public void testChoiceListEditor() {
 		Model model = Model.getModel();
 		String title = "test";
-		Vector<String> list = new Vector<String>();
+		List list = new List();
 		
-		ChoiceListEditor cle = new ChoiceListEditor(false);
+		ChoiceListEditor cle = new ChoiceListEditor();
 		cle.addTextToChoices();
 		list = cle.getChoices();
-		cle.loadCredentialsForm();
 	}
 }

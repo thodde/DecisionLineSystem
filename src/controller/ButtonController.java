@@ -47,7 +47,6 @@ public class ButtonController implements ActionListener {
 		case USER_BUTTON_VALUE:
 			//handle button clicks that have to do with the user
 			String eventId = ((MainForm)frame).getTextField();
-			//((MainForm)frame).dispose();
 			loadCredentialsForm(eventId);
 			break;
 		case ADMIN_BUTTON_VALUE:

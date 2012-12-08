@@ -1,14 +1,7 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
-/**
- * This DesicisionLinesEvent entity has many attributes and method. 
- * It is used to store the information we need about the Decision Line Event
- * @author Hang, Wei
- */
 public class DecisionLinesEvent {
 	public String question;
 	public String mode;
@@ -17,13 +10,11 @@ public class DecisionLinesEvent {
 	public int position;
 	public String eventId;
 	public int option;
-	public List<String> choices;
+	public String[] choices;
 	public int numChoices;
 	public int i;
-	//public static DecisionLinesEvent instance;
 	public String username;
 	public String password;
-	//public Edge[] edges;
 	private ArrayList<Edge> edges;
 	
 	public DecisionLinesEvent() {
@@ -35,22 +26,10 @@ public class DecisionLinesEvent {
 	     rounds = 0;
 	     eventId = "";
 	     option = 0;
-	     choices = new LinkedList<String>();
-	     numChoices = choices.size();
-	     //instance = null;
 	     username = "";
 	     password = "";
 	     edges = null;
 	 }
-	
-	/* Unnecessary, the model above this is a singleton
-	public static DecisionLinesEvent getInstance() {
-		if (instance == null) {
-			instance = new DecisionLinesEvent();
-		}
-		return instance;
-	}
-	*/
 	
 	public ArrayList<Edge> getEdges() {
 		if (edges == null)
@@ -105,7 +84,7 @@ public class DecisionLinesEvent {
 	public void setEventID(String eventId) {
 		this.eventId = eventId;
 	}
-	
+	/*
 	public int getOption() {
 		return option;
 	}
@@ -113,27 +92,24 @@ public class DecisionLinesEvent {
 	public void setOption(int option) {
 		this.option = option;
 	}
-	
+	*/
 	public String getChoice(int i) {
-		return choices.get(i);
+		return choices[i];
 	}
 	
 	public void setChoice (int i, String choice) {
-		if(!choices.contains(choice)) {
-			choices.add(i, choice);
-			setCuri(i);
-		}
+		choices[i] = choice;
 	}
 	
 	public void setCuri(int i) {
 		this.i = i;
 	}
 	
-	public int getCuri(){
+	public int getCuri() {
 		return i;
 	}
 /*
-	public boolean setChoice(int position, String choiceText ) {
+	public boolean setChoice(int position, String choiceText) {
 		boolean validChoice = false;
 
 		if (position >= 0 && position < numChoices) {
@@ -147,23 +123,9 @@ public class DecisionLinesEvent {
 		}
 		return validChoice;
 	}
-
-	public boolean doesChoiceExist(String choice) {
-		boolean exists = false;
-		
-		for (int i=0; i < numChoices; i++) {
-			if (lines[i] != null) {
-				if(lines[i].getChoice().equals(choice)) {
-					exists = true;
-					break;
-				}
-			}
-		}
-		return exists;
-	}
 */
 
-	public boolean isDone(){
+	public boolean isDone() {
 		boolean done = false;
 
 		return done;
@@ -171,21 +133,22 @@ public class DecisionLinesEvent {
 
 	public void setNumChoices(int numChoices) {
 		this.numChoices = numChoices;
+		choices = new String[numChoices];
 	}
 	
 	public int getNumChoices() {
 		return numChoices;
 	}
 	
-	public String getUsername(){
+	public String getUsername() {
 		return username;
 	}
 	
-	public void setUsername(String username){
+	public void setUsername(String username) {
 		this.username = username;
 	}
 	
-	public String getPassword(){
+	public String getPassword() {
 		return password;
 	}
 	

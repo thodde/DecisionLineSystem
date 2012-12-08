@@ -68,12 +68,6 @@ public class ChoiceListEditor extends JFrame {
 		//This is the list that holds all of the values
 		itemList = new List(10, false);
 	    itemList.setBounds(50, 10, 430, 280);
-		/*
-		itemList = new JList(new Vector<String>(event.choices));
-	    itemList.setBounds(50, 10, 430, 280);
-		itemList.setVisibleRowCount(8);
-		itemList.addListSelectionListener(new ValueReporter());
-		*/
 		contentPane.add(itemList);
 
 		//text box for entering new choices
@@ -137,6 +131,7 @@ public class ChoiceListEditor extends JFrame {
 				}
 			}
 		});
+		
 		btnRemoveChoice.setEnabled(false);
 		contentPane.add(btnRemoveChoice);
 		
@@ -158,24 +153,9 @@ public class ChoiceListEditor extends JFrame {
 	 * Returns a list of choices
 	 * @return Vector<String>
 	 */
-	public List getChoices(){
+	public List getChoices() {
 		return itemList;
 	}
-	
-	/**
-	 * This class adds the selected choice to the text box
-	 * and allows the user to remove the item
-	 * @author Martti Peltola
-	 */
-	/*
-	private class ValueReporter implements ListSelectionListener {
-	    public void valueChanged(ListSelectionEvent event) {
-	    	if (!event.getValueIsAdjusting()) 
-	    		txtEditField.setText("");
-	      
-	    	btnRemoveChoice.setEnabled(true);
-	    }
-	}*/
 	
 	/**
 	 * Adds the new choice to the list box
@@ -193,20 +173,6 @@ public class ChoiceListEditor extends JFrame {
 			}
 		}
 	}
-	/**
-	 * This method can refresh the choice list, so user in the open event can see the choice being added;
-	 * @author Hang, Wei
-	 */
-	/*
-	public void refreshChoiceList(){
-		Vector<String> vc = new Vector<String>();
-		for(int i=0;i<event.getCuri();i++){
-			choice = event.getChoice(i);
-			vc.add(choice);
-			updateLocalList(vc);
-			model.setJFrame(this);
-		}
-	} */
 	
 	/**
 	 * Removes a choice from the list box
@@ -220,24 +186,5 @@ public class ChoiceListEditor extends JFrame {
 			btnSubmit.setEnabled(false);
 			btnAddChoice.setEnabled(true);
 		}
-		
-		/*
-		itemList.remove(itemList.getSelectedItem().)
-		itemList.getSelectedItem()
-		
-		if(itemList.getSelectedValue() != null) {
-			currentItem = itemList.getSelectedValue().toString();
-			if(event.choices.contains(currentItem)) {
-				event.choices.remove(currentItem);
-				updateLocalList(new Vector<String>(event.choices));
-				numChoices--;
-				
-				if(numChoices < maxChoices) {
-					btnSubmit.setEnabled(false);
-					btnAddChoice.setEnabled(true);
-				}
-			}
-		}
-		*/
 	}
 }

@@ -13,7 +13,8 @@ import xml.Message;
 public class ClientLauncher {
 
 	// If requested by ClientLauncher (pass in '-server' as argument).
-	public static final String serverHost = "72.249.186.243";
+	//public static final String serverHost = "72.249.186.243";
+	public static final String serverHost = "192.168.1.9";
 	
 	//default port number
 	public static int defaultPort = 9371;
@@ -38,6 +39,7 @@ public class ClientLauncher {
 		if (args.length > 0 && args[0].equals("-server")) {
 			host = serverHost;
 		}
+		host = serverHost;
 		
 		int port = 9371;
 		if(args.length > 0 && args[1].equals("-port")) {

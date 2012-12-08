@@ -1,23 +1,18 @@
 package controller;
 
-
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
 import client.IMessageHandler;
 
-import view.ChoiceListEditor;
 import view.EdgeDisplayForm;
 import xml.Message;
 import model.*;
 
-/**
- * This class is used for dealing with the addChoiceResponse, it will store the information into event
- * @author Hang, Wei
- */
 public class AddChoiceResponseXMLController implements IMessageHandler {
+	
 	public void process(Message response) {
-		Model model = Model.getModel();
+		boolean hasAllValues = true;
 		DecisionLinesEvent event = Model.getModel().getDecisionLinesEvent();
 		Node node = response.contents.getFirstChild();
 		NamedNodeMap map = node.getAttributes();
@@ -30,17 +25,17 @@ public class AddChoiceResponseXMLController implements IMessageHandler {
 			int number = Integer.parseInt(num);
 			event.setChoice(number, choice);
 			System.out.println(num+choice);
-			//((ChoiceListEditor) model.getJFrame()).refreshChoiceList();
-			// if all the choices have been added
-			/*
-			if(event.getOption() == number) {
-				((ChoiceListEditor) model.getJFrame()).dispose();
+			
+			for(int i = 0; i < event.choices.length; i++) {
+				if(event.choices[i] == null) {
+					hasAllValues = false;
+				}
+			}
+			
+			if(hasAllValues) {
 				EdgeDisplayForm edf = new EdgeDisplayForm();
 				edf.setVisible(true);
 			}
-			*/
-			EdgeDisplayForm edf = new EdgeDisplayForm();
-			edf.setVisible(true);
 		}
 	}
 }

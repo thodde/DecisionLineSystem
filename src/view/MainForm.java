@@ -79,6 +79,9 @@ public class MainForm extends JFrame {
 		buttons[3].setBounds(110*4, 300, 90, 25);
 		buttons[3].addActionListener(new ButtonController(3, this));
 		contentPane.add(buttons[3]);
+		
+		//set focus to the moderator button for easy navigation
+		getRootPane().setDefaultButton(buttons[0]);
     }
 	
 	/** To redraw the frame we repaint the internal boxes. */

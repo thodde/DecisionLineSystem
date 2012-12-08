@@ -20,17 +20,12 @@ public class AddEdgeResponseXMLController implements IMessageHandler {
 	EdgeDisplayForm form;
 
 	public void process(Message response) {
-		form = (EdgeDisplayForm)model.getJFrame();
-		Node addEdgeResponse = response.contents.getFirstChild();
-		NamedNodeMap map = addEdgeResponse.getAttributes();		
+		model = Model.getModel();
+		form = (EdgeDisplayForm) model.getJFrame();
+		NamedNodeMap map = response.contents.getAttributes();		
 		Boolean flag =  Boolean.valueOf(map.getNamedItem("success").getNodeValue());
+		Node addEdgeResponse = response.contents.getFirstChild();
 		if (flag == true) {
-			//TODO no, this is wrong.  Take the settings from the XML message itself, not stored locally on the form
-			/*
-			int index = form.getClickOptionIndex(form.nLastXClick);
-			model.addNewEdge(index, form.nLastXClick, form.nLastYClick);
-			*/
-			addEdgeResponse = addEdgeResponse.getNextSibling();
 			int left = Integer.parseInt(addEdgeResponse.getAttributes().getNamedItem("left").getNodeValue());
 			int right = Integer.parseInt(addEdgeResponse.getAttributes().getNamedItem("right").getNodeValue());
 			int height = Integer.parseInt(addEdgeResponse.getAttributes().getNamedItem("height").getNodeValue());
@@ -38,12 +33,10 @@ public class AddEdgeResponseXMLController implements IMessageHandler {
 			Edge newEdge = new Edge(left, right, height);
 			DecisionLinesEvent event = model.getDecisionLinesEvent();
 			
-			// Does this exist in the Decision line event already?
 			if (!event.getEdges().contains(newEdge))
 				model.getDecisionLinesEvent().getEdges().add(newEdge);
 			
 			form.repaint();
-			model.setJFrame(form);
 		}
 	}
 }

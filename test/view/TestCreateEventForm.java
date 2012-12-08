@@ -6,7 +6,7 @@ import junit.framework.TestCase;
 public class TestCreateEventForm extends TestCase {
 	public void testCreateEventForm() {
 		Model model = Model.getModel();
-		CreateEventForm cef = new CreateEventForm(model);
+		CreateEventForm cef = new CreateEventForm();
 		
 		cef.setEventType("closed");
 		assertEquals(cef.getEventType(), "closed");

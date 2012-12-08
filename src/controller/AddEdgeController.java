@@ -15,30 +15,45 @@ import xml.Message;
 public class AddEdgeController extends MouseAdapter{
 	EdgeDisplayForm edf;
 	
+	/**
+	 * This constructor takes a reference to the EdgeDisplayForm
+	 * so that it can be closed later
+	 * @param edf EdgeDisplayForm
+	 */
 	public AddEdgeController(EdgeDisplayForm edf){
 		 this.edf = edf;
 	}
 	
+	/**
+	 * If the form detects a mouse click, the XY coordinates are stored
+	 * and sent to the server in an AddEdgeRequest
+	 */
 	public void	mouseClicked(MouseEvent arg) {
 		Model model = Model.getModel();
 		int nLastXClick = arg.getX();
-		int nLastYClick = arg.getY();
-		int choiceId = decodeChoiceId(nLastXClick, nLastYClick);
+		int nLastYClick = arg.getY() + 13;
+		int choiceId = decodeChoiceId(nLastXClick);
 		String eventId = model.getDecisionLinesEvent().getEventID();
-		// convert to the char[] to String
-		//TODO This is the right idea, send it to an XML string and DO NOT write it to the model just yet
-		// but first you must verify that the height is valid 
-		String xmlString = Message.requestHeader()+"<addEdgeRequest id='"+eventId+"' left='"+ choiceId
-			+"' right='"+(choiceId+1)+"' height='"+ nLastYClick+"' /></request>";;
-
-		Message m = new Message (xmlString);
-		// get the ServerAccess, then send the request
-		Access ac = Access.getInstance();
-		ac.getAccess().sendRequest(m);
+		
+		//as long as the click is valid 
+		if (nLastYClick > 50 && nLastYClick < 400 && choiceId != -1 && choiceId < model.getDecisionLinesEvent().getNumChoices() - 1) {
+			System.out.println("Click: " + nLastYClick);
+			String xmlString = Message.requestHeader()+"<addEdgeRequest id='"+eventId+"' left='"+ choiceId
+					+"' right='"+(choiceId+1)+"' height='"+ nLastYClick+"' /></request>";
+			Message m = new Message (xmlString);
+			Access ac = Access.getInstance();
+			ac.getAccess().sendRequest(m);
+		}
 	}
 	
-	//TODO code
-	private int decodeChoiceId(int xClick, int yClick) {
-		return 0;
+	private int decodeChoiceId(int xClick) {
+		if(xClick < 20) {
+			return -1;
+		}
+		
+		int tempClick = xClick - 20;
+		int retVal = tempClick / EdgeDisplayForm.CHOICEWIDTH;
+
+		return retVal;
 	}
 }
