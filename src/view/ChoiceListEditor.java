@@ -47,7 +47,8 @@ public class ChoiceListEditor extends JFrame {
 		this.model = Model.getModel();
 		event = model.getDecisionLinesEvent();
 		type = event.getType();
-		if (event.position == 0)
+		
+		if (type.equals("closed") && event.position == 0)
 			this.maxChoices = event.getNumChoices();
 		else
 			this.maxChoices = 1;

@@ -12,7 +12,7 @@ import model.*;
 public class AddChoiceResponseXMLController implements IMessageHandler {
 	
 	public void process(Message response) {
-		boolean hasAllValues = true;
+		boolean createEdgeDisplayForm = false;
 		DecisionLinesEvent event = Model.getModel().getDecisionLinesEvent();
 		Node node = response.contents.getFirstChild();
 		NamedNodeMap map = node.getAttributes();
@@ -26,15 +26,17 @@ public class AddChoiceResponseXMLController implements IMessageHandler {
 			event.setChoice(number, choice);
 			System.out.println(num+choice);
 			
-			for(int i = 0; i < event.choices.length; i++) {
-				if(event.choices[i] == null) {
-					hasAllValues = false;
-				}
-			}
-			
-			if(hasAllValues) {
+			if (Model.getModel().getJFrame() == null)
+				createEdgeDisplayForm = true;
+			else if (Model.getModel().getJFrame() instanceof EdgeDisplayForm)
+				((EdgeDisplayForm) Model.getModel().getJFrame()).redraw();
+			else
+				createEdgeDisplayForm = true;
+
+			if(createEdgeDisplayForm) {
 				EdgeDisplayForm edf = new EdgeDisplayForm();
 				edf.setVisible(true);
+				Model.getModel().setJFrame(edf);
 			}
 		}
 	}

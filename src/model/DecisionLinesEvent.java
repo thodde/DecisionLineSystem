@@ -2,6 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
+import view.EdgeDisplayForm;
+
 /**
  * This class stores all the information needed
  * by a Decision Line Event
@@ -95,7 +97,25 @@ public class DecisionLinesEvent {
 	}
 	
 	public void setChoice(int i, String choice) {
+		if (i < 0 && i >= choices.length)
+			return;
+		
 		choices[i] = choice;
+		
+		if (type.equals("open")) {
+			boolean allChoicesSet = true;
+			for (int x = 0; x < choices.length; x++) 
+				if (choices[x] == null)
+					allChoicesSet = false;
+			
+			if (allChoicesSet) {
+				type = "closed";
+				
+				if (Model.getModel().getJFrame() != null)
+					if (Model.getModel().getJFrame() instanceof EdgeDisplayForm)
+						((EdgeDisplayForm)Model.getModel().getJFrame()).redraw();
+			}
+		}
 	}
 
 	public void setNumChoices(int numChoices) {

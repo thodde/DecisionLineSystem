@@ -15,6 +15,7 @@ import controller.ButtonController;
 import model.DecisionLinesEvent;
 import model.Edge;
 import model.Model;
+import javax.swing.JLabel;
 
 /**
  * This class displays edges that are added between two decision lines
@@ -30,6 +31,7 @@ public class EdgeDisplayForm extends JFrame {
 	public static final int CHOICEHEIGHT = 55;
 	int[] xCoords;
 	JPanel contentPane;
+	JLabel lblConnectedUsers, lblEventTypeLabel;
 
 	/**
 	 * Constructor for setting up the edge display form
@@ -50,7 +52,7 @@ public class EdgeDisplayForm extends JFrame {
 	    int y = (screenSize.height - this.getHeight())/2;
 	    this.setLocation(x, y);
 		
-		setLayout(null);
+		getContentPane().setLayout(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -62,6 +64,14 @@ public class EdgeDisplayForm extends JFrame {
 		btnExitButton.addActionListener(new ButtonController(3, this));
 		btnExitButton.setVisible(true);
 		contentPane.add(btnExitButton);
+		
+		lblEventTypeLabel = new JLabel("Event Type:");
+		lblEventTypeLabel.setBounds(30, 417, 218, 14);
+		contentPane.add(lblEventTypeLabel);
+		
+		lblConnectedUsers = new JLabel("Connected Users: ");
+		lblConnectedUsers.setBounds(30, 442, 637, 25);
+		contentPane.add(lblConnectedUsers);
 		contentPane.addMouseListener(new AddEdgeController(this));
 		
 		model.setJFrame(this);
@@ -72,7 +82,7 @@ public class EdgeDisplayForm extends JFrame {
 	 */
 	public void redraw(){
 		this.repaint();
-		model.setJFrame(this);
+		//model.setJFrame(this);
 	}
 	
 	/**
@@ -104,8 +114,10 @@ public class EdgeDisplayForm extends JFrame {
 		//This loop paints the choices above the lines and the decision lines
 		DecisionLinesEvent event = model.getDecisionLinesEvent();
 		for (int i = 0; i < event.choices.length; i++) {
-			g.drawString(event.choices[i], getChoiceXLocation(i), getChoiceYLocation(i));
-			g.drawLine(getChoiceXLocation(i) + 20, getChoiceYLocation(i) + 10, getChoiceXLocation(i) + 20, getChoiceYLocation(i) + 350);
+			if (event.choices[i] != null) {
+				g.drawString(event.choices[i], getChoiceXLocation(i), getChoiceYLocation(i));
+				g.drawLine(getChoiceXLocation(i) + 20, getChoiceYLocation(i) + 10, getChoiceXLocation(i) + 20, getChoiceYLocation(i) + 350);
+			}
 		}
 		
 		//this loops paints the edges between the correct lines
@@ -113,5 +125,12 @@ public class EdgeDisplayForm extends JFrame {
 			currentEdge = event.getEdges().get(i);
 			g.drawLine(getChoiceXLocation(currentEdge.getLeft()) + 20, currentEdge.getHeight() + 10, getChoiceXLocation(currentEdge.getRight()) + 20, currentEdge.getHeight() + 10);
 		}
+		
+		lblEventTypeLabel.setText("Event Type: " + event.getType());
+		String conUsers = "Connected Users:";
+		for (int i = 0; i < model.connectedUsers.size(); i++) {
+			conUsers += " " + model.connectedUsers.get(i);
+		}
+		lblConnectedUsers.setText(conUsers);
 	}
 }

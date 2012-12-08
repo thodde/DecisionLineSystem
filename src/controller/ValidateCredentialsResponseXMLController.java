@@ -72,6 +72,9 @@ public class ValidateCredentialsResponseXMLController implements IMessageHandler
 				vc.add(choice);
 				event.setChoice(index, choice);
 			}
+			else if (n.getNodeName().equals("user")) {
+				Model.getModel().connectedUsers.add(n.getAttributes().getNamedItem("name").getNodeValue());
+			}
 		}
 		
 		if (position == 0) { // user is the moderator
@@ -99,5 +102,6 @@ public class ValidateCredentialsResponseXMLController implements IMessageHandler
 		//goto edge screen
 		EdgeDisplayForm edf = new EdgeDisplayForm();
 		edf.setVisible(true);
+		Model.getModel().setJFrame(edf);
 	}
 }

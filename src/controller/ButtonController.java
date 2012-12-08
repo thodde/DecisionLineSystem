@@ -56,6 +56,7 @@ public class ButtonController implements ActionListener {
 		case EXIT_BUTTON_VALUE:
 			//Handle Exit buttons throughout the application
 			frame.dispose();
+			System.exit(0);
 			break;
 		default:
 			break;

@@ -40,7 +40,7 @@ public class AddChoiceController implements ActionListener{
 						" number='" + i + "' choice='" + choiceList.getItem(i) + "'/></request>";				
 			else
 				xml = Message.requestHeader() + "<addChoiceRequest id='"+event.getEventID() +"'"+
-						" number='" + i + "' choice='" + choiceList.getItem(i) + "'/></request>";				
+						" number='" + event.position + "' choice='" + choiceList.getItem(i) + "'/></request>";				
 
 			Message m = new Message (xml);
 			Access ac = Access.getInstance();

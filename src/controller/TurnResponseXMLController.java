@@ -2,6 +2,8 @@ package controller;
 
 import model.Model;
 import org.w3c.dom.Node;
+
+import view.EdgeDisplayForm;
 import xml.Message;
 import client.IMessageHandler;
 
@@ -24,6 +26,12 @@ public class TurnResponseXMLController implements IMessageHandler {
 		//if the game is over, it is no longer the clients turn
 		if(gameOver) {
 			Model.getModel().myTurn = false;
+			Model.getModel().getDecisionLinesEvent().setType("finished");
+			
+			if (Model.getModel().getJFrame() != null)
+				if (Model.getModel().getJFrame() instanceof EdgeDisplayForm)
+					((EdgeDisplayForm) Model.getModel().getJFrame()).redraw();
+
 		}
 		else { //otherwise, it is the clients turn
 			Model.getModel().myTurn = true;

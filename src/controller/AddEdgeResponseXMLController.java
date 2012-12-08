@@ -26,6 +26,17 @@ public class AddEdgeResponseXMLController implements IMessageHandler {
 		Boolean flag =  Boolean.valueOf(map.getNamedItem("success").getNodeValue());
 		Node addEdgeResponse = response.contents.getFirstChild();
 		if (flag == true) {
+			if(Model.getModel().getDecisionLinesEvent().getMode().equals("roundRobin")) {
+				Model.getModel().myTurn = false;
+			}
+			else {
+				//TODO: Handles Asynch stuff
+				//compare # edges played
+				//doesnt exceed number of rounds
+				//hasnt received turn request completed yet
+			}
+			
+			
 			int left = Integer.parseInt(addEdgeResponse.getAttributes().getNamedItem("left").getNodeValue());
 			int right = Integer.parseInt(addEdgeResponse.getAttributes().getNamedItem("right").getNodeValue());
 			int height = Integer.parseInt(addEdgeResponse.getAttributes().getNamedItem("height").getNodeValue());

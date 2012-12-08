@@ -44,8 +44,6 @@ public class CreateNewEventController implements ActionListener {
 		event.setType(eventType);
 		event.setRounds(numRounds);
 		event.setNumChoices(numChoices);
-		// no, you cannot set this here.  You have to submit it to the server
-		//model.setDecisionLinesEvent(event);
 		
 		//hide the event setup form
 		frame.dispose();

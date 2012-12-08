@@ -1,9 +1,12 @@
 package view;
 
+//MAP202 import controller.CreateNewEventController;
+import model.Model;
 import junit.framework.TestCase;
 
 public class TestCreateEventForm extends TestCase {
 	public void testCreateEventForm() {
+		Model model = Model.getModel();
 		CreateEventForm cef = new CreateEventForm();
 		
 		cef.setEventType("closed");
@@ -29,7 +32,7 @@ public class TestCreateEventForm extends TestCase {
 		assertEquals(cef.getNumberOfRounds(), 0);
 		
 		cef.setQuestion("test");
-		assertEquals(cef.getQuestion(), "");
+		assertEquals(cef.getQuestion(), "test");
 		
 		cef.redraw();
 	}

@@ -35,6 +35,9 @@ public class ClientMessageHandler implements IMessageHandler {
 		else if(type.equals("turnResponse")){
 			new TurnResponseXMLController().process(response);
 		}
+		else if(type.equals("joinResponse")) {
+			new JoinResponseXMLController().process(response);
+		}
 	}
 }
 

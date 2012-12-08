@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 import javax.swing.JFrame;
 
 import view.*;
@@ -7,12 +9,14 @@ public class Model {
 	private DecisionLinesEvent event;
     private static Model modelInstance = null;
     public boolean myTurn = false;
+    public ArrayList<String> connectedUsers;
 	
 	JFrame j;
-    ChoiceListEditor cle;
+    //ChoiceListEditor cle;
     
     private Model() {
     	event = null;
+    	connectedUsers = new ArrayList<String>();
 	}
     
     public static Model getModel() {

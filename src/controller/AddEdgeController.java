@@ -30,6 +30,10 @@ public class AddEdgeController extends MouseAdapter{
 	 */
 	public void	mouseClicked(MouseEvent arg) {
 		Model model = Model.getModel();
+		
+		if (!model.getDecisionLinesEvent().getType().equals("closed"))
+			return;
+		
 		int nLastXClick = arg.getX();
 		int nLastYClick = arg.getY() + 13;
 		int choiceId = decodeChoiceId(nLastXClick);
@@ -39,16 +43,6 @@ public class AddEdgeController extends MouseAdapter{
 		if (Model.getModel().myTurn && nLastYClick > 50 && nLastYClick < 400 && choiceId != -1 && choiceId < model.getDecisionLinesEvent().getNumChoices() - 1) {
 			String xmlString = Message.requestHeader() + "<addEdgeRequest id='" + eventId + "' left='" + choiceId
 					+ "' right='" + (choiceId+1) + "' height='" + nLastYClick + "' /></request>";
-			
-			if(Model.getModel().getDecisionLinesEvent().getMode().equals("roundRobin")) {
-				Model.getModel().myTurn = false;
-			}
-			else {
-				//TODO: Handles Asynch stuff
-				//compare # edges played
-				//doesnt exceed number of rounds
-				//hasnt received turn request completed yet
-			}
 				
 			Message m = new Message (xmlString);
 			Access ac = Access.getInstance();
