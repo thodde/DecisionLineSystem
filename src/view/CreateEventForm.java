@@ -222,7 +222,7 @@ public class CreateEventForm extends JFrame {
 	 * @param num
 	 */
 	public void setNumberOfChoices(int num) {
-		textField_NumberOfChoices.setText("0");
+		textField_NumberOfChoices.setText("" + num);
 	}
 	
 	/**
@@ -241,7 +241,7 @@ public class CreateEventForm extends JFrame {
 	 * @param num
 	 */
 	public void setNumberOfRounds(int num) {
-		textField_NumberOfRounds.setText("0");
+		textField_NumberOfRounds.setText("" + num);
 	}
 	
 	/**
@@ -257,7 +257,7 @@ public class CreateEventForm extends JFrame {
 	 * @param num
 	 */
 	public void setQuestion(String question) {
-		questionTextField.setText("");
+		questionTextField.setText(question);
 	}
 
 	/**

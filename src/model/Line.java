@@ -11,6 +11,7 @@ public class Line {
 	private int position;
 	private int totalEdgeCount; 
 	private int currentCount;
+	private int finalDecision;
 	
 	/**
 	 * This constructor sets up the Line instance
@@ -128,5 +129,13 @@ public class Line {
 	public Edge nextEdge(int n) {
 		Edge e = null;
 		return e;
+	}
+	
+	public int getFinalOrder() {
+		return finalDecision;
+	}
+	
+	public void setFinalOrder(int finalDecision) {
+		this.finalDecision = finalDecision;
 	}
 }

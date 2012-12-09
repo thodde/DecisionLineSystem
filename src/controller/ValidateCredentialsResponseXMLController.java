@@ -12,6 +12,7 @@ import client.IMessageHandler;
 
 import view.ChoiceListEditor;
 import view.EdgeDisplayForm;
+import view.MainForm;
 import xml.*;
 
 /**

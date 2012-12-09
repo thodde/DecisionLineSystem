@@ -20,6 +20,7 @@ public class DecisionLinesEvent {
 	public String username;
 	public String password;
 	private ArrayList<Edge> edges;
+	private ArrayList<Line> lines;
 	
 	/**
 	 * This constructor sets default values to 
@@ -144,22 +145,58 @@ public class DecisionLinesEvent {
 	
 	/**
 	 * This method will return the final choice of the decision line event
-	 * @return String: the final choice of the event
 	 */
-	public String determineFinalOrder() {
-		return "";
-		//TODO: code
+	public void determineFinalOrder() {
+		int preOrder = -1;
+		int curOrder = -1;
+		int CurandHeight[] = new int[2];
+		int curHeight = 0;
+		// Calculate each Choice
+		for(Line choice : this.lines) {
+			preOrder = choice.getLinePosition();
+			CurandHeight = this.getNextEdge(preOrder, curHeight);
+			curOrder = CurandHeight[0];
+			curHeight = CurandHeight[1];
+			// Go through the path
+			while(curOrder > 0) {
+				preOrder = curOrder;
+				CurandHeight = this.getNextEdge(preOrder, curHeight);
+				curOrder = CurandHeight[0];
+				curHeight = CurandHeight[1];
+			}
+			choice.setFinalOrder(preOrder);
+		}
 	}
-	
+
 	/**
 	 * This method gets the closest edge to the current position on the line
 	 * @param choice int: the choice that we are currently on
 	 * @param height: int the height on the decision line
 	 * @return int[] the next edge on the line
 	 */
-	private int[] getNextEdge(int choice, int height) {
+	private int[] getNextEdge(int choice, int height) {		
+		int min = Integer.MAX_VALUE;
+		int result[] = new int[2];
+		result[0] = -1;
 		
-		//TODO: code
-		return null;
+		// Go through the each Edge
+		for(Edge edge : this.edges) {
+			// Check if the Edge is related to the Choice and below the height
+			if(edge.getHeight() < height) {
+				// Calculate the difference
+				int diff = edge.getHeight() - height;
+				if(diff < min) {
+					if(edge.getLeft() != choice) {
+						result[0] = edge.getLeft();
+					}
+					else {
+						result[0] = edge.getRight();
+					}
+					result[1] = edge.getHeight();
+					min = diff;					
+				}
+			}
+		}
+		return result;
 	}
 }

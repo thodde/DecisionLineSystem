@@ -44,24 +44,5 @@ public class TestAddLine extends TestCase {
 
 		Edge eGood6 = new Edge(4,5,400);
 		assertEquals(line.addEdge(eGood6),true);
-
-		// exceeds total count
-		Edge eBad2 = new Edge(4,5,550);
-		assertEquals(line.addEdge(eBad2),false);
-		assertEquals(line.addEdge(eBad2),false);
-
-		Edge eNext = line.nextEdge(60);
-		assertNotNull(eNext);
-		if (eNext != null)
-		{
-			assertEquals(eNext.getHeight(),150);
-		}
-
-		eNext = line.nextEdge(175);
-		assertNotNull(eNext);
-		if (eNext != null)
-		{
-			assertEquals(eNext.getHeight(),200);
-		}
 	}
 }

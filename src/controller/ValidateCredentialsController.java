@@ -55,22 +55,21 @@ public class ValidateCredentialsController implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		//Send XML Request to server 
-		if (cf.isNewEvent) { //CreateRequest
-			DecisionLinesEvent event = cf.partialEvent;
-			String xml = Message.requestHeader() + "<createRequest behavior='"+ event.getMode()+"' type='"+event.getType()+"' question='"
-					+event.getQuestion() + "' numChoices='"+event.getNumChoices()+"' numRounds='"+event.getRounds()+"'>" +
-					"<user name='"+ cf.getUsername() + "' password='" + new String(cf.getPassword()) + "'/>" +
-					"</createRequest>"+"</request>";
-			Message m = new Message (xml);
-			Access ac = Access.getInstance();
-			ac.getAccess().sendRequest(m);
-			cf.dispose();
-			
-		}
-		else { //signInRequest
-			boolean isValid = credentialsAreValid(cf.getUsername(), cf.getPassword());
-			if(isValid)	{
+		boolean isValid = credentialsAreValid(cf.getUsername(), cf.getPassword());
+		if(isValid) {
+			//Send XML Request to server 
+			if (cf.isNewEvent) { //CreateRequest
+				DecisionLinesEvent event = cf.partialEvent;
+				String xml = Message.requestHeader() + "<createRequest behavior='"+ event.getMode()+"' type='"+event.getType()+"' question='"
+						+event.getQuestion() + "' numChoices='"+event.getNumChoices()+"' numRounds='"+event.getRounds()+"'>" +
+						"<user name='"+ cf.getUsername() + "' password='" + new String(cf.getPassword()) + "'/>" +
+						"</createRequest>"+"</request>";
+				Message m = new Message (xml);
+				Access ac = Access.getInstance();
+				ac.getAccess().sendRequest(m);
+				cf.dispose();
+			}
+			else { //signInRequest
 				String eventId = cf.eventId;
 				String s = new String(cf.getPassword());
 				String xmlString = Message.requestHeader() + "<signInRequest id='" + eventId + "'>"+

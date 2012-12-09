@@ -1,51 +1,40 @@
 package model;
 
+import model.Model;
+import model.DecisionLinesEvent;
 import junit.framework.TestCase;
 
 public class TestCreateDecisionLineEvent extends TestCase {
 	public void testDecisionLineEvent() {
-		String testMode = "asynch";
-		String testType = "open";
-		
-        String testQuestion = "Why is there air?"; 
 		DecisionLinesEvent  dle = Model.getModel().getDecisionLinesEvent();
-		dle.setQuestion(testQuestion);
+		Model.getModel().setDecisionLinesEvent(dle);
+		dle.setQuestion("Why is there air?");
 		dle.setNumChoices(4);
 		dle.setRounds(3);
-		dle.setMode(testMode);
-		dle.setType(testType);
+		dle.setMode("asynch");
+		dle.setType("open");
 		
-		assertEquals(dle.getQuestion(), testQuestion);
+		assertEquals(dle.getQuestion(), "Why is there air?");
 		assertEquals(dle.getRounds(),3);
 		assertEquals(dle.getNumChoices(),4);
 		
-		assertEquals(dle.getType(), testType);
-		assertEquals(dle.getMode(), testMode);
+		assertEquals(dle.getType(), "open");
+		assertEquals(dle.getMode(), "asynch");
 	
-		/*
-		 * These are not valid test cases anymore because setChoice does not return anything
-		 * 
 		// Valid new position and choice
-		assertEquals(dle.setChoice(0, "Apple"), true );
+		dle.setChoice(0, "Apple");
 		
-		// Invalid new position (out of range) and valid choice
-        assertEquals(dle.setChoice(55, "Orange"), false );
-
-        // Invalid new position (position in use) and valid choice
-		assertEquals(dle.setChoice(0, "Orange"), false );
-
 		// Valid new position  and valid choice (Orange should not have been added above)
-        assertEquals(dle.setChoice(1, "Orange"), true );
+        dle.setChoice(1, "Orange");
 		
         // Valid new position  and Invalid choice (should have already been added above)
-		assertEquals(dle.setChoice(2, "Apple"), false ); 
+		dle.setChoice(2, "Apple"); 
 
         // Valid new position  and Invalid choice (should have already been added above)
-		assertEquals(dle.setChoice(2, "Pineapple"), true ); 
+		dle.setChoice(2, "Pineapple"); 
 
 		// Valid new position  and Invalid choice (should have already been added above)
-		assertEquals(dle.setChoice(3, "Cherry"), true ); 
-		*/
+		dle.setChoice(3, "Cherry"); 
 		
 		String choice = dle.getChoice(0);
 		assertEquals(choice, "Apple"); 
@@ -58,13 +47,5 @@ public class TestCreateDecisionLineEvent extends TestCase {
 		
 		choice = dle.getChoice(3);
 		assertEquals(choice, "Cherry"); 
-		
-		// out of range check 1
-		choice = dle.getChoice(4);
-		assertEquals(choice, null); 
-
-		// out of range check 2
-		choice = dle.getChoice(-2);
-		assertEquals(choice, null); 
 	}
 }
