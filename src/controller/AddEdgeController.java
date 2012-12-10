@@ -4,6 +4,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import model.Access;
+import model.DecisionLinesEvent;
 import model.Model;
 import view.EdgeDisplayForm;
 import xml.Message;
@@ -32,6 +33,9 @@ public class AddEdgeController extends MouseAdapter{
 		Model model = Model.getModel();
 		
 		if (!model.getDecisionLinesEvent().getType().equals("closed"))
+			return;
+		
+		if(model.connectedUsers.size() != DecisionLinesEvent.getInstance().getNumChoices())
 			return;
 		
 		int nLastXClick = arg.getX();

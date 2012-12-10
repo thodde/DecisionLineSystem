@@ -1,7 +1,5 @@
 package controller;
 
-import java.util.Vector;
-
 import model.*;
 
 import org.w3c.dom.NamedNodeMap;
@@ -12,7 +10,6 @@ import client.IMessageHandler;
 
 import view.ChoiceListEditor;
 import view.EdgeDisplayForm;
-import view.MainForm;
 import xml.*;
 
 /**
@@ -29,11 +26,18 @@ public class ValidateCredentialsResponseXMLController implements IMessageHandler
 	 * This method takes all the info from the server response
 	 */
 	public void process(Message response) {
-		Model model = Model.getModel();
 		DecisionLinesEvent event = DecisionLinesEvent.getInstance();
+		
+		NamedNodeMap map = response.contents.getAttributes();		
+		Boolean flag =  Boolean.valueOf(map.getNamedItem("success").getNodeValue());
+		
+		if(!flag) {
+			return;
+		}
+		
 		//get the event information
 		Node node = response.contents.getFirstChild();
-		NamedNodeMap map = node.getAttributes();
+		map = node.getAttributes();
 		String id = map.getNamedItem("id").getNodeValue();
 		System.out.println("id:" + id);
 		event.setEventID(id);

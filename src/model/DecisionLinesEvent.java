@@ -2,8 +2,6 @@ package model;
 
 import java.util.ArrayList;
 
-import view.EdgeDisplayForm;
-
 /**
  * This class stores all the information needed
  * by a Decision Line Event
@@ -16,12 +14,10 @@ public class DecisionLinesEvent {
 	public int rounds;
 	public int position;
 	public String eventId;
-	//public String[] choices;
 	private Line[] choices;
 	public String username;
 	public String password;
 	private ArrayList<Edge> edges;
-	//private ArrayList<Line> lines;
 	static DecisionLinesEvent localInstance = null;
 	
 	/**
@@ -123,10 +119,6 @@ public class DecisionLinesEvent {
 			
 			if (allChoicesSet) {
 				type = "closed";
-				
-				//if (Model.getModel().getJFrame() != null)
-				//	if (Model.getModel().getJFrame() instanceof EdgeDisplayForm)
-				//		((EdgeDisplayForm)Model.getModel().getJFrame()).redraw();
 			}
 		}
 	}
@@ -156,27 +148,29 @@ public class DecisionLinesEvent {
 	}
 	
 	/**
-	 * This method will return the final choice of the decision line event
+	 * This method sets the final choice of the decision line event
 	 */
 	public void determineFinalOrder() {
-		int preOrder = -1;
-		int curOrder = -1;
-		int CurandHeight[] = new int[2];
-		int curHeight = 0;
+		int heights[] = new int[2];
+		//make sure we start at the top
+		int currentHeight = 0; 
+		int position;
+		int currentPosition;
 		// Calculate each Choice
 		for(Line choice : this.choices) {
-			preOrder = choice.getLinePosition();
-			CurandHeight = this.getNextEdge(preOrder, curHeight);
-			curOrder = CurandHeight[0];
-			curHeight = CurandHeight[1];
+			position = choice.getLinePosition();
+			heights = getNextEdge(position, currentHeight);
+			currentPosition = heights[0];
+			currentHeight = heights[1];
 			// Go through the path
-			while(curOrder > 0) {
-				preOrder = curOrder;
-				CurandHeight = this.getNextEdge(preOrder, curHeight);
-				curOrder = CurandHeight[0];
-				curHeight = CurandHeight[1];
+			while(currentPosition > 0) {
+				position = currentPosition;
+				heights = getNextEdge(position, currentHeight);
+				currentPosition = heights[0];
+				currentHeight = heights[1];
 			}
-			choice.setFinalOrder(preOrder);
+			choice.setFinalOrder(position);
+			System.out.println("choice " + choice.getChoice() + " " + choice.getFinalOrder());
 		}
 	}
 

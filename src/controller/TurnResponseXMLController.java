@@ -1,5 +1,6 @@
 package controller;
 
+import model.DecisionLinesEvent;
 import model.Model;
 import org.w3c.dom.Node;
 
@@ -31,6 +32,9 @@ public class TurnResponseXMLController implements IMessageHandler {
 			if (Model.getModel().getJFrame() != null)
 				if (Model.getModel().getJFrame() instanceof EdgeDisplayForm)
 					((EdgeDisplayForm) Model.getModel().getJFrame()).redraw();
+	
+			//TODO: test
+			DecisionLinesEvent.getInstance().determineFinalOrder();
 
 		}
 		else { //otherwise, it is the clients turn
