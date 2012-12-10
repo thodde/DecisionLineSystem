@@ -31,19 +31,27 @@ public class CredentialsForm extends JFrame {
 	JPanel contentPane;
 	public boolean isNewEvent;
 	JButton btnSubmitCredentials;
-	public DecisionLinesEvent partialEvent = null;
 	public String eventId = "";
+	public String question;
+	public String eventType;
+	public String choiceMode;
+	public int numChoices;
+	public int numRounds;
 	
 	/**
 	 * This constructor takes a partially created decision line event
 	 * and creates the credentials form.
 	 * @param partialEvent DecisionLinesEvent
 	 */
-	public CredentialsForm(DecisionLinesEvent partialEvent) {
+	public CredentialsForm(String question, String eventType, String choiceMode, int numChoices, int numRounds) {
 		setupForm();
 		btnSubmitCredentials.addActionListener(new ValidateCredentialsController(this));
 		isNewEvent = true;
-		this.partialEvent = partialEvent;
+		this.question = question;
+		this.eventType = eventType;
+		this.choiceMode = choiceMode;
+		this.numChoices = numChoices;
+		this.numRounds = numRounds;
 	}
 	
 	/**

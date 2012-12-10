@@ -14,9 +14,13 @@ public class TestValidateCredentialsController  extends TestCase{
 	public TestValidateCredentialsController()
 	{
 		m = Model.getModel();
-		event = m.getDecisionLinesEvent();
+		String question = "Why is there air?";
+		String choiceMode = "roundRobin";
+		String eventType = "closed";
+		int numChoices = 3;
+		int numRounds = 2;
 
-		CredentialsForm cf = new CredentialsForm(event);
+		CredentialsForm cf = new CredentialsForm(question, eventType, choiceMode, numChoices, numRounds);
 
 		vcc = new ValidateCredentialsController(cf);
 	}
@@ -25,14 +29,15 @@ public class TestValidateCredentialsController  extends TestCase{
 	public void testNewEvent()
 	{
 		String expected = "<createRequest behavior='roundRobin' type='closed' question='Why is there air?' numChoices='3' numRounds='2'><user name='MAP' password='123'/>";
-		event.type = "closed";
-		event.rounds = 2;
-		event.setNumChoices(3);
-		event.mode = "roundRobin";
-		event.question = "Why is there air?";
+
+		String question = "Why is there air?";
+		String choiceMode = "roundRobin";
+		String eventType = "closed";
+		int numChoices = 3;
+		int numRounds = 2;
 
 		char [] password = {'1','2','3'};
-		vcc.GenerateRequest("MAP", password, true, event, "www");
+		vcc.GenerateRequest("MAP", password, true, question, eventType, choiceMode, numChoices, numRounds, "www");
 		String generatedXML = vcc.GetGeneratedRequest();
 		
 		// get XML string from public XML generator method
@@ -59,14 +64,15 @@ public class TestValidateCredentialsController  extends TestCase{
 	public void testSignInRequest()
 	{
 		String expected = "<signInRequest id='www'><user name='MAP' password='123'/>";
-		event.type = "closed";
-		event.rounds = 2;
-		event.setNumChoices(3);
-		event.mode = "roundRobin";
-		event.question = "Why is there air?";
+
+		String question = "Why is there air?";
+		String choiceMode = "roundRobin";
+		String eventType = "closed";
+		int numChoices = 3;
+		int numRounds = 2;
 
 		char [] password = {'1','2','3'};
-		vcc.GenerateRequest("MAP", password, false, event, "www");
+		vcc.GenerateRequest("MAP", password, false, question, eventType, choiceMode, numChoices, numRounds, "www");
 		String generatedXML = vcc.GetGeneratedRequest();
 		
 		// get XML string from public XML generator method

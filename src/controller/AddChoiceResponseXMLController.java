@@ -13,7 +13,7 @@ public class AddChoiceResponseXMLController implements IMessageHandler {
 	
 	public void process(Message response) {
 		boolean createEdgeDisplayForm = false;
-		DecisionLinesEvent event = Model.getModel().getDecisionLinesEvent();
+		DecisionLinesEvent event = DecisionLinesEvent.getInstance();
 		Node node = response.contents.getFirstChild();
 		NamedNodeMap map = node.getAttributes();
 		String id = map.getNamedItem("id").getNodeValue();
@@ -22,8 +22,10 @@ public class AddChoiceResponseXMLController implements IMessageHandler {
 		//check if the id equals to the EventID
 		if(id.equals(event.getEventID())) {
 			//if this number of choice is not added
+			//(int n, String choice, int position)
 			int number = Integer.parseInt(num);
-			event.setChoice(number, choice);
+			Line newChoice = new Line(choice, number);
+			event.setChoice(newChoice);
 			System.out.println(num+choice);
 			
 			if (Model.getModel().getJFrame() == null)

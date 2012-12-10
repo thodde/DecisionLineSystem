@@ -16,17 +16,19 @@ public class DecisionLinesEvent {
 	public int rounds;
 	public int position;
 	public String eventId;
-	public String[] choices;
+	//public String[] choices;
+	private Line[] choices;
 	public String username;
 	public String password;
 	private ArrayList<Edge> edges;
-	private ArrayList<Line> lines;
+	//private ArrayList<Line> lines;
+	static DecisionLinesEvent localInstance = null;
 	
 	/**
 	 * This constructor sets default values to 
 	 * all the data used by the Decision Line Event
 	 */
-	public DecisionLinesEvent() {
+	private DecisionLinesEvent() {
 	     question = "";
 	     eventId = "";
 	     position = 0;
@@ -38,6 +40,13 @@ public class DecisionLinesEvent {
 	     password = "";
 	     edges = null;
 	 }
+	
+	public static DecisionLinesEvent getInstance() {
+		if (localInstance == null)
+			localInstance = new DecisionLinesEvent();
+		
+		return localInstance;
+	}
 	
 	public ArrayList<Edge> getEdges() {
 		if (edges == null)
@@ -93,15 +102,18 @@ public class DecisionLinesEvent {
 		this.eventId = eventId;
 	}
 
-	public String getChoice(int i) {
+	public Line getChoice(int i) {
+		if (i < 0 && i >= choices.length)
+			return null;
+		
 		return choices[i];
 	}
 	
-	public void setChoice(int i, String choice) {
-		if (i < 0 && i >= choices.length)
+	public void setChoice(Line choice) {
+		if (choice.getLinePosition() < 0 && choice.getLinePosition() >= choices.length)
 			return;
 		
-		choices[i] = choice;
+		choices[choice.getLinePosition()] = choice;
 		
 		if (type.equals("open")) {
 			boolean allChoicesSet = true;
@@ -112,15 +124,15 @@ public class DecisionLinesEvent {
 			if (allChoicesSet) {
 				type = "closed";
 				
-				if (Model.getModel().getJFrame() != null)
-					if (Model.getModel().getJFrame() instanceof EdgeDisplayForm)
-						((EdgeDisplayForm)Model.getModel().getJFrame()).redraw();
+				//if (Model.getModel().getJFrame() != null)
+				//	if (Model.getModel().getJFrame() instanceof EdgeDisplayForm)
+				//		((EdgeDisplayForm)Model.getModel().getJFrame()).redraw();
 			}
 		}
 	}
 
 	public void setNumChoices(int numChoices) {
-		choices = new String[numChoices];
+		choices = new Line[numChoices];
 	}
 	
 	public int getNumChoices() {
@@ -152,7 +164,7 @@ public class DecisionLinesEvent {
 		int CurandHeight[] = new int[2];
 		int curHeight = 0;
 		// Calculate each Choice
-		for(Line choice : this.lines) {
+		for(Line choice : this.choices) {
 			preOrder = choice.getLinePosition();
 			CurandHeight = this.getNextEdge(preOrder, curHeight);
 			curOrder = CurandHeight[0];

@@ -38,17 +38,10 @@ public class CreateNewEventController implements ActionListener {
 		int numChoices = frame.getNumberOfChoices();
 		int numRounds = frame.getNumberOfRounds();
 		
-		event = new DecisionLinesEvent();
-		event.setMode(choiceMode);
-		event.setQuestion(question);
-		event.setType(eventType);
-		event.setRounds(numRounds);
-		event.setNumChoices(numChoices);
-		
 		//hide the event setup form
 		frame.dispose();
 		
-		cf = new CredentialsForm(event);
+		cf = new CredentialsForm(question, eventType, choiceMode, numChoices, numRounds);
 		cf.setVisible(true);
 	}
 }

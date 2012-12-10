@@ -6,8 +6,9 @@ import junit.framework.TestCase;
 
 public class TestCreateDecisionLineEvent extends TestCase {
 	public void testDecisionLineEvent() {
-		DecisionLinesEvent  dle = Model.getModel().getDecisionLinesEvent();
-		Model.getModel().setDecisionLinesEvent(dle);
+		DecisionLinesEvent dle = DecisionLinesEvent.getInstance();
+		//Model.getModel().setDecisionLinesEvent(dle);
+		Line newChoice;
 		dle.setQuestion("Why is there air?");
 		dle.setNumChoices(4);
 		dle.setRounds(3);
@@ -22,30 +23,35 @@ public class TestCreateDecisionLineEvent extends TestCase {
 		assertEquals(dle.getMode(), "asynch");
 	
 		// Valid new position and choice
-		dle.setChoice(0, "Apple");
+		newChoice = new Line("Apple", 0);
+		dle.setChoice(newChoice);
 		
 		// Valid new position  and valid choice (Orange should not have been added above)
-        dle.setChoice(1, "Orange");
+		newChoice = new Line("Orange", 1);
+        dle.setChoice(newChoice);
 		
         // Valid new position  and Invalid choice (should have already been added above)
-		dle.setChoice(2, "Apple"); 
+		newChoice = new Line("Apple", 2);
+		dle.setChoice(newChoice); 
 
         // Valid new position  and Invalid choice (should have already been added above)
-		dle.setChoice(2, "Pineapple"); 
+		newChoice = new Line("Pineapple", 2);
+		dle.setChoice(newChoice); 
 
 		// Valid new position  and Invalid choice (should have already been added above)
-		dle.setChoice(3, "Cherry"); 
+		newChoice = new Line("Cherry", 3);
+		dle.setChoice(newChoice); 
 		
-		String choice = dle.getChoice(0);
-		assertEquals(choice, "Apple"); 
+		Line choice = dle.getChoice(0);
+		assertTrue(choice.getChoice().equals("Apple")); 
 		
 		choice = dle.getChoice(1);
-		assertEquals(choice, "Orange");
+		assertTrue(choice.getChoice().equals("Orange")); 
 		
 		choice = dle.getChoice(2);
-		assertEquals(choice, "Pineapple");
+		assertTrue(choice.getChoice().equals("Pineapple")); 
 		
 		choice = dle.getChoice(3);
-		assertEquals(choice, "Cherry"); 
+		assertTrue(choice.getChoice().equals("Cherry")); 
 	}
 }

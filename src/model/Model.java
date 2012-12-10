@@ -27,10 +27,7 @@ public class Model {
     }
     
     public DecisionLinesEvent getDecisionLinesEvent() {
-    	if (event == null) {
-    		event = new DecisionLinesEvent();
-    	}	
-    	return event;
+    	return DecisionLinesEvent.getInstance();
     }
     
     /**

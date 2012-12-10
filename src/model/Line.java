@@ -1,16 +1,20 @@
 package model;
 
+import java.util.ArrayList;
+
 /**
  * This entity maintains information about a single choice in the decision line event
  * @author Martti Peltola
  */
 public class Line {
 
-	private Edge edges[]; 
+	
+	//private Edge edges[]; // you really cannot have a fixed sized array for this.  Instead, try taking advantage of a variable sized array
+	private ArrayList<Edge> edges;
 	private String choice;
 	private int position;
-	private int totalEdgeCount; 
-	private int currentCount;
+	//private int totalEdgeCount; 
+	//private int currentCount;
 	private int finalDecision;
 	
 	/**
@@ -20,7 +24,7 @@ public class Line {
 	 * @param position : ordinal (0th, 1st, 2nd, ..) position of this line instance in the event instance
 	 * @author Martti Peltola
 	 */
-	public Line(int n, String choice, int position) {
+	public Line(String choice, int position) {
 		// choice text of line 
 		this.choice = choice;
 		
@@ -28,10 +32,11 @@ public class Line {
 		this.position = position;
 		
 		// number of edges we allow on this line ???????????? Am I interpereting his meaning of n correctly?
-		this.totalEdgeCount =  n;
-		currentCount = 0;
+		//this.totalEdgeCount =  n;
+		//currentCount = 0;
 
-		edges = new Edge[n];
+		//edges = new Edge[n];
+		edges = new ArrayList<Edge>();
 	}
 
 	/**
@@ -48,7 +53,7 @@ public class Line {
 	 * @return : edges on line
 	 * @author Martti Peltola
      */
-	public Edge[] getEdges() {
+	public ArrayList<Edge> getEdges() {
 		return edges;
 	}
 
@@ -58,7 +63,7 @@ public class Line {
 	 * @author Martti Peltola
      */
 	public int getCurrentCount() {
-		return currentCount;
+		return edges.size();
 	}
 	
 	
@@ -67,9 +72,10 @@ public class Line {
 	 * @return : number of edges allowed
 	 * @author Martti Peltola
      */
+	/* not a necessary function
 	public int getTotalEdgeCount() {
 		return totalEdgeCount;
-	}	
+	}	*/
 	
 	/**
 	 * This method returns the line position
@@ -90,8 +96,9 @@ public class Line {
 	public boolean addEdge(Edge e) {
 		boolean valid = false;
 		if(isValidNewEdge(e)){
-			edges[currentCount] = e;
-			currentCount++;
+			//edges[currentCount] = e;
+			//currentCount++;
+			edges.add(e);
 			valid = true;
 		}
 		return valid;
@@ -106,6 +113,16 @@ public class Line {
 	public boolean isValidNewEdge(Edge e) {
 		boolean valid = true;
 		
+		for(int i = 0; i < edges.size(); i++) {
+			Edge tmpEdge = edges.get(i);
+			
+			if (tmpEdge.conflictsWith(e)) {
+				valid = false;
+				break;
+			}
+		}
+		
+		/*  Again, the fixed array size should be avoided
 		if (currentCount < totalEdgeCount) {
 			for(int i = 0; i<currentCount; i++) {
 				if (edges[i].conflictsWith(e)) {
@@ -116,7 +133,7 @@ public class Line {
 		}
 		else {
 			valid = false;
-		}
+		} */
 		return valid;
 	}
 	
@@ -126,6 +143,7 @@ public class Line {
 	 * @return : next Edge 
 	 * @author Martti Peltola
 	 */
+	//Why is this needed?  And why are you including iterators inside of classes?
 	public Edge nextEdge(int n) {
 		Edge e = null;
 		return e;

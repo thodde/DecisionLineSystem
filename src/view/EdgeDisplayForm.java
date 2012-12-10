@@ -14,6 +14,7 @@ import controller.AddEdgeResponseXMLController;
 import controller.ButtonController;
 import model.DecisionLinesEvent;
 import model.Edge;
+import model.Line;
 import model.Model;
 import javax.swing.JLabel;
 
@@ -113,9 +114,10 @@ public class EdgeDisplayForm extends JFrame {
 		
 		//This loop paints the choices above the lines and the decision lines
 		DecisionLinesEvent event = model.getDecisionLinesEvent();
-		for (int i = 0; i < event.choices.length; i++) {
-			if (event.choices[i] != null) {
-				g.drawString(event.choices[i], getChoiceXLocation(i), getChoiceYLocation(i));
+		for (int i = 0; i < event.getNumChoices(); i++) {
+			Line tempChoice = event.getChoice(i);
+			if (tempChoice != null) {
+				g.drawString(tempChoice.getChoice(), getChoiceXLocation(i), getChoiceYLocation(i));
 				g.drawLine(getChoiceXLocation(i) + 20, getChoiceYLocation(i) + 10, getChoiceXLocation(i) + 20, getChoiceYLocation(i) + 350);
 			}
 		}

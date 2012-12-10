@@ -4,11 +4,11 @@ import junit.framework.TestCase;
 
 public class TestCreateLine extends TestCase {
 	public void testCreateLine(){
-		Line line = new Line(5,"Apple", 3);
+		Line line = new Line("Apple", 3);
 		
-		assertEquals(line.getTotalEdgeCount(),5);
+		//assertEquals(line.getTotalEdgeCount(),5);
 		assertEquals(line.getLinePosition(),3);
-		assertEquals(line.getChoice(),"Apple");
+		assertTrue(line.getChoice().equals("Apple"));
 		assertEquals(line.getCurrentCount(),0);
 		
 		Edge e = new Edge(3,4,50);

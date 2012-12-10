@@ -61,7 +61,7 @@ public class ValidateCredentialsController implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 
-		if(GenerateRequest(cf.getUsername(), cf.getPassword(), cf.isNewEvent, cf.partialEvent, cf.eventId)){
+		if(GenerateRequest(cf.getUsername(), cf.getPassword(), cf.isNewEvent, cf.question, cf.eventType, cf.choiceMode, cf.numChoices, cf.numRounds, cf.eventId)){
 
 			Message m = new Message (xmlString);
 			Access ac = Access.getInstance();
@@ -76,7 +76,7 @@ public class ValidateCredentialsController implements ActionListener {
 		return xmlString;
 	}
 
-	public boolean GenerateRequest(String username, char[] password, boolean isNewEvent, DecisionLinesEvent event, String eventId)
+	public boolean GenerateRequest(String username, char[] password, boolean isNewEvent, String question, String eventType, String choiceMode, int numChoices, int numRounds, String eventId)
 	{
         boolean stat = false;
 		boolean isValid = credentialsAreValid(username, password);
@@ -84,8 +84,8 @@ public class ValidateCredentialsController implements ActionListener {
 			//Send XML Request to server 
 			if (isNewEvent) { //CreateRequest
 				
-				xmlString = Message.requestHeader() + "<createRequest behavior='"+ event.getMode()+"' type='"+event.getType()+"' question='"
-						+event.getQuestion() + "' numChoices='"+event.getNumChoices()+"' numRounds='"+event.getRounds()+"'>" +
+				xmlString = Message.requestHeader() + "<createRequest behavior='"+ choiceMode + "' type='" + eventType + "' question='"
+						+ question + "' numChoices='" + numChoices + "' numRounds='" + numRounds + "'>" +
 						"<user name='"+ username + "' password='" + new String(password) + "'/>" +
 						"</createRequest>"+"</request>";
 				stat = true;

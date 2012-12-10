@@ -7,11 +7,13 @@ public class TestAddLine extends TestCase {
 	public void testLine() {
 		int numRounds = 2;
 		int numChoices = 3;
-		int totalEdgeCount = numRounds*numChoices;
 		
-		Line line = new Line(totalEdgeCount,"Apple", 3);
+		//as mentioned before, avoid the use of a fix sized array
+		//int totalEdgeCount = numRounds*numChoices;
 		
-		assertEquals(line.getTotalEdgeCount(),totalEdgeCount);
+		Line line = new Line("Apple", 3);
+		
+		//assertEquals(line.getTotalEdgeCount(),totalEdgeCount);
 		assertEquals(line.getLinePosition(),3);
 		assertEquals(line.getChoice(),"Apple");
 		assertEquals(line.getCurrentCount(),0);

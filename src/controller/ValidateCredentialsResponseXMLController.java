@@ -30,7 +30,7 @@ public class ValidateCredentialsResponseXMLController implements IMessageHandler
 	 */
 	public void process(Message response) {
 		Model model = Model.getModel();
-		DecisionLinesEvent event = model.getDecisionLinesEvent();
+		DecisionLinesEvent event = DecisionLinesEvent.getInstance();
 		//get the event information
 		Node node = response.contents.getFirstChild();
 		NamedNodeMap map = node.getAttributes();
@@ -62,16 +62,26 @@ public class ValidateCredentialsResponseXMLController implements IMessageHandler
 		event.setPosition(position);
 		
 	    //get the every choice in the XML message to store into event.choice
-		Vector<String> vc = new Vector<String>();
+		//Vector<String> vc = new Vector<String>();
 		NodeList list = node.getChildNodes();
+		Line newChoice;
 		for (int index = 0; index < list.getLength(); index++) {
 			Node n = list.item(index);
 			if(n.getNodeName().equals("choice")) {
 				String choice = n.getAttributes().getNamedItem("value").getNodeValue();
 				int valIndex = Integer.parseInt(n.getAttributes().getNamedItem("index").getNodeValue());
-				event.setChoice(valIndex, choice);
-				vc.add(choice);
-				event.setChoice(index, choice);
+				newChoice = new Line(choice, valIndex);
+				event.setChoice(newChoice);
+				
+				/*
+				 * don't do this, you are adding duplicate recording methods, and you are basing your Choice index off an arbitrary loading order.  
+				 * the exact number is provided in the index field.  In open DLEs, each user makes one choice, and choices could potentially be created
+				 * out of order
+				 *   
+				 * In fact, why are you even using a local vector of strings here?
+				 */
+				//vc.add(choice);
+				//event.setChoice(index, choice);
 			}
 			else if (n.getNodeName().equals("user")) {
 				Model.getModel().connectedUsers.add(n.getAttributes().getNamedItem("name").getNodeValue());
@@ -83,7 +93,7 @@ public class ValidateCredentialsResponseXMLController implements IMessageHandler
 			Model.getModel().myTurn = true;
 			
 			for (int i = 0; i < option; i++) 
-				if (event.choices[i] == null)
+				if (event.getChoice(i) == null)
 					hasAllChoices = false;
 			
 			if (!hasAllChoices) {
@@ -93,7 +103,10 @@ public class ValidateCredentialsResponseXMLController implements IMessageHandler
 			}
 		}
 		else { //user is not a moderator
-			if (type.equals("open") && event.choices[position] == null) {
+			if (mode.equals("asynchronous"))
+				Model.getModel().myTurn = true;
+			
+			if (type.equals("open") && event.getChoice(position) == null) {
 				ChoiceListEditor cle = new ChoiceListEditor();
 				cle.setVisible(true);
 				return;
