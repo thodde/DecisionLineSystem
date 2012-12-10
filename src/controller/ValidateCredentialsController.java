@@ -9,6 +9,7 @@ import view.CredentialsForm;
 import xml.Message;
 import model.Access;
 import model.DecisionLinesEvent;
+import model.Model;
 
 /**
  * This class sends an XML request to the server to 
@@ -17,7 +18,9 @@ import model.DecisionLinesEvent;
  */
 public class ValidateCredentialsController implements ActionListener {
 	CredentialsForm cf;
-	
+	String xmlString;
+	Model model;
+
 	/**
 	 * This constructor sets up the data needed to validate the users credentials with the server
 	 * @param m : Model object
@@ -26,8 +29,10 @@ public class ValidateCredentialsController implements ActionListener {
 	 */
 	public ValidateCredentialsController(CredentialsForm cf) {
 		this.cf = cf;
+		xmlString = "";
+		model = Model.getModel();
 	}
-	
+
 	/**
 	 * Validates with the server that the credentials of the user are valid
 	 * @param user : String username
@@ -36,7 +41,7 @@ public class ValidateCredentialsController implements ActionListener {
 	 */
 	public boolean credentialsAreValid(String user, char[] password) {
 		boolean stat;
-		
+
 		//makes sure the user enters a valid username
 		if(user == null || user.equals("")) {
 			JOptionPane.showMessageDialog(null, "You must enter a username!");
@@ -47,7 +52,7 @@ public class ValidateCredentialsController implements ActionListener {
 		}
 		return stat;
 	}
-	
+
 	/**
 	 * This method can send the SignInRequest to the server
 	 * @author Hang, Wei
@@ -55,34 +60,53 @@ public class ValidateCredentialsController implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		boolean isValid = credentialsAreValid(cf.getUsername(), cf.getPassword());
+
+		if(GenerateRequest(cf.getUsername(), cf.getPassword(), cf.isNewEvent, cf.partialEvent, cf.eventId)){
+
+			Message m = new Message (xmlString);
+			Access ac = Access.getInstance();
+			ac.getAccess().sendRequest(m);
+			cf.dispose();
+		}
+
+	}
+
+	public String GetGeneratedRequest()
+	{
+		return xmlString;
+	}
+
+	public boolean GenerateRequest(String username, char[] password, boolean isNewEvent, DecisionLinesEvent event, String eventId)
+	{
+        boolean stat = false;
+		boolean isValid = credentialsAreValid(username, password);
 		if(isValid) {
 			//Send XML Request to server 
-			if (cf.isNewEvent) { //CreateRequest
-				DecisionLinesEvent event = cf.partialEvent;
-				String xml = Message.requestHeader() + "<createRequest behavior='"+ event.getMode()+"' type='"+event.getType()+"' question='"
+			if (isNewEvent) { //CreateRequest
+				
+				xmlString = Message.requestHeader() + "<createRequest behavior='"+ event.getMode()+"' type='"+event.getType()+"' question='"
 						+event.getQuestion() + "' numChoices='"+event.getNumChoices()+"' numRounds='"+event.getRounds()+"'>" +
-						"<user name='"+ cf.getUsername() + "' password='" + new String(cf.getPassword()) + "'/>" +
+						"<user name='"+ username + "' password='" + new String(password) + "'/>" +
 						"</createRequest>"+"</request>";
-				Message m = new Message (xml);
-				Access ac = Access.getInstance();
-				ac.getAccess().sendRequest(m);
-				cf.dispose();
+				stat = true;
 			}
 			else { //signInRequest
-				String eventId = cf.eventId;
-				String s = new String(cf.getPassword());
-				String xmlString = Message.requestHeader() + "<signInRequest id='" + eventId + "'>"+
-						"<user name='"+ cf.getUsername() + "' password='" + s + "'/>" +
+	
+				String s = new String(password);
+				xmlString = Message.requestHeader() + "<signInRequest id='" + eventId + "'>"+
+						"<user name='"+ username + "' password='" + s + "'/>" +
 						"</signInRequest></request>";
-				Message m = new Message (xmlString);
 				
-				// get the ServerAccess, then send the request
-				Access ac = Access.getInstance();
-				ac.getAccess().sendRequest(m);
-				cf.dispose();
+				stat = true;
 			}
+			
+			//store the user name and password on the model 
+			//so the moderator can be signed in directly later
+			model.setUsername(username);
+			model.setPassword(new String(password));
 		}
+		return stat;
+
 	}
 }
 

@@ -102,6 +102,8 @@ public class ServerAccess {
 	public synchronized boolean sendRequest(Message r) {
 		if (!isActive) { return false; }
 
+		System.out.println("TO: " + r);
+		
 		toServer.println(r);
 		return !toServer.checkError();
 	}
@@ -151,7 +153,7 @@ public class ServerAccess {
 						disconnect();
 						break;
 					}
-
+					System.out.println("FROM: " + m);
 					try {
 						Tuple p = pending.remove(m.id()); 
 						if (p != null) {

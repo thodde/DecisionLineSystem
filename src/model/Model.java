@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
-import view.*;
 public class Model {
 	private DecisionLinesEvent event;
     private static Model modelInstance = null;
@@ -12,7 +11,6 @@ public class Model {
     public ArrayList<String> connectedUsers;
 	
 	JFrame j;
-    //ChoiceListEditor cle;
     
     private Model() {
     	event = null;
@@ -42,6 +40,22 @@ public class Model {
     public void setDecisionLinesEvent (DecisionLinesEvent event) {
 		this.event = event;
 	}
+    
+    public void setUsername(String username) {
+    	Model.getModel().getDecisionLinesEvent().setUsername(username);
+    }
+    
+    public String getUsername() {
+    	return Model.getModel().getDecisionLinesEvent().getUsername();
+    }
+    
+    public void setPassword(String password) {
+    	Model.getModel().getDecisionLinesEvent().setPassword(password);
+    }
+    
+    public String getPassword() {
+    	return Model.getModel().getDecisionLinesEvent().getPassword();
+    }
 
 	/**
 	 * This is used for storing and getting the windows;

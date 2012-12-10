@@ -13,10 +13,12 @@ public class ClientLauncher {
 
 	// If requested by ClientLauncher (pass in '-server' as argument).
 	//public static final String serverHost = "72.249.186.243";
-	public static final String serverHost = "192.168.1.9";
+	//public static final String serverHost = "192.168.1.9";
+	public static final String serverHost = "72.249.186.243";
 	
 	//default port number
-	public static int defaultPort = 9371;
+	//public static int defaultPort = 9371;
+	public static int defaultPort = 9509;
 	
 	/**
 	 * Note that to simplify the coding of this command-client, it declares that it can throw an Exception,
@@ -40,13 +42,13 @@ public class ClientLauncher {
 		}
 		host = serverHost;
 		
-		int port = 9371;
+		int port = defaultPort;
 		if(args.length > 0 && args[1].equals("-port")) {
-			port = defaultPort;
+		 port = Integer.parseInt(args[1]);
 		}
+
 		
 		// create message chain
-		//DebugHandler handler = new DebugHandler();
 		ClientMessageHandler handler = new ClientMessageHandler();
 		
 		// try to connect to the server. Once connected, messages are going to be processed by 
@@ -61,8 +63,6 @@ public class ClientLauncher {
 		
 		
 		// send an introductory connect request now that we have created (but not made visible!)
-		// the GUI
-		
 		// set the ac to the global value
 		Access ac = Access.getInstance();
 		ac.setAccess(sa);
