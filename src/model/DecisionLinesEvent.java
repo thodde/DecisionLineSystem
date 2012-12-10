@@ -151,14 +151,18 @@ public class DecisionLinesEvent {
 	 * This method sets the final choice of the decision line event
 	 */
 	public void determineFinalOrder() {
+		//grab the first choice in the choice list
+		Line currentChoice = this.choices[0];
+		//make an array to store the current edge in one spot and its height in the other
 		int heights[] = new int[2];
 		//make sure we start at the top
 		int currentHeight = 0; 
 		int position;
 		int currentPosition;
+		
 		// Calculate each Choice
-		for(Line choice : this.choices) {
-			position = choice.getLinePosition();
+		for(int i = 0; i < this.choices.length; i++) {
+			position = currentChoice.getLinePosition();
 			heights = getNextEdge(position, currentHeight);
 			currentPosition = heights[0];
 			currentHeight = heights[1];
@@ -169,8 +173,8 @@ public class DecisionLinesEvent {
 				currentPosition = heights[0];
 				currentHeight = heights[1];
 			}
-			choice.setFinalOrder(position);
-			System.out.println("choice " + choice.getChoice() + " " + choice.getFinalOrder());
+			currentChoice.setFinalOrder(position);
+			System.out.println("choice " + currentChoice.getChoice() + " " + currentChoice.getFinalOrder());
 		}
 	}
 
@@ -180,29 +184,26 @@ public class DecisionLinesEvent {
 	 * @param height: int the height on the decision line
 	 * @return int[] the next edge on the line
 	 */
-	private int[] getNextEdge(int choice, int height) {		
-		int min = Integer.MAX_VALUE;
-		int result[] = new int[2];
-		result[0] = -1;
+	private int[] getNextEdge(int choice, int height) {	
+		//grab the first edge
+		Edge currentEdge = this.edges.get(0);
+		int results[] = new int[2];
 		
-		// Go through the each Edge
-		for(Edge edge : this.edges) {
-			// Check if the Edge is related to the Choice and below the height
-			if(edge.getHeight() < height) {
-				// Calculate the difference
-				int diff = edge.getHeight() - height;
-				if(diff < min) {
-					if(edge.getLeft() != choice) {
-						result[0] = edge.getLeft();
-					}
-					else {
-						result[0] = edge.getRight();
-					}
-					result[1] = edge.getHeight();
-					min = diff;					
+		// Go through the each Edge on the lines
+		for(int i = 0; i < this.edges.size(); i++) {
+			//make sure the next edge is below the current height
+			if(currentEdge.getHeight() > height) {
+				//we are already on the right, we have to move left
+				if(choice == currentEdge.getRight()) {
+					results[0] = currentEdge.getLeft();
 				}
+				else { //if we are already on the left, we have to go right
+					results[0] = currentEdge.getRight();
+				}
+				//store the height of the current edge
+				results[1] = currentEdge.getHeight();
 			}
 		}
-		return result;
+		return results;
 	}
 }
