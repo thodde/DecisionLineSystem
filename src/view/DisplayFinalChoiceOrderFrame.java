@@ -2,6 +2,8 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -9,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 import model.DecisionLinesEvent;
 import model.Model;
@@ -21,6 +24,7 @@ import controller.ButtonController;
 public class DisplayFinalChoiceOrderFrame extends JFrame{
 
 	private static final long serialVersionUID = 1L;
+	JPanel contentPane;
 	Model model;
 
 	/**
@@ -29,44 +33,50 @@ public class DisplayFinalChoiceOrderFrame extends JFrame{
 	 */
 	public DisplayFinalChoiceOrderFrame(Model m){
 		this.model = m;
-		setBounds(10,45,625,528);
-		setLayout(null);	
-
+		setTitle("Final Choice Order");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(700, 500);
+		setResizable(false);
+		Toolkit toolkit = Toolkit.getDefaultToolkit();
+	    Dimension screenSize = toolkit.getScreenSize();
+	    //Following three lines make the form centered
+	    int x = (screenSize.width - this.getWidth())/2;
+	    int y = (screenSize.height - this.getHeight())/2;
+	    this.setLocation(x, y);
+	    
+	    contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+	    
 		//show the question panel from the event
 		JPanel questionPanel = new JPanel();
-		questionPanel.setBounds(1, 8, 609, 93);
-		questionPanel.setBorder(BorderFactory.createLineBorder(Color.ORANGE, 1));
+		questionPanel.setBounds(10, 10, 690, 100);
 		questionPanel.setBorder(BorderFactory.createTitledBorder("Event Question"));
-		add(questionPanel);
-
-		questionPanel.setLayout(new BorderLayout(0, 0));
+		this.add(questionPanel);
 
 		//display the question that was asked in the event
-		JTextField questionTextField = new JTextField();
-		questionTextField.setForeground(Color.BLACK);
-		questionTextField.setText(DecisionLinesEvent.getInstance().getQuestion());
-		questionTextField.setEnabled(false);
+		JLabel questionLabel = new JLabel();
+		questionLabel.setText("" + DecisionLinesEvent.getInstance().getQuestion());
+		questionPanel.add(questionLabel);
 		
 		JPanel choicesPanel = new JPanel();
-		choicesPanel.setBounds(40, 240, 350, 230);
-		
+		choicesPanel.setBounds(150, 120, 350, 250);
 		//show the final choice order
-		choicesPanel.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
 		choicesPanel.setBorder(BorderFactory.createTitledBorder("Final Choice Order"));
-		add(choicesPanel);
+		this.add(choicesPanel);
 	    
 	    for(int i = 0; i < DecisionLinesEvent.getInstance().getNumChoices(); i++) {
 	    	JLabel tmp = new JLabel();
-	    	tmp.setBounds((100*i)+1, 300, 200, 140);
+	    	tmp.setBounds(50, 200+(25*i), 150, 150);
 	    	choicesPanel.add(tmp);
 	    	tmp.setText(DecisionLinesEvent.getInstance().getChoiceOrderPosition(i));
 	    }
 
 	    //create an exit button
 		JButton btnExit = new JButton("Exit");
-		btnExit.setBounds(372, 491, 89, 23);
-		add(btnExit);
-
+		btnExit.setBounds(300, 400, 90, 25);
+		this.add(btnExit);
 		//set the exit button listener
 		btnExit.addActionListener(new ButtonController(3, this));
 	}

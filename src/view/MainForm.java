@@ -40,7 +40,7 @@ public class MainForm extends JFrame {
 		this.model = m;
 		setTitle("Draw 2 Choose");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(700, 500);
+		setSize(650, 350);
 		setResizable(false);
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
 	    Dimension screenSize = toolkit.getScreenSize();
@@ -59,31 +59,31 @@ public class MainForm extends JFrame {
 		titleLabel.setBounds(175, 30, 400, 25);
 		this.add(titleLabel);
 
-		lblNewLabel = new JLabel("EventID");
-		lblNewLabel.setBounds(240, 150, 50, 25);
+		lblNewLabel = new JLabel("Enter your EventID");
+		lblNewLabel.setBounds(260, 120, 150, 25);
 		this.add(lblNewLabel);
 		
 		//creates the event ID text box
 		txtEventId = new JTextField();
-		txtEventId.setBounds(290, 150, 100, 25);
+		txtEventId.setBounds(180, 150, 300, 25);
 		this.add(txtEventId);
 		
 		//sets up all the buttons on the main form and gives a reference to their controllers
 		buttons = new JButton[4];
 		buttons[0] = new JButton("Moderator");
-		buttons[0].setBounds(110, 300, 90, 25);
+		buttons[0].setBounds(110, 250, 90, 25);
 		buttons[0].addActionListener(new ButtonController(0, this));
 		contentPane.add(buttons[0]);
 		buttons[1] = new JButton("User");
-		buttons[1].setBounds(110*2, 300, 90, 25);
+		buttons[1].setBounds(110*2, 250, 90, 25);
 		buttons[1].addActionListener(new ButtonController(1, this));
 		contentPane.add(buttons[1]);
 		buttons[2] = new JButton("Administrator");
-		buttons[2].setBounds(110*3, 300, 90, 25);
+		buttons[2].setBounds(110*3, 250, 90, 25);
 		buttons[2].addActionListener(new ButtonController(2, this));
 		contentPane.add(buttons[2]);
 		buttons[3] = new JButton("Exit");
-		buttons[3].setBounds(110*4, 300, 90, 25);
+		buttons[3].setBounds(110*4, 250, 90, 25);
 		buttons[3].addActionListener(new ButtonController(3, this));
 		contentPane.add(buttons[3]);
 		

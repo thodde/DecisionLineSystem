@@ -155,19 +155,15 @@ public class DecisionLinesEvent {
 		int heights[] = new int[2];
 		//make sure we start at the top
 		int currentHeight = 0; 
-		int position = 0;
 		int currentPosition = 0;
 		
 		// Calculate each Choice
 		for(int i = 0; i < choices.length; i++) {
-			//position = choices[i].getLinePosition();
-			//heights = getNextEdge(position, 65000);
 			currentPosition = choices[i].getLinePosition();
 			currentHeight = 65000;
 
 			while(currentHeight > 0) {
-				position = currentPosition;
-				heights = getNextEdge(position, currentHeight);
+				heights = getNextEdge(currentPosition, currentHeight);
 				currentPosition = heights[0];
 				currentHeight = heights[1];
 			}
@@ -195,7 +191,7 @@ public class DecisionLinesEvent {
 		for(int i = 0; i < edges.size(); i++) {
 			currentEdge = edges.get(i);
 			//make sure the next edge is below the current height
-			if(currentEdge.getHeight() < height && (currentEdge.getLeft() == results[0] || currentEdge.getRight() == results[0])) {
+			if((currentEdge.getHeight() < height) && (currentEdge.getLeft() == results[0] || currentEdge.getRight() == results[0])) {
 				//we are already on the right, we have to move left
 				if(choice != currentEdge.getLeft()) {
 					results[0] = currentEdge.getLeft();
