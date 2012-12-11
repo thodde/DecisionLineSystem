@@ -6,10 +6,11 @@ import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import model.DecisionLinesEvent;
 import model.Model;
 import controller.ButtonController;
 
@@ -43,7 +44,7 @@ public class DisplayFinalChoiceOrderFrame extends JFrame{
 		//display the question that was asked in the event
 		JTextField questionTextField = new JTextField();
 		questionTextField.setForeground(Color.BLACK);
-		questionTextField.setText("What juice should I purchase?");
+		questionTextField.setText(DecisionLinesEvent.getInstance().getQuestion());
 		questionTextField.setEnabled(false);
 		
 		JPanel choicesPanel = new JPanel();
@@ -53,12 +54,13 @@ public class DisplayFinalChoiceOrderFrame extends JFrame{
 		choicesPanel.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
 		choicesPanel.setBorder(BorderFactory.createTitledBorder("Final Choice Order"));
 		add(choicesPanel);
-
-		//populate the choices
-		JTextArea ml = new JTextArea();
-		ml.setSize(200,140);
-	    choicesPanel.add(ml);
-	    ml.setText("Mango\nApple\nOrange");
+	    
+	    for(int i = 0; i < DecisionLinesEvent.getInstance().getNumChoices(); i++) {
+	    	JLabel tmp = new JLabel();
+	    	tmp.setBounds((100*i)+1, 300, 200, 140);
+	    	choicesPanel.add(tmp);
+	    	tmp.setText(DecisionLinesEvent.getInstance().getChoiceOrderPosition(i));
+	    }
 
 	    //create an exit button
 		JButton btnExit = new JButton("Exit");

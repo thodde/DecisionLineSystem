@@ -18,7 +18,8 @@ public class JoinResponseXMLController implements IMessageHandler {
 		for (int index = 0; index < list.getLength(); index++) {
 			Node n = list.item(index);
 			if (n.getNodeName().equals("user")) {
-				Model.getModel().connectedUsers.add(n.getAttributes().getNamedItem("name").getNodeValue());
+				if (!Model.getModel().connectedUsers.contains(n.getAttributes().getNamedItem("name").getNodeValue()))
+					Model.getModel().connectedUsers.add(n.getAttributes().getNamedItem("name").getNodeValue());
 			}
 		}
 

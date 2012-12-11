@@ -24,7 +24,7 @@ public class DecisionLinesEvent {
 	 * This constructor sets default values to 
 	 * all the data used by the Decision Line Event
 	 */
-	private DecisionLinesEvent() {
+	DecisionLinesEvent() {
 	     question = "";
 	     eventId = "";
 	     position = 0;
@@ -34,7 +34,7 @@ public class DecisionLinesEvent {
 	     eventId = "";
 	     username = "";
 	     password = "";
-	     edges = null;
+	     edges = new ArrayList<Edge>();
 	 }
 	
 	public static DecisionLinesEvent getInstance() {
@@ -151,30 +151,27 @@ public class DecisionLinesEvent {
 	 * This method sets the final choice of the decision line event
 	 */
 	public void determineFinalOrder() {
-		//grab the first choice in the choice list
-		Line currentChoice = this.choices[0];
 		//make an array to store the current edge in one spot and its height in the other
 		int heights[] = new int[2];
 		//make sure we start at the top
 		int currentHeight = 0; 
-		int position;
-		int currentPosition;
+		int position = 0;
+		int currentPosition = 0;
 		
 		// Calculate each Choice
-		for(int i = 0; i < this.choices.length; i++) {
-			position = currentChoice.getLinePosition();
-			heights = getNextEdge(position, currentHeight);
-			currentPosition = heights[0];
-			currentHeight = heights[1];
-			// Go through the path
-			while(currentPosition > 0) {
+		for(int i = 0; i < choices.length; i++) {
+			//position = choices[i].getLinePosition();
+			//heights = getNextEdge(position, 65000);
+			currentPosition = choices[i].getLinePosition();
+			currentHeight = 65000;
+
+			while(currentHeight > 0) {
 				position = currentPosition;
 				heights = getNextEdge(position, currentHeight);
 				currentPosition = heights[0];
 				currentHeight = heights[1];
 			}
-			currentChoice.setFinalOrder(position);
-			System.out.println("choice " + currentChoice.getChoice() + " " + currentChoice.getFinalOrder());
+			choices[i].setFinalOrder(currentPosition);
 		}
 	}
 
@@ -185,16 +182,22 @@ public class DecisionLinesEvent {
 	 * @return int[] the next edge on the line
 	 */
 	private int[] getNextEdge(int choice, int height) {	
+		//make sure there are edges stored, otherwise return default values
+		if(edges.size() == 0) {
+			return new int[]{choice, 0};
+		}
+		
 		//grab the first edge
-		Edge currentEdge = this.edges.get(0);
+		Edge currentEdge = edges.get(0);
 		int results[] = new int[2];
 		
 		// Go through the each Edge on the lines
-		for(int i = 0; i < this.edges.size(); i++) {
+		for(int i = 0; i < edges.size(); i++) {
+			currentEdge = edges.get(i);
 			//make sure the next edge is below the current height
-			if(currentEdge.getHeight() > height) {
+			if(currentEdge.getHeight() < height) {
 				//we are already on the right, we have to move left
-				if(choice == currentEdge.getRight()) {
+				if(choice != currentEdge.getLeft()) {
 					results[0] = currentEdge.getLeft();
 				}
 				else { //if we are already on the left, we have to go right
@@ -205,5 +208,21 @@ public class DecisionLinesEvent {
 			}
 		}
 		return results;
+	}
+	
+	/**
+	 * This method allows us to get the final ordering at the end of the event
+	 * and display it for all users.
+	 * @param position int the position in the ordering of the current choice
+	 * @return String the name of the choice at the current position
+	 */
+	public String getChoiceOrderPosition(int position) {
+		String choiceName = "";
+		for(int i = 0; i < choices.length; i++) {
+			if(choices[i].getFinalOrder() == position) {
+				choiceName = choices[position].getChoice();
+			}
+		}
+		return choiceName;
 	}
 }

@@ -4,6 +4,7 @@ import model.DecisionLinesEvent;
 import model.Model;
 import org.w3c.dom.Node;
 
+import view.DisplayFinalChoiceOrderFrame;
 import view.EdgeDisplayForm;
 import xml.Message;
 import client.IMessageHandler;
@@ -33,9 +34,9 @@ public class TurnResponseXMLController implements IMessageHandler {
 				if (Model.getModel().getJFrame() instanceof EdgeDisplayForm)
 					((EdgeDisplayForm) Model.getModel().getJFrame()).redraw();
 	
-			//TODO: test
 			DecisionLinesEvent.getInstance().determineFinalOrder();
-
+			DisplayFinalChoiceOrderFrame dfc = new DisplayFinalChoiceOrderFrame(Model.getModel());
+			dfc.setVisible(true);
 		}
 		else { //otherwise, it is the clients turn
 			Model.getModel().myTurn = true;
