@@ -1,19 +1,22 @@
 package model;
 
-import model.Model;
 import model.DecisionLinesEvent;
 import junit.framework.TestCase;
 
 public class TestCreateDecisionLineEvent extends TestCase {
 	public void testDecisionLineEvent() {
 		DecisionLinesEvent dle = DecisionLinesEvent.getInstance();
-		//Model.getModel().setDecisionLinesEvent(dle);
 		Line newChoice;
 		dle.setQuestion("Why is there air?");
 		dle.setNumChoices(4);
 		dle.setRounds(3);
 		dle.setMode("asynch");
 		dle.setType("open");
+		dle.setUsername("trevor");
+		dle.setPassword("password");
+		
+		assertEquals(dle.getUsername(), "trevor");
+		assertEquals(dle.getPassword(), "password");
 		
 		assertEquals(dle.getQuestion(), "Why is there air?");
 		assertEquals(dle.getRounds(),3);

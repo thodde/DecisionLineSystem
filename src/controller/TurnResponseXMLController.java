@@ -33,9 +33,7 @@ public class TurnResponseXMLController implements IMessageHandler {
 				if (Model.getModel().getJFrame() instanceof EdgeDisplayForm)
 					((EdgeDisplayForm) Model.getModel().getJFrame()).redraw();
 	
-			//TODO: test
 			DecisionLinesEvent.getInstance().determineFinalOrder();
-
 		}
 		else { //otherwise, it is the clients turn
 			Model.getModel().myTurn = true;

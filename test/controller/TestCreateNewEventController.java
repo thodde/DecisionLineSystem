@@ -20,7 +20,6 @@ import junit.framework.TestCase;
  */
 public class TestCreateNewEventController extends TestCase {
 	public void testCreateNewEventController() {
-		Model model = Model.getModel();
 
 		// I strip out the ID GUID for both this reference string, and the generated controller XML
 		// since they will vary from run to run
@@ -50,5 +49,8 @@ public class TestCreateNewEventController extends TestCase {
 		}
 		
 		assertEquals(xmlStrippedMessage, ref1);
+		
+		CreateNewEventController cnec = new CreateNewEventController(f);
+		cnec.actionPerformed(new ActionEvent(cnec, 0, xmlStrippedMessage));
 	}
 }

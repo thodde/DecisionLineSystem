@@ -21,7 +21,6 @@ public class TestDetermineFinalDecisionOrder extends TestCase {
 		newChoice = new Line("Orange", 1);
         dle.setChoice(newChoice); 
 
-        // Valid new position  and Invalid choice (should have already been added above)
 		newChoice = new Line("Pineapple", 2);
 		dle.setChoice(newChoice); 
 		
