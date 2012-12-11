@@ -19,6 +19,11 @@ public class AddEdgeResponseXMLController implements IMessageHandler {
 	Model model;
 	EdgeDisplayForm form;
 
+	/**
+	 * This method processes XML responses from the server
+	 * when a user adds an edge to a DLE
+	 * @param Message response an XML response from the server
+	 */
 	public void process(Message response) {
 		model = Model.getModel();
 		form = (EdgeDisplayForm) model.getJFrame();
@@ -29,13 +34,6 @@ public class AddEdgeResponseXMLController implements IMessageHandler {
 			if(Model.getModel().getDecisionLinesEvent().getMode().equals("roundRobin")) {
 				Model.getModel().myTurn = false;
 			}
-			else {
-				//TODO: Handles Asynch stuff
-				//compare # edges played
-				//doesnt exceed number of rounds
-				//hasnt received turn request completed yet
-			}
-			
 			
 			int left = Integer.parseInt(addEdgeResponse.getAttributes().getNamedItem("left").getNodeValue());
 			int right = Integer.parseInt(addEdgeResponse.getAttributes().getNamedItem("right").getNodeValue());

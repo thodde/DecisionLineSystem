@@ -9,6 +9,11 @@ import org.w3c.dom.Node;
 import xml.Message;
 import client.IMessageHandler;
 
+/**
+ * This class handles XML responses from the server when
+ * the moderator requests to create an event
+ * @author Trevor Hodde
+ */
 public class CreateEventResponseXMLController implements IMessageHandler {
 	@Override
 	public void process(Message response) {

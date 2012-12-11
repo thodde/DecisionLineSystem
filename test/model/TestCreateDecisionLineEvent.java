@@ -56,5 +56,7 @@ public class TestCreateDecisionLineEvent extends TestCase {
 		
 		choice = dle.getChoice(3);
 		assertTrue(choice.getChoice().equals("Cherry")); 
+		
+		int position = dle.getPostion();
 	}
 }

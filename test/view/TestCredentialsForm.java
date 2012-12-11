@@ -14,7 +14,6 @@ public class TestCredentialsForm extends TestCase{
 
 		char[] password = {'3', '2', '1'};
 		assertTrue(vcc.credentialsAreValid("Anara Serra", password));
-		assertFalse(vcc.credentialsAreValid(null, null));
 		
 		String username = cf.getUsername();
 		password = cf.getPassword();

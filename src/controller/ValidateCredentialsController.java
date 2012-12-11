@@ -76,7 +76,7 @@ public class ValidateCredentialsController implements ActionListener {
 	{
 		return xmlString;
 	}
-
+	
 	public boolean GenerateRequest(String username, char[] password, boolean isNewEvent, String question, String eventType, String choiceMode, int numChoices, int numRounds, String eventId)
 	{
         boolean stat = false;

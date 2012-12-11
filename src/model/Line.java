@@ -66,17 +66,6 @@ public class Line {
 		return edges.size();
 	}
 	
-	
-	/**
-	 * This method returns the total number of edges allowed
-	 * @return : number of edges allowed
-	 * @author Martti Peltola
-     */
-	/* not a necessary function
-	public int getTotalEdgeCount() {
-		return totalEdgeCount;
-	}	*/
-	
 	/**
 	 * This method returns the line position
 	 * @return : line position
@@ -96,8 +85,6 @@ public class Line {
 	public boolean addEdge(Edge e) {
 		boolean valid = false;
 		if(isValidNewEdge(e)){
-			//edges[currentCount] = e;
-			//currentCount++;
 			edges.add(e);
 			valid = true;
 		}
@@ -121,38 +108,21 @@ public class Line {
 				break;
 			}
 		}
-		
-		/*  Again, the fixed array size should be avoided
-		if (currentCount < totalEdgeCount) {
-			for(int i = 0; i<currentCount; i++) {
-				if (edges[i].conflictsWith(e)) {
-					valid = false;
-					break;
-				}
-			}
-		}
-		else {
-			valid = false;
-		} */
 		return valid;
 	}
 	
 	/**
-	 * This method returns the next edge after the n'th edge
-	 * @param n : ??????
-	 * @return : next Edge 
-	 * @author Martti Peltola
+	 * Get the final order number of an element
+	 * @return the position in the final ordering of a choice
 	 */
-	//Why is this needed?  And why are you including iterators inside of classes?
-	public Edge nextEdge(int n) {
-		Edge e = null;
-		return e;
-	}
-	
 	public int getFinalOrder() {
 		return finalDecision;
 	}
 	
+	/**
+	 * Set the position in the final ordering of a choice
+	 * @param finalDecision the position in the final ordering of a choice
+	 */
 	public void setFinalOrder(int finalDecision) {
 		this.finalDecision = finalDecision;
 	}

@@ -9,8 +9,18 @@ import view.EdgeDisplayForm;
 import xml.Message;
 import model.*;
 
+/**
+ * This class gets XML responses from the server
+ * when users add choices to Decision Line Events
+ * @author Trevor Hodde
+ */
 public class AddChoiceResponseXMLController implements IMessageHandler {
 	
+	/**
+	 * This method handles the response from the server when a user adds
+	 * a choice to an event
+	 * @param Message response from the server
+	 */
 	public void process(Message response) {
 		boolean createEdgeDisplayForm = false;
 		DecisionLinesEvent event = DecisionLinesEvent.getInstance();
@@ -22,7 +32,6 @@ public class AddChoiceResponseXMLController implements IMessageHandler {
 		//check if the id equals to the EventID
 		if(id.equals(event.getEventID())) {
 			//if this number of choice is not added
-			//(int n, String choice, int position)
 			int number = Integer.parseInt(num);
 			Line newChoice = new Line(choice, number);
 			event.setChoice(newChoice);

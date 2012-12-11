@@ -33,7 +33,7 @@ public class AddEdgeController extends MouseAdapter{
 	 */
 	public void	mouseClicked(MouseEvent arg) {
 		
-		if(ProcessMouseClick(arg))
+		if(processMouseClick(arg))
 		{
 			Message m = new Message (xmlString);
 			Access ac = Access.getInstance();
@@ -41,7 +41,7 @@ public class AddEdgeController extends MouseAdapter{
 		}
 	}
 	
-	public boolean ProcessMouseClick(MouseEvent arg)
+	public boolean processMouseClick(MouseEvent arg)
 	{
 		boolean	stat = false;
 

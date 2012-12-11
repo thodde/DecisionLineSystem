@@ -34,7 +34,9 @@ public class TurnResponseXMLController implements IMessageHandler {
 				if (Model.getModel().getJFrame() instanceof EdgeDisplayForm)
 					((EdgeDisplayForm) Model.getModel().getJFrame()).redraw();
 
+			//Calculate the final choice order
 			DecisionLinesEvent.getInstance().determineFinalOrder();
+			//Display the final choices
 			DisplayFinalChoiceOrderFrame dfc = new DisplayFinalChoiceOrderFrame(Model.getModel());
 			dfc.setVisible(true);
 		}
