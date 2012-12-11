@@ -62,10 +62,11 @@ public class ValidateCredentialsController implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 
 		if(GenerateRequest(cf.getUsername(), cf.getPassword(), cf.isNewEvent, cf.question, cf.eventType, cf.choiceMode, cf.numChoices, cf.numRounds, cf.eventId)){
-
+			
 			Message m = new Message (xmlString);
 			Access ac = Access.getInstance();
 			ac.getAccess().sendRequest(m);
+			
 			cf.dispose();
 		}
 
@@ -88,6 +89,7 @@ public class ValidateCredentialsController implements ActionListener {
 						+ question + "' numChoices='" + numChoices + "' numRounds='" + numRounds + "'>" +
 						"<user name='"+ username + "' password='" + new String(password) + "'/>" +
 						"</createRequest>"+"</request>";
+
 				stat = true;
 			}
 			else { //signInRequest
@@ -96,8 +98,9 @@ public class ValidateCredentialsController implements ActionListener {
 				xmlString = Message.requestHeader() + "<signInRequest id='" + eventId + "'>"+
 						"<user name='"+ username + "' password='" + s + "'/>" +
 						"</signInRequest></request>";
-				
 				stat = true;
+
+
 			}
 			
 			//store the user name and password on the model 

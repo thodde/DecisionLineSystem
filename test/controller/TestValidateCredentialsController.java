@@ -4,6 +4,7 @@ import junit.framework.TestCase;
 import model.DecisionLinesEvent;
 import model.Model;
 import view.CredentialsForm;
+import xml.Message;
 
 public class TestValidateCredentialsController  extends TestCase{
 	
@@ -13,6 +14,8 @@ public class TestValidateCredentialsController  extends TestCase{
 
 	public TestValidateCredentialsController()
 	{
+		assertTrue (Message.configure("draw2choose.xsd"));
+
 		m = Model.getModel();
 		String question = "Why is there air?";
 		String choiceMode = "roundRobin";
@@ -28,6 +31,7 @@ public class TestValidateCredentialsController  extends TestCase{
 	
 	public void testNewEvent()
 	{
+		
 		String expected = "<createRequest behavior='roundRobin' type='closed' question='Why is there air?' numChoices='3' numRounds='2'><user name='MAP' password='123'/>";
 
 		String question = "Why is there air?";

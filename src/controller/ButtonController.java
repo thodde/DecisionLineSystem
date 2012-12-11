@@ -16,10 +16,10 @@ import model.Model;
  */
 public class ButtonController implements ActionListener {
 	/* The following numbers are used to determine different buttons throughout the application */
-	final int MODERATOR_BUTTON_VALUE = 0;
-	final int USER_BUTTON_VALUE = 1;
-	final int ADMIN_BUTTON_VALUE = 2;
-	final int EXIT_BUTTON_VALUE = 3;
+	final static public int MODERATOR_BUTTON_VALUE = 0;
+	final static public int USER_BUTTON_VALUE = 1;
+	final static public int ADMIN_BUTTON_VALUE = 2;
+	final static public int EXIT_BUTTON_VALUE = 3;
 	
 	/** The box being controlled. */
 	final int number;
@@ -30,11 +30,41 @@ public class ButtonController implements ActionListener {
 	/** view under management. */
 	JFrame frame;
 	
+	//moved here for JUnit testing purposes
+	CredentialsForm cf; 
+	CreateEventForm cef;
+	AdminForm af;
+	
+	
 	/** Constructor records all information. */
 	public ButtonController(int n, JFrame f) {
 		model = Model.getModel();
 		frame = f;
 		number = n;
+
+		// initialize forms
+		tearDownForms();
+
+	}
+	
+	CredentialsForm getCredentialsForm(){
+		return cf;
+	}
+
+	CreateEventForm getCreateEventForm(){
+		return cef;
+	}
+
+	AdminForm getAdminForm(){
+		return af;		
+	}
+	
+	
+	void tearDownForms()
+	{
+		cf  = null; 
+		cef = null;
+		af  = null;
 	}
 
 	/** Take action when pressing a button. */
@@ -69,7 +99,7 @@ public class ButtonController implements ActionListener {
 	 */
 	public void loadCredentialsForm(String dleId) {
 		//load up the credentials form
-		CredentialsForm cf = new CredentialsForm(dleId);
+		cf = new CredentialsForm(dleId);
 		cf.setVisible(true);
 	}
 	
@@ -79,7 +109,7 @@ public class ButtonController implements ActionListener {
 	 */
 	public void setupEventOptions() {
 		//load up create event form for the moderator
-		CreateEventForm cef = new CreateEventForm();
+		cef = new CreateEventForm();
 		cef.setVisible(true);
 	}
 	
@@ -88,7 +118,7 @@ public class ButtonController implements ActionListener {
 	 */
 	public void loadAdminForm() {
 		//load up the administrator form
-		AdminForm af = new AdminForm(model);
+		af = new AdminForm(model);
 		af.setVisible(true);
 	}
 }

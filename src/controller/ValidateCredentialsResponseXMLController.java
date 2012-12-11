@@ -12,6 +12,7 @@ import view.ChoiceListEditor;
 import view.EdgeDisplayForm;
 import xml.*;
 
+
 /**
  * This class takes charge of the SignInResponse, it stores the information into event entity,
  * It can handle the SignInResponse
