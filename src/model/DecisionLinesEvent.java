@@ -177,21 +177,20 @@ public class DecisionLinesEvent {
      * @param height: int the height on the decision line
      * @return int[] the next edge on the line
      */
-    private int[] getNextEdge(int choice, int height) {     
-        //make sure there are edges stored, otherwise return default values
-        if(edges.size() == 0) {
-                return new int[]{choice, 0};
-        }
+    private int[] getNextEdge(int choice, int height) {  
+        if (edges == null) 
+            return new int[] { choice, 0 };
         
-        //grab the first edge
-        Edge currentEdge = edges.get(0);
+        Edge currentEdge;
         int results[] = new int[] { choice, 0 };
+        int currentHeight = 0;
         
         // Go through the each Edge on the lines
         for(int i = 0; i < edges.size(); i++) {
             currentEdge = edges.get(i);
             //make sure the next edge is below the current height
-            if((currentEdge.getHeight() < height) && (currentEdge.getLeft() == results[0] || currentEdge.getRight() == results[0])) {
+            if((currentEdge.getHeight() > currentHeight) && (currentEdge.getHeight() < height) && 
+                    (currentEdge.getLeft() == choice || currentEdge.getRight() == choice)) {
                 //we are already on the right, we have to move left
                 if(choice != currentEdge.getLeft()) {
                         results[0] = currentEdge.getLeft();
@@ -201,6 +200,7 @@ public class DecisionLinesEvent {
                 }
                 //store the height of the current edge
                 results[1] = currentEdge.getHeight();
+                currentHeight = results[1];
             }
         }
         return results;
