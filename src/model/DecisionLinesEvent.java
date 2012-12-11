@@ -189,13 +189,13 @@ public class DecisionLinesEvent {
 		
 		//grab the first edge
 		Edge currentEdge = edges.get(0);
-		int results[] = new int[2];
+		int results[] = new int[] { choice, 0 };
 		
 		// Go through the each Edge on the lines
 		for(int i = 0; i < edges.size(); i++) {
 			currentEdge = edges.get(i);
 			//make sure the next edge is below the current height
-			if(currentEdge.getHeight() < height) {
+			if(currentEdge.getHeight() < height && (currentEdge.getLeft() == results[0] || currentEdge.getRight() == results[0])) {
 				//we are already on the right, we have to move left
 				if(choice != currentEdge.getLeft()) {
 					results[0] = currentEdge.getLeft();
@@ -220,7 +220,7 @@ public class DecisionLinesEvent {
 		String choiceName = "";
 		for(int i = 0; i < choices.length; i++) {
 			if(choices[i].getFinalOrder() == position) {
-				choiceName = choices[position].getChoice();
+				choiceName = choices[i].getChoice();
 			}
 		}
 		return choiceName;

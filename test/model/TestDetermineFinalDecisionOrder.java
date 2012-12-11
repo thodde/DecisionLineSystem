@@ -31,6 +31,8 @@ public class TestDetermineFinalDecisionOrder extends TestCase {
 		
 		Edge e = new Edge(0, 1, 8);
 		dle.getEdges().add(e);
+		e = new Edge(0, 1, 6);
+		dle.getEdges().add(e);
 		
 		dle.determineFinalOrder();
 		for(int i = 0; i < dle.getNumChoices(); i++) {
