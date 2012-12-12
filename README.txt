@@ -31,7 +31,7 @@ Instructions for Signing into an Event as a User:
 1) Run the client
 
 2) Copy the event id from the console (You may have to switch back to the console that was populated from the Moderator, this is also assuming that you are running multiple clients on the same machine) and paste it in the event ID box.
-	Example console for the line you are looking for:
+	Example console output for the line you are looking for:
 		id:c43c58e3-54ec-42f7-8b2a-2ff4eba59471
 
 3) Click "User" and then enter your credentials into the form that appears.

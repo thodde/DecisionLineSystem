@@ -63,10 +63,12 @@ public class DisplayFinalChoiceOrderFrame extends JFrame{
 		choicesPanel.setBorder(BorderFactory.createTitledBorder("Final Choice Order"));
 		this.add(choicesPanel);
 
-		JLabel tmp = new JLabel();
+		//Loop through all the final choices and display them on the final event form
+		//in the correct order
 	    for(int i = 0; i < DecisionLinesEvent.getInstance().getNumChoices(); i++) {
-	    	tmp.setBounds(50, 200+(25*i), 150, 150);
-	    	choicesPanel.add(tmp);
+	    	JLabel tmp = new JLabel();
+			tmp.setBounds(50, 200+(i*25), 300, 50);
+			choicesPanel.add(tmp);
 	    	tmp.setText(DecisionLinesEvent.getInstance().getChoiceOrderPosition(i));
 	    }
 

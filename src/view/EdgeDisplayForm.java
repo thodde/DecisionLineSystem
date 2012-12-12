@@ -40,8 +40,9 @@ public class EdgeDisplayForm extends JFrame {
 	 */
 	public EdgeDisplayForm() {
 		model = Model.getModel();
-		//creates the form
-		setTitle("Decision Lines Event");
+		
+		//creates the form and sets the question as the title
+		setTitle("Decision Lines Event: " + DecisionLinesEvent.getInstance().getQuestion());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		setSize(700, 500);
