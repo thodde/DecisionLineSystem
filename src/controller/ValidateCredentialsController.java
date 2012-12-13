@@ -64,9 +64,13 @@ public class ValidateCredentialsController implements ActionListener {
 		if(GenerateRequest(cf.getUsername(), cf.getPassword(), cf.isNewEvent, cf.question, cf.eventType, cf.choiceMode, cf.numChoices, cf.numRounds, cf.eventId)){
 			
 			Message m = new Message (xmlString);
-			Access ac = Access.getInstance();
-			ac.getAccess().sendRequest(m);
 			
+			if (arg0 != null)
+			{
+				Access ac = Access.getInstance();
+				ac.getAccess().sendRequest(m);
+			}
+
 			cf.dispose();
 		}
 

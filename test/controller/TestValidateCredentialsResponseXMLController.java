@@ -15,13 +15,19 @@ public class TestValidateCredentialsResponseXMLController extends TestCase{
 	
 
 	
+	/**
+	 * tests ValidateCredentialsResponseXMLController for User
+	 * @author mpeltola
+	 */
 	public void testValidateCredentialsResponseXMLControllerUser()
 	{
 		assertTrue (Message.configure("draw2choose.xsd"));
 		
 		// Position not 0 means user
 		
-		String testXML1 = "<?xml version='1.0' encoding='UTF-8'?><response id='db845493-9f1c-48b9-b8b2-8edd03833051' success='true'><signInResponse behavior='roundRobin' id='20e71b53-2804-4124-838b-dcea72d4d16a' numChoices='3' numRounds='2' position='1' question='Why Now?' type='closed'><choice index='0' value='ABC'/><choice index='1' value='DEF'/><choice index='2' value='GHI'/><user name='MAP'/><user name='Bob'/></signInResponse></response>";
+		String testXML1 = "<?xml version='1.0' encoding='UTF-8'?><response id='db845493-9f1c-48b9-b8b2-8edd03833051' success='true'>" +
+				"<signInResponse behavior='roundRobin' id='20e71b53-2804-4124-838b-dcea72d4d16a' numChoices='3' numRounds='2' position='1' question='Why Now?' " +
+				"type='closed'><choice index='0' value='ABC'/><choice index='1' value='DEF'/><choice index='2' value='GHI'/><user name='MAP'/><user name='Bob'/></signInResponse></response>";
 
 		
 		ValidateCredentialsResponseXMLController crxc = new ValidateCredentialsResponseXMLController();
@@ -42,6 +48,10 @@ public class TestValidateCredentialsResponseXMLController extends TestCase{
 	
 	}
 	
+	/**
+	 * tests ValidateCredentialsResponseXMLController for Moderator
+	 * @author mpeltola
+	 */
 	public void testValidateCredentialsResponseXMLControllerModerator()
 	{
 		assertTrue (Message.configure("draw2choose.xsd"));

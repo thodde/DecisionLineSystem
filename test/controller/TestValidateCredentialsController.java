@@ -12,6 +12,10 @@ public class TestValidateCredentialsController  extends TestCase{
 	DecisionLinesEvent event;
 	ValidateCredentialsController vcc; 
 
+	/**
+	 * tests ValidateCredentialsController
+	 * @author mpeltola
+	 */
 	public TestValidateCredentialsController()
 	{
 		assertTrue (Message.configure("draw2choose.xsd"));
@@ -29,6 +33,10 @@ public class TestValidateCredentialsController  extends TestCase{
 	}
 
 	
+	/**
+	 * tests creating new event
+	 * @author mpeltola
+	 */
 	public void testNewEvent()
 	{
 		
@@ -62,9 +70,15 @@ public class TestValidateCredentialsController  extends TestCase{
 		//System.out.println("E "+expected);
         
 		assertEquals(xmlStrippedMessage, expected);
+		
+		vcc.actionPerformed(null);
+		
 	}
 
-	
+	/**
+	 * tests sign in request
+	 * @author mpeltola
+	 */
 	public void testSignInRequest()
 	{
 		String expected = "<signInRequest id='www'><user name='MAP' password='123'/>";

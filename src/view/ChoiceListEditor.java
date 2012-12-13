@@ -181,6 +181,15 @@ public class ChoiceListEditor extends JFrame {
 	}
 	
 	/**
+	 * add item to list of choices
+	 * a helper for JUnit testing
+	 * @author mpeltola
+	 */
+	public void addChoiceString(String arg0) {
+		itemList.add(arg0);
+	}	
+	
+	/**
 	 * Removes a choice from the list box
 	 * @author Trevor Hodde
 	 */
